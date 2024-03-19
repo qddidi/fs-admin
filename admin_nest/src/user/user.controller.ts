@@ -14,15 +14,24 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiException } from 'src/common/filter/http-exception/api.exception';
 import { ApiErrorCode } from 'src/common/enums/api-error-code.enum';
-
+import { CacheService } from 'src/cache/cache.service';
 @Controller('user')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
-
+  constructor(
+    private readonly userService: UserService,
+    private cacheService: CacheService,
+  ) {}
+  @Post('/set')
+  async setVal(@Body() val) {
+    return await this.cacheService.set('name', 'yueyue');
+  }
+  @Post('/get')
+  async getVal(@Body() key) {
+    return await this.cacheService.get('name');
+  }
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
-    throw new ApiException('用户id无效', ApiErrorCode.USER_ID_INVALID);
-    return 'ok';
+    return this.userService.create(createUserDto);
   }
 
   @Get()

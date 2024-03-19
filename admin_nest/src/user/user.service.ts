@@ -12,7 +12,7 @@ export class UserService {
   ) {}
 
   async create(createUserDto: CreateUserDto) {
-    return await this.userRepository.delete({ username: 'yue' });
+    return 'xxx';
   }
 
   findAll() {

@@ -11,7 +11,8 @@ async function bootstrap() {
     .setVersion('1.0') // 版本
     .addBearerAuth()
     .build();
-
+  console.log('test');
+  
   const document = SwaggerModule.createDocument(app, options);
   //配置swgger地址
   SwaggerModule.setup('/fs_admin/api', app, document);

@@ -17,6 +17,6 @@ async function bootstrap() {
   SwaggerModule.setup('/fs_admin/api', app, document);
   app.useGlobalFilters(new HttpExceptionFilter());
   app.useGlobalInterceptors(new TransformInterceptor());
-  await app.listen(3000);
+  await app.listen(3005);
 }
 bootstrap();

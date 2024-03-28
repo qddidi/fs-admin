@@ -6,6 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './user/entities/user.entity';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { CacheModule } from './cache/cache.module';
+import { JwtModule } from '@nestjs/jwt';
 import * as path from 'path';
 const isProd = process.env.NODE_ENV == 'production';
 @Module({
@@ -31,6 +32,20 @@ const isProd = process.env.NODE_ENV == 'production';
       },
       inject: [ConfigService],
     }),
+    JwtModule.registerAsync({
+      global: true,
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: async (configService: ConfigService) => {
+        return {
+          secret: configService.get('JWT_SECRET'),
+          signOptions: {
+            expiresIn: configService.get('JWT_EXP'),
+          },
+        };
+      },
+    }),
+
     CacheModule,
   ],
   controllers: [AppController],

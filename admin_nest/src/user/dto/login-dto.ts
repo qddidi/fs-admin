@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, MinLength, Length } from 'class-validator';
-export class CreateUserDto {
+import { IsNotEmpty, MinLength } from 'class-validator';
+export class LoginDto {
   @IsNotEmpty({
     message: '用户名不能为空',
   })
@@ -30,7 +30,9 @@ export class CreateUserDto {
   })
   id: string;
 
-  @Length(4, 4, { message: '验证码必须4位' })
+  @IsNotEmpty({
+    message: '验证码不能为空',
+  })
   @ApiProperty({
     example: 'dasw',
     description: '验证码',

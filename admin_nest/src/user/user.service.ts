@@ -59,16 +59,18 @@ export class UserService {
     const { username, password, captcha, id } = loginDto;
     //缓存的验证码
     const cacheCaptcha = await this.cacheService.get(id);
-
-    if (captcha !== cacheCaptcha) {
-      throw new ApiException('验证码错误', ApiErrorCode.COMMON_CODE);
-    }
+    // if (captcha !== cacheCaptcha) {
+    //   throw new ApiException('验证码错误', ApiErrorCode.COMMON_CODE);
+    // }
     const user = await this.findOne(username);
     if (user.password !== encry(password, user.salt)) {
       throw new ApiException('密码错误', ApiErrorCode.PASSWORD_ERR);
     }
+
     const payload = { username: user.username, sub: user.id };
-    return await this.jwtService.signAsync(payload);
+    const token = await this.jwtService.signAsync(payload);
+    this.cacheService.set(token, token, 7200);
+    return token;
   }
   getCaptcha() {
     const { id, captcha } = generateCaptcha();

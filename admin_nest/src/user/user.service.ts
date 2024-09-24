@@ -22,11 +22,11 @@ export class UserService {
   async create(createUserDto: CreateUserDto) {
     const { username, password, captcha, id } = createUserDto;
 
-    //缓存的验证码
+    //获取缓存的验证码
     const cacheCaptcha = await this.cacheService.get(id);
-
+    console.log({ cacheCaptcha, id });
     if (captcha !== cacheCaptcha) {
-      throw new ApiException('验证码错误', ApiErrorCode.COMMON_CODE);
+      throw new ApiException('验证码错误或已过期', ApiErrorCode.COMMON_CODE);
     }
     const existUser = await this.userRepository.findOne({
       where: { username },
@@ -72,6 +72,7 @@ export class UserService {
     this.cacheService.set(token, token, 7200);
     return token;
   }
+  //生成验证码
   getCaptcha() {
     const { id, captcha } = generateCaptcha();
     this.cacheService.set(id, captcha.text, 60);

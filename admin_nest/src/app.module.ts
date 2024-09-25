@@ -7,6 +7,8 @@ import { User } from './user/entities/user.entity';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { CacheModule } from './cache/cache.module';
 import { JwtModule } from '@nestjs/jwt';
+import { MenuModule } from './menu/menu.module';
+import { RoleModule } from './role/role.module';
 import * as path from 'path';
 const isProd = process.env.NODE_ENV == 'production';
 @Module({
@@ -26,7 +28,9 @@ const isProd = process.env.NODE_ENV == 'production';
           username: configService.get('DB_USER'), // 用户名
           password: configService.get('DB_PASSWD'), // 密码
           database: configService.get('DB_DATABASE'), //数据库名
-          entities: [User], //数据库对应的Entity
+          //entities: [User], //数据库对应的Entity
+          entities: ['**/*.entity.js'],
+          autoLoadEntities: true, //自动加载实体
           synchronize: !isProd, //是否自动同步实体文件,生产环境建议关闭
         };
       },
@@ -47,6 +51,10 @@ const isProd = process.env.NODE_ENV == 'production';
     }),
 
     CacheModule,
+
+    MenuModule,
+
+    RoleModule,
   ],
   controllers: [AppController],
   providers: [AppService],

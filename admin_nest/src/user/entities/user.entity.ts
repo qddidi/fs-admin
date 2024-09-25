@@ -1,9 +1,9 @@
 import { Column, Entity, PrimaryGeneratedColumn, BeforeInsert } from 'typeorm';
 import encry from '../../utils/crypto';
 import * as crypto from 'crypto';
-@Entity('user')
+@Entity('fs_user')
 export class User {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryGeneratedColumn()
   id: number; // 标记为主键，值自动生成
 
   @Column({ length: 30 })

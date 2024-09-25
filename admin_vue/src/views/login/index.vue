@@ -29,6 +29,7 @@
             <el-input
               size="large"
               v-model="formLogin.password"
+              type="password"
               placeholder="请输入密码"
             />
           </el-form-item>

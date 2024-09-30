@@ -1,9 +1,19 @@
-import { Column, Entity, PrimaryGeneratedColumn, BeforeInsert } from 'typeorm';
+import {
+  Column,
+  Entity,
+  PrimaryGeneratedColumn,
+  BeforeInsert,
+  ManyToMany,
+  JoinTable,
+} from 'typeorm';
 import encry from '../../utils/crypto';
 import * as crypto from 'crypto';
+import { Role } from 'src/role/entities/role.entity';
 @Entity('fs_user')
 export class User {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({
+    type: 'bigint',
+  })
   id: number; // 标记为主键，值自动生成
 
   @Column({ length: 30 })
@@ -20,6 +30,12 @@ export class User {
   role: string; //角色
   @Column({ nullable: true })
   salt: string;
+
+  @ManyToMany(() => Role)
+  @JoinTable({
+    name: 'fs_user_role_relation',
+  })
+  menus: Role[];
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   create_time: Date;
 

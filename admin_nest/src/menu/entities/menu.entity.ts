@@ -1,3 +1,4 @@
+import { Role } from 'src/role/entities/role.entity';
 import {
   Column,
   CreateDateColumn,
@@ -10,21 +11,21 @@ import {
 export class Menu {
   @PrimaryGeneratedColumn()
   id: number;
-  //菜单名称
+  //标题
   @Column({
     length: 20,
   })
-  menu_name: string;
+  title: string;
   //排序
   @Column()
   order_num: number;
   //父id
   @Column({ nullable: true })
   parent_id: number;
-  @Column({
-    length: 10,
-  })
-  menuType: string;
+
+  //菜单类型 1:目录,2:菜单,3:按钮
+  @Column()
+  menu_type: number;
   //菜单图标
   @Column({
     length: 50,
@@ -37,7 +38,12 @@ export class Menu {
     length: 50,
   })
   component: string;
-
+  //权限标识
+  @Column({
+    length: 50,
+    nullable: true,
+  })
+  permission: string;
   //路由
   @Column({
     length: 50,
@@ -49,6 +55,7 @@ export class Menu {
     nullable: true,
   })
   create_by: string;
+
   @CreateDateColumn()
   create_time: Date;
 

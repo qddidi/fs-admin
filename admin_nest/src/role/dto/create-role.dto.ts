@@ -1,4 +1,4 @@
-import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty, IsOptional } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 export class CreateRoleDto {
   @IsNotEmpty({ message: '角色名不可为空' })
@@ -6,6 +6,11 @@ export class CreateRoleDto {
     example: '技术人员',
   })
   role_name: string;
+  @ApiProperty({
+    example: '备注',
+    required: false,
+  })
+  @IsOptional()
   remark?: string;
   @IsNotEmpty({ message: '角色状态不可为空' })
   @ApiProperty({

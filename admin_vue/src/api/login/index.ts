@@ -1,5 +1,5 @@
 import request from "@/utils/http/index";
-import { LoginVo } from "./types/login.vo";
+import { LoginVo } from "./types/login.dto";
 export const login = (data: LoginVo) => {
   return request({
     url: "/user/login",

@@ -1,4 +1,4 @@
-export type LoginVo = {
+export type LoginDto = {
   username: string;
   password: string;
   id: string;

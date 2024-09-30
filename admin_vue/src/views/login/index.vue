@@ -74,11 +74,11 @@ import wxIcon from "@/assets/svg/wx_icon.vue";
 import qqIcon from "@/assets/svg/qq_icon.vue";
 import { reactive, ref, onMounted } from "vue";
 import { login, getCaptcha } from "@/api/login";
-import { LoginVo } from "@/api/login/types/login.vo";
+import { LoginDto } from "@/api/login/types/login.dto";
 import { Storage } from "@/utils/storage";
 import { useRouter } from "vue-router";
 const router = useRouter();
-const formLogin = reactive<LoginVo>({
+const formLogin = reactive<LoginDto>({
   username: "",
   password: "",
   id: "",
@@ -114,14 +114,14 @@ const handleLogin = async () => {
  * 记住密码
  * @param account 账户密码
  */
-const rememberPassword = (account: LoginVo) => {
-  Storage.set<LoginVo>("userAccount", account);
+const rememberPassword = (account: LoginDto) => {
+  Storage.set<LoginDto>("userAccount", account);
 };
 const isRemember = ref(false);
 
 //获取记住的账户密码
 const getRememberAccount = () => {
-  const userAccount: LoginVo | null = Storage.get("userAccount");
+  const userAccount: LoginDto | null = Storage.get("userAccount");
   if (!userAccount) return;
   formLogin.username = userAccount.username;
   formLogin.password = userAccount.password;
@@ -133,3 +133,4 @@ onMounted(() => {
   handleGetCaptcha();
 });
 </script>
+@/api/login/types/login.dto

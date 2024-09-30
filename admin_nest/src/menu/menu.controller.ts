@@ -4,6 +4,7 @@ import { ApiOperation, ApiTags, ApiOkResponse } from '@nestjs/swagger';
 import { CreateMenuDto } from './dto/create-menu.dto';
 import { Public } from 'src/public/public.decorator';
 @Controller('menu')
+@ApiTags('菜单权限模块')
 export class MenuController {
   constructor(private readonly menuService: MenuService) {}
   @Post('/createMenu')

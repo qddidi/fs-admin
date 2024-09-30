@@ -20,7 +20,7 @@ export class CreateRoleDto {
   menu_ids: number[];
   @IsNotEmpty({ message: '排序不可为空' })
   @ApiProperty({
-    example: 1,
+    example: [1, 2],
   })
   role_sort: number;
 }

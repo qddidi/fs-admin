@@ -30,6 +30,11 @@ export class UserController {
     type: CreateUserVo,
   })
   @Post('register')
+  register(@Body() createUserDto: CreateUserDto) {
+    return this.userService.register(createUserDto);
+  }
+  @Public()
+  @Post('createUser')
   create(@Body() createUserDto: CreateUserDto) {
     return this.userService.create(createUserDto);
   }

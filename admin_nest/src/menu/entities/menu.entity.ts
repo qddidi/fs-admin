@@ -36,8 +36,10 @@ export class Menu {
   //组件路径
   @Column({
     length: 50,
+    nullable: true,
   })
   component: string;
+
   //权限标识
   @Column({
     length: 50,
@@ -51,10 +53,15 @@ export class Menu {
   path: string;
 
   @Column({
-    length: 50,
-    nullable: true,
+    type: 'bigint',
   })
-  create_by: string;
+  create_by: number;
+
+  //状态 1:启用 0:禁用
+  @Column({
+    default: 1,
+  })
+  status: number;
 
   @CreateDateColumn()
   create_time: Date;

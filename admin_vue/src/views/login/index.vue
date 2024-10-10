@@ -133,4 +133,3 @@ onMounted(() => {
   handleGetCaptcha();
 });
 </script>
-@/api/login/types/login.dto

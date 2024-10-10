@@ -1,5 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, MinLength, Length } from 'class-validator';
+import {
+  IsNotEmpty,
+  MinLength,
+  Length,
+  IsOptional,
+  IsArray,
+  IsNumber,
+} from 'class-validator';
 export class CreateUserDto {
   @IsNotEmpty({
     message: '用户名不能为空',
@@ -21,19 +28,29 @@ export class CreateUserDto {
   })
   password: string;
 
-  @IsNotEmpty({
-    message: 'id不能为空',
-  })
+  @IsOptional()
   @ApiProperty({
-    example: '934e51cfff7b71ffc8ea',
+    example: 1,
     description: 'id',
+    required: false,
   })
-  id: string;
+  id: number;
 
-  @Length(4, 4, { message: '验证码必须4位' })
+  @IsOptional()
   @ApiProperty({
     example: 'dasw',
+    required: false,
     description: '验证码',
   })
   captcha: string;
+  @ApiProperty({
+    example: [1],
+    required: false,
+  })
+  @IsOptional()
+  @IsArray({
+    message: 'role_ids必须是数组',
+  })
+  @IsNumber({}, { each: true, message: 'role_ids必须是数字数组' })
+  role_ids: number[];
 }

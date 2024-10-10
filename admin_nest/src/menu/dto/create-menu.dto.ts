@@ -1,4 +1,4 @@
-import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty, IsOptional } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 export class CreateMenuDto {
   @IsNotEmpty({ message: '菜单名不可为空' })
@@ -6,14 +6,19 @@ export class CreateMenuDto {
     example: '菜单1',
   })
   title: string;
+
   @ApiProperty({
     example: 1,
   })
   order_num: number;
+
   @ApiProperty({
     example: 1,
+    required: false,
   })
+  @IsOptional()
   parent_id: number;
+
   @ApiProperty({
     example: 1,
   })
@@ -22,18 +27,28 @@ export class CreateMenuDto {
     example: 'menu',
   })
   icon: string;
-  @IsNotEmpty({ message: '组件路径不可为空' })
+
+  @IsOptional()
   @ApiProperty({
     example: 'AA/BB',
+    required: false,
   })
   component: string;
+
   @IsNotEmpty({ message: '路由不可为空' })
   @ApiProperty({
     example: 'BB',
   })
   path: string;
   @ApiProperty({
-    example: 'Admin',
+    example: 11,
   })
-  create_by: string;
+  create_by: number;
+
+  @IsOptional()
+  @ApiProperty({
+    example: 'sys:post:list',
+    required: false,
+  })
+  permission: string;
 }

@@ -23,7 +23,9 @@ export class Role {
   @Column()
   role_sort: number;
   //角色状态 启用:1 关闭:0
-  @Column()
+  @Column({
+    default: 1,
+  })
   status: number;
   //备注
   @Column({ length: '100', nullable: true })
@@ -37,7 +39,7 @@ export class Role {
   @Column({
     type: 'bigint',
   })
-  update_by: string;
+  update_by: number;
 
   @CreateDateColumn()
   create_time: Date;

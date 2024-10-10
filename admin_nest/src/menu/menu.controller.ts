@@ -8,6 +8,7 @@ import {
 } from '@nestjs/swagger';
 import { CreateMenuDto } from './dto/create-menu.dto';
 import { Public } from 'src/public/public.decorator';
+import { Request } from '@nestjs/common';
 @Controller('menu')
 @ApiTags('菜单权限模块')
 export class MenuController {
@@ -22,9 +23,9 @@ export class MenuController {
   ) {
     return await this.menuService.createMenu(createMenuDto);
   }
-  @Post('/getRoutes')
-  @ApiOperation({ summary: '获取菜单列表' })
-  async getRoutes() {
-    return await this.menuService.getMenuList();
+  @Post('/getRouters')
+  @ApiOperation({ summary: '获取路由' })
+  async getRouters(@Request() req) {
+    return await this.menuService.getRouters(req);
   }
 }

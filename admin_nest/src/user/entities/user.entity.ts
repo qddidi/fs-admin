@@ -26,8 +26,7 @@ export class User {
   avatar: string; //头像
   @Column({ nullable: true })
   email: string; //邮箱
-  @Column({ nullable: true })
-  role: string; //角色
+
   @Column({ nullable: true })
   salt: string;
 
@@ -35,7 +34,7 @@ export class User {
   @JoinTable({
     name: 'fs_user_role_relation',
   })
-  menus: Role[];
+  roles: Role[];
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   create_time: Date;
 

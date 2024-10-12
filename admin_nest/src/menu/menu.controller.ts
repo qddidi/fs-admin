@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Post, UseGuards } from '@nestjs/common';
 import { MenuService } from './menu.service';
 import {
   ApiOperation,
@@ -9,6 +9,8 @@ import {
 import { CreateMenuDto } from './dto/create-menu.dto';
 import { Public } from 'src/public/public.decorator';
 import { Request } from '@nestjs/common';
+import { PermissionsGuard } from 'src/common/guards/permissions.guard';
+import { Permissions } from 'src/common/decorators/permissions.decorator';
 @Controller('menu')
 @ApiTags('菜单权限模块')
 export class MenuController {
@@ -23,9 +25,16 @@ export class MenuController {
   ) {
     return await this.menuService.createMenu(createMenuDto);
   }
-  @Post('/getRouters')
+  @Post('/getInfo')
   @ApiOperation({ summary: '获取路由' })
-  async getRouters(@Request() req) {
-    return await this.menuService.getRouters(req);
+  async getInfo(@Request() req) {
+    return await this.menuService.getInfo(req);
+  }
+
+  @UseGuards(PermissionsGuard)
+  @Permissions('sys:menu:list')
+  @Post('/test')
+  async test(@Request() req) {
+    return 11;
   }
 }

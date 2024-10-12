@@ -7,6 +7,9 @@ import { ApiException } from 'src/common/filter/http-exception/api.exception';
 import { User } from 'src/user/entities/user.entity';
 import { Role } from 'src/role/entities/role.entity';
 import { convertToTree } from 'src/utils/convertToTree';
+import { GetInfoVo } from './vo/get-info.vo';
+import { filterPermissions } from 'src/utils/filterPermissions';
+import { CacheService } from 'src/cache/cache.service';
 @Injectable()
 export class MenuService {
   constructor(
@@ -14,6 +17,7 @@ export class MenuService {
     private readonly menuRepository: Repository<Menu>,
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
+    private cacheService: CacheService,
   ) {}
   async createMenu(createMenuDto: CreateMenuDto) {
     try {
@@ -23,7 +27,7 @@ export class MenuService {
       throw new ApiException('菜单新增失败', 20000);
     }
   }
-  async getRouters(req): Promise<Menu[]> {
+  async getInfo(req): Promise<GetInfoVo> {
     //user.guard中注入的解析后的JWTtoken的user
     const { user } = req;
     //根据关联关系通过user查询user下的菜单和角色
@@ -38,7 +42,7 @@ export class MenuService {
     //是否为超级管理员,是的话查询所有菜单
     const isAdmin = userList.roles?.find((item) => item.role_name === 'admin');
     let routers: Menu[] = [];
-
+    let permissions: string[] = [];
     if (isAdmin) {
       routers = await this.menuRepository.find({
         order: {
@@ -48,7 +52,12 @@ export class MenuService {
           status: 1,
         },
       });
-      return convertToTree(routers);
+      permissions = filterPermissions(routers);
+      await this.cacheService.set(`${user.sub}_permissions`, permissions, 7200);
+      return {
+        routers: convertToTree(routers),
+        permissions: permissions,
+      };
     }
     interface MenuMap {
       [key: string]: Menu;
@@ -67,7 +76,12 @@ export class MenuService {
     );
 
     routers = Object.values(menus);
+    permissions = filterPermissions(routers);
+    await this.cacheService.set(`${user.sub}_permissions`, permissions, 7200);
 
-    return convertToTree(routers);
+    return {
+      routers: convertToTree(routers),
+      permissions,
+    };
   }
 }

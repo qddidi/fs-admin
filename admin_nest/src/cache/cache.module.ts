@@ -1,7 +1,9 @@
-import { Module } from '@nestjs/common';
+import { Global, Module } from '@nestjs/common';
 import { CacheService } from './cache.service';
 import { createClient } from 'redis';
 import { ConfigService } from '@nestjs/config';
+// 使用 @Global() 装饰器将模块设置为全局模块
+@Global()
 @Module({
   providers: [
     CacheService,

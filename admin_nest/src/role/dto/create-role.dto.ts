@@ -30,7 +30,7 @@ export class CreateRoleDto {
     message: 'role_ids必须是数组',
   })
   @IsNumber({}, { each: true, message: 'role_ids必须是数字数组' })
-  menu_ids: number[];
+  menu_ids?: number[];
 
   @IsNotEmpty({ message: '排序不可为空' })
   @ApiProperty({

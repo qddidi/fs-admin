@@ -17,7 +17,7 @@ export class CreateMenuDto {
     required: false,
   })
   @IsOptional()
-  parent_id: number;
+  parent_id?: number;
 
   @ApiProperty({
     example: 1,
@@ -33,7 +33,7 @@ export class CreateMenuDto {
     example: 'AA/BB',
     required: false,
   })
-  component: string;
+  component?: string;
 
   @IsNotEmpty({ message: '路由不可为空' })
   @ApiProperty({
@@ -50,5 +50,5 @@ export class CreateMenuDto {
     example: 'sys:post:list',
     required: false,
   })
-  permission: string;
+  permission?: string;
 }

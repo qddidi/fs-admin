@@ -45,7 +45,6 @@ export class MenuService {
           order_num: 'ASC',
         },
         where: {
-          menu_type: In([1, 2]),
           status: 1,
         },
       });
@@ -68,7 +67,7 @@ export class MenuService {
     );
 
     routers = Object.values(menus);
-    console.log(routers);
+
     return convertToTree(routers);
   }
 }

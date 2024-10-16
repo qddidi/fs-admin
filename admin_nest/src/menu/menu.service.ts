@@ -39,7 +39,7 @@ export class MenuService {
       .orderBy('fs_menu.order_num', 'ASC')
       .getOne();
 
-    //是否为超级管理员,是的话查询所有菜单
+    //是否为超级管理员,是的话查询所有菜单和权限
     const isAdmin = userList.roles?.find((item) => item.role_name === 'admin');
     let routers: Menu[] = [];
     let permissions: string[] = [];
@@ -52,8 +52,10 @@ export class MenuService {
           status: 1,
         },
       });
+      //获取菜单所拥有的权限
       permissions = filterPermissions(routers);
-      await this.cacheService.set(`${user.sub}_permissions`, permissions, 7200);
+      //存储当前用户的权限
+      await this.cacheService.set(`${user.sub}_permissions`, permissions, null);
       return {
         routers: convertToTree(routers),
         permissions: permissions,

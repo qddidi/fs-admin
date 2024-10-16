@@ -14,7 +14,7 @@ import { Permissions } from 'src/common/decorators/permissions.decorator';
 @Controller('menu')
 @ApiTags('菜单权限模块')
 export class MenuController {
-  constructor(private readonly menuService: MenuService) {}
+  constructor(private readonly menuService: MenuService) { }
   @Post('/createMenu')
   @Public()
   @ApiParam({ name: 'createMenuDto', type: CreateMenuDto })
@@ -32,9 +32,9 @@ export class MenuController {
   }
 
   @UseGuards(PermissionsGuard)
-  @Permissions('sys:menu:list')
+  @Permissions('sys:user:list')
   @Post('/test')
   async test(@Request() req) {
-    return 11;
+    return "success";
   }
 }

@@ -61,7 +61,11 @@ export class Menu {
     default: 1,
   })
   status: number;
-
+  //状态 1:缓存 0:不缓存
+  @Column({
+    default: 0,
+  })
+  catch: number;
   @CreateDateColumn()
   create_time: Date;
 

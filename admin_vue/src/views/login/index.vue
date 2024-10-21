@@ -1,56 +1,31 @@
 <template>
-  <div
-    class="flex items-center justify-center h-screen bg-gradient-to-b from-blue-500 to-blue-200"
-  >
+  <div class="flex items-center justify-center h-screen bg-gradient-to-b from-blue-500 to-blue-200">
     <div class="flex mx-auto bg-white rounded py-10">
       <div class="w-[330px] box-border text-center pt-10">
         <div class="text-[#444444] font-bold">打开微信App</div>
         <div class="text-sm pt-2 pb-6">右上角扫一扫</div>
-        <div
-          class="border border-gray rounded w-[50%] mx-auto overflow-hidden inline-block"
-        >
+        <div class="border border-gray rounded w-[50%] mx-auto overflow-hidden inline-block">
           <img class="w-full" src="../../assets/login/gzh_code.jpg" alt="" />
         </div>
         <div class="pt-4 font-bold text-sm">扫码登录</div>
       </div>
-      <div
-        class="w-[400px] pl-10 pr-10 pb-3 border-box border-l border-l-2 border-gray"
-      >
+      <div class="w-[400px] pl-10 pr-10 pb-3 border-box border-l border-l-2 border-gray">
         <div class="font-bold mb-3">密码登录</div>
         <el-form :model="formLogin" :rules="loginRules">
           <el-form-item prop="username">
-            <el-input
-              size="large"
-              placeholder="请输入用户名"
-              v-model="formLogin.username"
-            />
+            <el-input size="large" placeholder="请输入用户名" v-model="formLogin.username" />
           </el-form-item>
           <el-form-item prop="password">
-            <el-input
-              size="large"
-              v-model="formLogin.password"
-              type="password"
-              placeholder="请输入密码"
-            />
+            <el-input size="large" v-model="formLogin.password" type="password" placeholder="请输入密码" />
           </el-form-item>
           <el-form-item prop="code">
-            <el-input
-              v-model="formLogin.captcha"
-              size="large"
-              auto-complete="off"
-              placeholder="验证码"
-              class="w-[60%] mr-4"
-            >
+            <el-input v-model="formLogin.captcha" size="large" auto-complete="off" placeholder="验证码"
+              class="w-[60%] mr-4">
             </el-input>
             <div @click="handleGetCaptcha" v-html="codeUrl"></div>
           </el-form-item>
           <el-checkbox v-model="isRemember" label="记住密码" size="large" />
-          <el-button
-            type="primary"
-            class="w-full mt-5 !h-[40px]"
-            @click="handleLogin"
-            >登录</el-button
-          >
+          <el-button type="primary" class="w-full mt-5 !h-[40px]" @click="handleLogin">登录</el-button>
         </el-form>
         <div class="flex items-center justify-between mt-4">
           <div class="w-[100px] border-t-2 border-gray"></div>
@@ -77,6 +52,10 @@ import { login, getCaptcha } from "@/api/login";
 import { LoginDto } from "@/api/login/types/login.dto";
 import { Storage } from "@/utils/storage";
 import { useRouter } from "vue-router";
+import useHome from "@/store/index"
+const homeStore = useHome()
+console.log(homeStore);
+
 const router = useRouter();
 const formLogin = reactive<LoginDto>({
   username: "",

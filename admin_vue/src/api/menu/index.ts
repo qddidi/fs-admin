@@ -1,30 +1,23 @@
 import request from "@/utils/http/index";
-import { MenuVo } from "./types/menu.vo";
-//获取菜单列表
-export const getMenuList = (data: any) => {
+import { MenuDto } from "./types/menu.dto";
+//获取路由及权限
+export const getInfo = (data: MenuDto) => {
   return request({
-    url: "/menu",
-    params: data,
-    method: "get",
-  });
-};
-
-//新增菜单
-
-export const addMenu = (data: MenuVo) => {
-  return request({
-    url: "/menu",
+    url: "/menu/getInfo",
     data,
     method: "post",
   });
 };
 
-//更新菜单
-
-export const updateMenu = (data: MenuVo) => {
+//新增菜单
+export const addMenu = (data: any) => {
   return request({
-    url: "/menu",
+    url: "/menu/createMenu",
     data,
-    method: "put",
+    method: "post",
   });
 };
+
+
+
+

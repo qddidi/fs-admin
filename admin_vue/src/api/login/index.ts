@@ -1,6 +1,6 @@
 import request from "@/utils/http/index";
-import { LoginVo } from "./types/login.dto";
-export const login = (data: LoginVo) => {
+import { LoginDto } from "./types/login.dto";
+export const login = (data: LoginDto) => {
   return request({
     url: "/user/login",
     data,
@@ -14,6 +14,7 @@ export const getCaptcha = () => {
   return request({
     url: "/user/captcha",
     isToken: false,
+    loading: false,
     method: "get",
   });
 };

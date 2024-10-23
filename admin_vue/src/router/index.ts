@@ -1,30 +1,35 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
-
-import { nextTick } from "vue";
-import useHome from "@/store/index"
-import { filterRoute } from "@/utils/filterRouters";
-
-//const homeStore = useHome()
+import { useHandleRouter } from "@/hooks/useHandleRouter";
 export const routes: RouteRecordRaw[] = [
   {
+    path: "/",
+    name: "Index",
+    redirect: '/index',
+    component: () =>
+      import(/* webpackChunkName: "index" */ "@/layout/index.vue"),
+    children: [
+      {
+        path: '/index',
+        component: () => import('@/views/index.vue'),
+        name: 'Home',
+        meta: { title: '首页' }
+      }
+    ]
+  }, {
     path: "/login",
-    name: "login",
+    name: "Login",
     component: () =>
       import(/* webpackChunkName: "login" */ "@/views/login/index.vue"),
   },
   {
-    path: "/",
-    name: "index",
-    component: () =>
-      import(/* webpackChunkName: "index" */ "@/layout/index.vue"),
+    path: "/:pathMatch(.*)*",
+    component: () => import('@/views/error/404.vue'),
   },
-];
 
+];
 const router = createRouter({
   history: createWebHashHistory(),
-  scrollBehavior(to, from, savedPosition) {
-
-
+  scrollBehavior(_to, _from, savedPosition) {
     if (savedPosition) {
       return savedPosition;
     } else {
@@ -33,32 +38,5 @@ const router = createRouter({
   },
   routes,
 });
-
-const writeLists = ["login"];
-router.beforeEach(async (to, from, next) => {
-
-
-  if (writeLists.includes(to.name as string)) {
-    next();
-    return;
-  }
-
-  await nextTick();
-  const homeStore = useHome();
-  if (homeStore.menuList.length) {
-    next()
-    return;
-  }
-
-  await homeStore.getInfo();
-  const routers = filterRoute(homeStore.menuList);
-  console.log(routers);
-
-  routers.forEach((route: RouteRecordRaw) => {
-    router.addRoute("index", route);
-  });
-  console.log({ routers });
-
-  next({ ...to, replace: true });
-});
+useHandleRouter(router)
 export default router;

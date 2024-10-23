@@ -81,18 +81,14 @@ service.interceptors.response.use(
         message: data.describe,
         type: "error",
       });
-      if (data.code === 401 || data.code === 400) {
-        //登录状态已过期.处理路由重定向
-        Storage.remove("token");
-        router.push("/login");
-      }
+
       throw new Error(data.describe);
     }
     return data;
   },
   (error) => {
     closeLoading();
-    let { message } = error;
+    let { message, status } = error;
     if (message == "Network Error") {
       message = "后端接口连接异常";
     } else if (message.includes("timeout")) {
@@ -100,11 +96,22 @@ service.interceptors.response.use(
     } else if (message.includes("Request failed with status code")) {
       message = "系统接口" + message.substr(message.length - 3) + "异常";
     }
-    ElMessage({
-      message: message,
-      type: "error",
-    });
-    router.push("/login");
+    console.log({ error });
+    if (status === 403) {
+      ElMessage({
+        message: "登录状态已失效,请重新登录",
+        type: "error",
+      });
+      Storage.remove("token");
+      router.push({ name: 'Login' });
+    } else {
+      ElMessage({
+        message: message,
+        type: "error",
+      });
+    }
+
+
     return Promise.reject(error);
   }
 );

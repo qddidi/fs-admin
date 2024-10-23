@@ -1,19 +1,20 @@
 import { defineStore } from "pinia";
 import { getInfo } from '../api/menu/index';
-import { IndexStoreState } from './types';
-export default defineStore("home", {
-    state: (): IndexStoreState => {
+import { AppStoreState } from './types';
+
+export default defineStore("appStore", {
+    state: (): AppStoreState => {
         return {
             menuList: [],
-            isCollapse: false
+            isCollapse: false,
+            permissions: []
         }
     },
     actions: {
         async getInfo() {
             const { data } = await getInfo({})
             this.menuList = data.routers;
-
-
+            this.permissions = data.permissions;
         }
     }
 })

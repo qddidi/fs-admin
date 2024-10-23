@@ -1,3 +1,4 @@
+
 export type MenuList = {
     id: number
     parent_id: number
@@ -16,7 +17,8 @@ export type MenuList = {
     }
 }
 
-export type IndexStoreState = {
+export type AppStoreState = {
     menuList: MenuList[]
     isCollapse: boolean
+    permissions: string[]
 }

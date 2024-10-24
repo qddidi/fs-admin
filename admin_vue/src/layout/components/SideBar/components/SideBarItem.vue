@@ -1,13 +1,14 @@
 <template>
     <div>
+
         <el-sub-menu class="grid" v-if="controlSubView(props.item)" :index="props.item.path">
             <template #title>
                 <component class="w-[15px] mr-2 ml-1" :is="props.item.icon" />
                 <span>{{ props.item.meta.title }}</span>
             </template>
-            <index v-for="i in props.item.children" :key="i.id" :item="i"></index>
+            <SideBarItem v-for="i in props.item.children" :key="i.id" :item="i" />
         </el-sub-menu>
-        <el-menu-item v-else v-if="controlMenuView(props.item)" :index="props.item.path">
+        <el-menu-item v-else v-if="controlMenuView(props.item)" :index="dealRoutePath(props.item.path)">
             <component class="w-[15px] mr-2 ml-1" :is="props.item.icon" /> <span>{{ props.item?.meta?.title }}</span>
         </el-menu-item>
     </div>
@@ -15,6 +16,7 @@
 
 <script lang='ts' setup>
 import { MenuList } from "@/store/types/index"
+import { dealRoutePath } from "@/utils/routeUtils";
 type Props = {
     item: MenuList
 }

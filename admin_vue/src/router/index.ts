@@ -1,5 +1,5 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
-import { useHandleRouter } from "@/hooks/useHandleRouter";
+import { handleRouter } from "@/utils/routeUtils";
 export const routes: RouteRecordRaw[] = [
   {
     path: "/",
@@ -38,5 +38,5 @@ const router = createRouter({
   },
   routes,
 });
-useHandleRouter(router)
+handleRouter(router)
 export default router;

@@ -1,17 +1,16 @@
 <template>
-    <div>
 
-        <el-sub-menu class="grid" v-if="controlSubView(props.item)" :index="props.item.path">
-            <template #title>
-                <component class="w-[15px] mr-2 ml-1" :is="props.item.icon" />
-                <span>{{ props.item.meta.title }}</span>
-            </template>
-            <SideBarItem v-for="i in props.item.children" :key="i.id" :item="i" />
-        </el-sub-menu>
-        <el-menu-item v-else v-if="controlMenuView(props.item)" :index="dealRoutePath(props.item.path)">
-            <component class="w-[15px] mr-2 ml-1" :is="props.item.icon" /> <span>{{ props.item?.meta?.title }}</span>
-        </el-menu-item>
-    </div>
+    <el-sub-menu class="grid" v-if="controlSubView(props.item)" :index="props.item.path">
+        <template #title>
+            <component class="w-[20px] mr-2 ml-1" :is="props.item.icon" />
+            <span>{{ props.item.meta.title }}</span>
+        </template>
+        <SideBarItem v-for="i in props.item.children" :key="i.id" :item="i" />
+    </el-sub-menu>
+    <el-menu-item v-else v-if="controlMenuView(props.item)" :index="dealRoutePath(props.item.path)">
+        <component class="w-[20px] mr-2 ml-1" :is="props.item.icon" /> <span>{{ props.item?.meta?.title }}</span>
+    </el-menu-item>
+
 </template>
 
 <script lang='ts' setup>

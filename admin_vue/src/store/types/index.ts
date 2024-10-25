@@ -1,6 +1,7 @@
 
 export type MenuList = {
     id: number
+    name: string
     parent_id: number
     title: string
     path: string
@@ -16,9 +17,13 @@ export type MenuList = {
         hidden?: boolean
     }
 }
-
+export type Breadcrumb = {
+    path: string
+    name: string
+}
 export type AppStoreState = {
     menuList: MenuList[]
     isCollapse: boolean
     permissions: string[]
+    breadcrumbs: Breadcrumb[]
 }

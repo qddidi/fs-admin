@@ -1,5 +1,6 @@
 import { RouteRecordRaw, Router } from "vue-router";
 import useAppStore from "@/store/index"
+import { filterBreadCrumb } from "./filterBreadCrumb";
 
 //处理路由路径,返回`/`最后一级
 export const dealRoutePath = (path: string) => {
@@ -47,6 +48,9 @@ export const handleRouter = (router: Router) => {
 
         const appStore = useAppStore();
         if (appStore.menuList.length) {
+            appStore.$patch({
+                breadcrumbs: filterBreadCrumb(to.path, appStore.menuList),
+            });
             next()
             return;
         }

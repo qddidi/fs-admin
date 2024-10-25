@@ -16,7 +16,7 @@ import { LoginVo } from './vo/login-vo';
 @ApiTags('用户模块')
 @Controller('user')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  constructor(private readonly userService: UserService) { }
   @Public()
   @ApiOperation({
     summary: '用户注册', // 接口描述信息
@@ -53,6 +53,7 @@ export class UserController {
     type: LoginVo,
   })
   login(@Body() loginDto: LoginDto) {
+
     return this.userService.login(loginDto);
   }
 

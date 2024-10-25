@@ -109,6 +109,7 @@ const getRememberAccount = () => {
 onMounted(() => {
   getRememberAccount();
   if (Storage.get("token")) return router.push("/");
+
   handleGetCaptcha();
 });
 </script>

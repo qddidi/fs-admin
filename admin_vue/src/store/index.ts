@@ -7,7 +7,8 @@ export default defineStore("appStore", {
         return {
             menuList: [],
             isCollapse: false,
-            permissions: []
+            permissions: [],
+            breadcrumbs: []
         }
     },
     actions: {

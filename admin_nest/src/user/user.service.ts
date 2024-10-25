@@ -20,7 +20,7 @@ export class UserService {
     private roleRepository: Repository<Role>,
     private jwtService: JwtService,
     private cacheService: CacheService,
-  ) {}
+  ) { }
   //注册(暂时考虑用不用)
   async register(createUserDto: CreateUserDto) {
     const { username, password, captcha, id } = createUserDto;

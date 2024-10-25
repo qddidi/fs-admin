@@ -51,6 +51,7 @@ export const handleRouter = (router: Router) => {
             appStore.$patch({
                 breadcrumbs: filterBreadCrumb(to.path, appStore.menuList),
             });
+            appStore.addTags({ name: to.meta.title as string, path: to.path });
             next()
             return;
         }

@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { getInfo } from '../api/menu/index';
-import { AppStoreState } from './types';
+import { AppStoreState, NavTag } from './types';
 
 export default defineStore("appStore", {
     state: (): AppStoreState => {
@@ -8,7 +8,8 @@ export default defineStore("appStore", {
             menuList: [],
             isCollapse: false,
             permissions: [],
-            breadcrumbs: []
+            breadcrumbs: [],
+            navTags: []
         }
     },
     actions: {
@@ -16,6 +17,13 @@ export default defineStore("appStore", {
             const { data } = await getInfo({})
             this.menuList = data.routers;
             this.permissions = data.permissions;
-        }
+        },
+
+        addTags(tag: NavTag) {
+            const isRepeat = this.navTags.find((item) => item.name === tag.name);
+
+            isRepeat ||
+                this.navTags.push({ name: tag.name as string, path: tag.path });
+        },
     }
 })

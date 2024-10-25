@@ -18,12 +18,16 @@ export type MenuList = {
     }
 }
 export type Breadcrumb = {
-    path: string
     name: string
+}
+export type NavTag = {
+    name: string
+    path: string
 }
 export type AppStoreState = {
     menuList: MenuList[]
     isCollapse: boolean
     permissions: string[]
     breadcrumbs: Breadcrumb[]
+    navTags: NavTag[]
 }

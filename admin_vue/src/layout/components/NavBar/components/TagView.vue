@@ -1,6 +1,6 @@
 <template>
     <div class="bg-white shadow-lg rounded-md text-[14px] overflow-hidden cursor-pointer w-[100px] fixed">
-        <div class="p-1 hover:bg-[#E0E0E0] flex items-center" @click="emits('refresh')">
+        <div class="p-1 hover:bg-[#E0E0E0] flex items-center" @click="emits('refreshTag')">
             <el-icon>
                 <Refresh />
             </el-icon><span>刷新页面</span>
@@ -29,7 +29,7 @@ type Emits = {
     (e: "closeTagView"): void;
     (e: "closeOtherTags"): void;
     (e: "closeAllTags"): void;
-    (e: "refresh"): void;
+    (e: "refreshTag"): void;
 
 };
 const emits = defineEmits<Emits>();

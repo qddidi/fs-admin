@@ -17,7 +17,7 @@
             <teleport to="body">
                 <TagView v-if="isTagView && nowClickIndex == index" :style="tagViewStyle"
                     @close-cur="closeCur(index, item.path, currentPath)" @close-all-tags="closeAllTags"
-                    @close-other-tags="closeOtherTags(item)" @refresh="refresh" />
+                    @close-other-tags="closeOtherTags(item)" @refreshTag="refreshTag(item)" />
             </teleport>
         </Tags>
     </div>
@@ -37,12 +37,12 @@ const closeTag = (index: number) => {
     appStore.navTags.splice(index, 1);
 }
 //关闭当前
-
 const closeCur = (index: number, path: string, currentPath: string) => {
     appStore.navTags.splice(index, 1);
 
     if (path === currentPath) {
         const length = appStore.navTags.length;
+
         length && router.push(appStore.navTags[length - 1].path);
         !length && router.push("/");
     }
@@ -65,9 +65,9 @@ const closeAllTags = () => {
 };
 
 //刷新
-const refresh = () => {
+const refreshTag = (item: NavTag) => {
     router.push({
-        path: '/redirect' + route.fullPath,
+        path: '/redirect' + item.fullpath,
         query: route.query
     })
 }

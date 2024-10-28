@@ -40,6 +40,7 @@ export const filterRoute = (data: any) => {
 export const handleRouter = (router: Router) => {
     const writeLists = ["Login"];
     router.beforeEach(async (to, _from, next) => {
+
         if (writeLists.includes(to.name as string)) {
             next();
             return;
@@ -49,7 +50,10 @@ export const handleRouter = (router: Router) => {
             appStore.$patch({
                 breadcrumbs: filterBreadCrumb(to.path, appStore.menuList),
             });
-            appStore.addTags({ name: to.meta.title as string, path: to.path });
+
+
+            appStore.addTags({ name: to.meta.title as string, path: to.path, fullpath: to.fullPath });
+
             next()
             return;
         }

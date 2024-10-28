@@ -22,10 +22,8 @@ export default defineStore("appStore", {
         addTags(tag: NavTag) {
             const isRepeat = this.navTags.find((item) => item.name === tag.name);
             const isRed = tag.path.includes('redirect');
-
-
             isRepeat || isRed ||
-                this.navTags.push({ name: tag.name as string, path: tag.path });
+                this.navTags.push({ name: tag.name as string, path: tag.path, fullpath: tag.fullpath });
         },
     }
 })

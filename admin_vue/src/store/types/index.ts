@@ -23,6 +23,7 @@ export type Breadcrumb = {
 export type NavTag = {
     name: string
     path: string
+    fullpath?: string
 }
 export type AppStoreState = {
     menuList: MenuList[]

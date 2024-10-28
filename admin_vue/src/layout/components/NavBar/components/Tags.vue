@@ -1,11 +1,12 @@
 <template>
     <el-scrollbar>
         <div class="flex">
-            <el-tag v-for="(item, index) in tagsProps.navTags" @click="handelTo(item)" :key="item.name"
+            <el-tag @contextmenu.prevent="tagsEmits('openMenu', $event, index)"
+                v-for="(item, index) in tagsProps.navTags" @click="handelTo(item)" :key="item.name"
                 class="ml-2 cursor-pointer flex-shrink-0" :effect="currentPath === item.path ? 'dark' : undefined"
                 type="primary" :closable="item.path != '/'" @close="handleClose(index, item.path)">
                 {{ item.name }}
-
+                <slot :item="item" :currentPath="currentPath" :index="index" />
             </el-tag>
         </div>
     </el-scrollbar>
@@ -26,6 +27,8 @@ const tagsProps = defineProps<TagsProps>()
 
 type TagsEmits = {
     (e: 'close', index: number): void;
+    (e: 'openMenu', event: Event, index: number): void;
+
 }
 const tagsEmits = defineEmits<TagsEmits>()
 const currentPath = ref()
@@ -42,8 +45,6 @@ const handelTo = (item: any) => {
 
 const handleClose = (index: number, path: string) => {
     tagsEmits('close', index)
-
-
     if (path === currentPath.value) {
         const length = tagsProps.navTags.length;
         length && router.push(tagsProps.navTags.slice(-1)[0].path);

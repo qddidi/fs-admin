@@ -2,6 +2,16 @@ import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
 import { handleRouter } from "@/utils/routeUtils";
 export const routes: RouteRecordRaw[] = [
   {
+    path: '/redirect',
+    component: import(/* webpackChunkName: "index" */ "@/layout/index.vue"),
+    children: [
+      {
+        path: '/redirect/:path(.*)',
+        component: () => import(/* webpackChunkName: "redirect" */'@/views/redirect/index.vue')
+      }
+    ]
+  },
+  {
     path: "/",
     name: "Index",
     redirect: '/index',

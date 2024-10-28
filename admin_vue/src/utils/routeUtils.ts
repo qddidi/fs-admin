@@ -44,8 +44,6 @@ export const handleRouter = (router: Router) => {
             next();
             return;
         }
-
-
         const appStore = useAppStore();
         if (appStore.menuList.length) {
             appStore.$patch({

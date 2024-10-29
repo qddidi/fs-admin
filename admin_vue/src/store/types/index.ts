@@ -19,6 +19,7 @@ export type MenuList = {
 }
 export type Breadcrumb = {
     name: string
+    path?: string
 }
 export type NavTag = {
     name: string

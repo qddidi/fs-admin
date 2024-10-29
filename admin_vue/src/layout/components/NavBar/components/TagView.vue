@@ -26,7 +26,6 @@
 <script lang="ts" setup>
 type Emits = {
     (e: "closeCur"): void;
-    (e: "closeTagView"): void;
     (e: "closeOtherTags"): void;
     (e: "closeAllTags"): void;
     (e: "refreshTag"): void;

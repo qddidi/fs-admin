@@ -32,4 +32,5 @@ export type AppStoreState = {
     permissions: string[]
     breadcrumbs: Breadcrumb[]
     navTags: NavTag[]
+    catchList: string[]
 }

@@ -9,6 +9,7 @@ export const convertToTree = (menuList, parentId: number | null = null) => {
       title: menuList[i].title,
       catch: menuList[i].catch,
       hidden: !menuList[i].status,
+      name: menuList[i].name,
     }
     //返回前端组件名称首字母大写
     menuList[i].name = toUpperCaseStart(menuList[i].path.replace(/\//g, ''))

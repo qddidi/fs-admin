@@ -9,7 +9,8 @@ export default defineStore("appStore", {
             isCollapse: false,
             permissions: [],
             breadcrumbs: [],
-            navTags: []
+            navTags: [],
+            catchList: []
         }
     },
     actions: {
@@ -24,6 +25,13 @@ export default defineStore("appStore", {
             const isRed = tag.path.includes('redirect');
             isRepeat || isRed ||
                 this.navTags.push({ name: tag.name as string, path: tag.path, fullpath: tag.fullpath });
+        },
+
+        //添加缓存路由
+        addCatchList(name: string) {
+            if (!this.catchList.includes(name)) {
+                this.catchList.push(name);
+            }
         },
     }
 })

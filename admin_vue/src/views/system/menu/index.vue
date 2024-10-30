@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div>菜单管理</div>
+        <div v-hasPerm="['sys:role:list']">菜单管理</div>
         <div>
             <el-button @click="count++">{{ count }}</el-button>
         </div>

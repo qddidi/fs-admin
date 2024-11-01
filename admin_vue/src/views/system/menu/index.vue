@@ -4,6 +4,7 @@
         <div>
             <el-button @click="count++">{{ count }}</el-button>
         </div>
+
     </div>
 </template>
 
@@ -12,6 +13,7 @@ import { ref } from 'vue'
 defineOptions({
     name: 'Menu'
 })
+
 const count = ref(0)
 </script>
 <style lang='scss'></style>

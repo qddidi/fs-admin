@@ -1,4 +1,4 @@
-import { Body, Controller, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards, Query } from '@nestjs/common';
 import { MenuService } from './menu.service';
 import {
   ApiOperation,
@@ -11,6 +11,8 @@ import { Public } from 'src/public/public.decorator';
 import { Request } from '@nestjs/common';
 import { PermissionsGuard } from 'src/common/guards/permissions.guard';
 import { Permissions } from 'src/common/decorators/permissions.decorator';
+import { FindMenuListDto } from './dto/findMenu.dto';
+
 @Controller('menu')
 @ApiTags('菜单权限模块')
 export class MenuController {
@@ -29,6 +31,13 @@ export class MenuController {
   @ApiOperation({ summary: '获取路由' })
   async getInfo(@Request() req) {
     return await this.menuService.getInfo(req);
+  }
+
+  @Get('/list')
+  @ApiOperation({ summary: '获取菜单列表' })
+  async list(@Query() findMenuListDto: FindMenuListDto, @Request() req) {
+
+    return await this.menuService.findMenuList(findMenuListDto, req);
   }
 
   @UseGuards(PermissionsGuard)

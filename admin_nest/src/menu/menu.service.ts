@@ -10,6 +10,9 @@ import { convertToTree } from 'src/utils/convertToTree';
 import { GetInfoVo } from './vo/get-info.vo';
 import { filterPermissions } from 'src/utils/filterPermissions';
 import { CacheService } from 'src/cache/cache.service';
+import { ApiErrorCode } from 'src/common/enums/api-error-code.enum';
+import { rolesToMenus } from 'src/utils/rolesToMenus';
+import { FindMenuListDto } from './dto/findMenu.dto';
 @Injectable()
 export class MenuService {
   constructor(
@@ -18,7 +21,7 @@ export class MenuService {
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
     private cacheService: CacheService,
-  ) {}
+  ) { }
   async createMenu(createMenuDto: CreateMenuDto) {
     try {
       await this.menuRepository.save(createMenuDto);
@@ -27,17 +30,43 @@ export class MenuService {
       throw new ApiException('菜单新增失败', 20000);
     }
   }
+
+  async getUser(user, condition?) {
+    try {
+      const queryBuilder = this.userRepository
+        .createQueryBuilder('fs_user')
+        .leftJoinAndSelect('fs_user.roles', 'fs_role')
+        .leftJoinAndSelect('fs_role.menus', 'fs_menu')
+        .where({ id: user.sub })
+
+
+      if (condition?.title) {
+
+        //根据菜单title模糊查询
+        queryBuilder.andWhere('fs_menu.title LIKE :title', { title: `%${condition.title}%` })
+      }
+      if (condition?.status) {
+        //根据菜单状态查询
+        queryBuilder.andWhere('fs_menu.status = :status', { status: condition.status })
+      }
+
+      queryBuilder.orderBy('fs_menu.order_num', 'ASC')
+      queryBuilder.getOne();
+      const User = await queryBuilder.getOne();
+      return User
+
+    } catch (error) {
+      console.log(error);
+
+      throw new ApiException('查询失败', ApiErrorCode.COMMON_CODE);
+    }
+
+  }
   async getInfo(req): Promise<GetInfoVo> {
     //user.guard中注入的解析后的JWTtoken的user
     const { user } = req;
     //根据关联关系通过user查询user下的菜单和角色
-    const userList: User = await this.userRepository
-      .createQueryBuilder('fs_user')
-      .leftJoinAndSelect('fs_user.roles', 'fs_role')
-      .leftJoinAndSelect('fs_role.menus', 'fs_menu')
-      .where({ id: user.sub })
-      .orderBy('fs_menu.order_num', 'ASC')
-      .getOne();
+    const userList: User = await this.getUser(user)
 
     //是否为超级管理员,是的话查询所有菜单和权限
     const isAdmin = userList.roles?.find((item) => item.role_name === 'admin');
@@ -61,23 +90,10 @@ export class MenuService {
         permissions: permissions,
       };
     }
-    interface MenuMap {
-      [key: string]: Menu;
-    }
-    // console.log(userList.roles[0].menus);
+
 
     //根据id去重
-    const menus: MenuMap = userList?.roles.reduce(
-      (mergedMenus: MenuMap, role: Role) => {
-        role.menus.forEach((menu: Menu) => {
-          mergedMenus[menu.id] = menu;
-        });
-        return mergedMenus;
-      },
-      {},
-    );
-
-    routers = Object.values(menus);
+    routers = rolesToMenus(userList?.roles);
     permissions = filterPermissions(routers);
     await this.cacheService.set(`${user.sub}_permissions`, permissions, 7200);
 
@@ -85,5 +101,18 @@ export class MenuService {
       routers: convertToTree(routers),
       permissions,
     };
+  }
+
+  //菜单列表查询
+  async findMenuList(findMenuListDto: FindMenuListDto, req) {
+    //user.guard中注入的解析后的JWTtoken的user
+    const { user } = req;
+    //根据关联关系通过user查询user下的菜单和角色,并根据findMenuListDto条件查询,条件字段为空默认匹配所有
+    const userList: User = await this.getUser(user, findMenuListDto)
+    const menuList = rolesToMenus(userList?.roles)
+    const treeMenuList = convertToTree(menuList);
+    //是否显示树形菜单 没有传title且菜单状态为开启时候才显示树形菜单
+    const isShowTreeMenu = !findMenuListDto.title && (findMenuListDto.status == 1 || !findMenuListDto.status);
+    return isShowTreeMenu ? treeMenuList : menuList;
   }
 }

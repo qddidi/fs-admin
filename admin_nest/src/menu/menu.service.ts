@@ -13,6 +13,7 @@ import { CacheService } from 'src/cache/cache.service';
 import { ApiErrorCode } from 'src/common/enums/api-error-code.enum';
 import { rolesToMenus } from 'src/utils/rolesToMenus';
 import { FindMenuListDto } from './dto/findMenu.dto';
+import { UpdateMenuDto } from './dto/update-menu.dto';
 @Injectable()
 export class MenuService {
   constructor(
@@ -22,14 +23,6 @@ export class MenuService {
     private readonly userRepository: Repository<User>,
     private cacheService: CacheService,
   ) { }
-  async createMenu(createMenuDto: CreateMenuDto) {
-    try {
-      await this.menuRepository.save(createMenuDto);
-      return '菜单新增成功';
-    } catch (error) {
-      throw new ApiException('菜单新增失败', 20000);
-    }
-  }
 
   async getUser(user, condition?) {
     try {
@@ -41,7 +34,6 @@ export class MenuService {
 
 
       if (condition?.title) {
-
         //根据菜单title模糊查询
         queryBuilder.andWhere('fs_menu.title LIKE :title', { title: `%${condition.title}%` })
       }
@@ -108,11 +100,41 @@ export class MenuService {
     //user.guard中注入的解析后的JWTtoken的user
     const { user } = req;
     //根据关联关系通过user查询user下的菜单和角色,并根据findMenuListDto条件查询,条件字段为空默认匹配所有
-    const userList: User = await this.getUser(user, findMenuListDto)
-    const menuList = rolesToMenus(userList?.roles)
+    const userList: User = await this.getUser(user, findMenuListDto);
+    const menuList = rolesToMenus(userList?.roles);
     const treeMenuList = convertToTree(menuList);
     //是否显示树形菜单 没有传title且菜单状态为开启时候才显示树形菜单
     const isShowTreeMenu = !findMenuListDto.title && (findMenuListDto.status == 1 || !findMenuListDto.status);
     return isShowTreeMenu ? treeMenuList : menuList;
+  }
+
+  //新增菜单
+  async createMenu(createMenuDto: CreateMenuDto) {
+    try {
+      await this.menuRepository.save(createMenuDto);
+      return '菜单新增成功';
+    } catch (error) {
+      throw new ApiException('菜单新增失败', 20000);
+    }
+  }
+
+  //修改菜单
+  async updateMenu(updateMenuDto: UpdateMenuDto) {
+    try {
+      await this.menuRepository.update(updateMenuDto.id, updateMenuDto);
+      return '菜单更新成功';
+    } catch (error) {
+      throw new ApiException('菜单更新失败', 20000);
+    }
+  }
+
+  //删除菜单
+  async deleteMenu(id: number) {
+    try {
+      await this.menuRepository.delete(id);
+      return '菜单删除成功';
+    } catch (error) {
+      throw new ApiException('菜单删除失败', 20000);
+    }
   }
 }

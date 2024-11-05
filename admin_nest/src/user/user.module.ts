@@ -6,16 +6,13 @@ import { Role } from 'src/role/entities/role.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CacheModule } from 'src/cache/cache.module';
 import { APP_GUARD } from '@nestjs/core';
-import { UserGuard } from './user.guard';
+import { UserGuard } from '../common/guards/user.guard';
 @Module({
   controllers: [UserController],
   providers: [
     UserService,
-    {
-      provide: APP_GUARD,
-      useClass: UserGuard,
-    },
+
   ],
   imports: [TypeOrmModule.forFeature([User, Role]), CacheModule],
 })
-export class UserModule {}
+export class UserModule { }

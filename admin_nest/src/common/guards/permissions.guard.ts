@@ -11,9 +11,8 @@ import { CacheService } from 'src/cache/cache.service';
 export class PermissionsGuard implements CanActivate {
   constructor(
     private reflector: Reflector,
-
     private cacheService: CacheService,
-  ) {}
+  ) { }
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     //获取自定义装饰器配置的元数据`permissions`
@@ -29,10 +28,18 @@ export class PermissionsGuard implements CanActivate {
     // 从request拿到当前用户登录信息(全局守卫UserGuard已经将用户信息挂载到request上)
     const request = context.switchToHttp().getRequest();
     const { user } = request;
+
+
+    //解析出的是超级管理员直接通过
+    if (user?.username === 'admin') {
+      return true
+    }
     // 从缓存中获取用户的权限列表
     const userPermissions = await this.cacheService.get(
-      `${user.sub}_permissions`,
+      `${user?.sub}_permissions`,
     );
+
+
     // 用户未登录或未设置权限，拒绝访问
     if (!user || !userPermissions) {
       return false;

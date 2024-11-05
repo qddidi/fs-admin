@@ -23,7 +23,7 @@ export class UserController {
   })
   @ApiParam({
     name: 'CreateUserVo',
-    type: CreateUserVo,
+    type: CreateUserDto,
   })
   @ApiOkResponse({
     description: '返回示例',

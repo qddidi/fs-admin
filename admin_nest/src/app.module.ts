@@ -10,6 +10,9 @@ import { JwtModule } from '@nestjs/jwt';
 import { MenuModule } from './menu/menu.module';
 import { RoleModule } from './role/role.module';
 import * as path from 'path';
+import { APP_GUARD } from '@nestjs/core';
+import { PermissionsGuard } from './common/guards/permissions.guard';
+import { UserGuard } from './common/guards/user.guard';
 const isProd = process.env.NODE_ENV == 'production';
 @Module({
   imports: [
@@ -57,6 +60,13 @@ const isProd = process.env.NODE_ENV == 'production';
     RoleModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, {
+    provide: APP_GUARD,
+    useClass: UserGuard,
+  }, {
+      provide: APP_GUARD,
+      useClass: PermissionsGuard,
+    }
+  ],
 })
-export class AppModule {}
+export class AppModule { }

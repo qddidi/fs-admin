@@ -17,7 +17,7 @@ export class UserGuard implements CanActivate {
     private configService: ConfigService, // 配置服务，用于获取JWT_SECRET
     private reflector: Reflector,
     private cacheService: CacheService,
-  ) {}
+  ) { }
 
   /**
    * 判断请求是否通过身份验证
@@ -31,10 +31,13 @@ export class UserGuard implements CanActivate {
       //controller类型
       context.getClass(),
     ]);
+    const request = context.switchToHttp().getRequest();
+
+
     if (isPublic) {
       return true;
     }
-    const request = context.switchToHttp().getRequest(); // 获取请求对象
+    // 获取请求对象
     const token = this.extractTokenFromHeader(request); // 从请求头中提取token
     if (!token) {
       throw new HttpException('验证不通过', HttpStatus.FORBIDDEN); // 如果没有token，抛出验证不通过异常
@@ -48,10 +51,7 @@ export class UserGuard implements CanActivate {
       //获取token过期时间
       const { exp } = payload;
       const nowTime = Math.floor(new Date().getTime() / 1000);
-      console.log(exp - nowTime);
-
       const isExpired = exp - nowTime < 3600;
-      console.log(isExpired);
 
       if (isExpired) {
         const newPayLoad = { username: payload.username, sub: payload.sub };
@@ -59,6 +59,7 @@ export class UserGuard implements CanActivate {
         this.cacheService.set(token, newToken, 7200);
       }
       request['user'] = payload; // 将解析后的用户信息存储在请求对象中
+
     } catch {
       throw new HttpException('token验证失败', HttpStatus.FORBIDDEN); // token验证失败，抛出异常
     }

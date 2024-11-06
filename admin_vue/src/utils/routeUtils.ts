@@ -1,7 +1,7 @@
 import { RouteRecordRaw, Router } from "vue-router";
 import useAppStore from "@/store/index"
 import { filterBreadCrumb } from "./filterBreadCrumb";
-
+import { Storage } from "@/utils/storage";
 //处理路由路径,返回`/`最后一级
 export const dealRoutePath = (path: string) => {
     if (!path) return ''
@@ -69,6 +69,12 @@ export const handleRouter = (router: Router) => {
             next({ ...to, replace: true });
 
         } catch (error) {
+            if (!Storage.get("token")) {
+
+                next('/login');
+                return
+            }
+
             next()
         }
 

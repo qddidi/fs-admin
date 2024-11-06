@@ -8,6 +8,9 @@ import { ApiErrorCode } from 'src/common/enums/api-error-code.enum';
 import { Menu } from 'src/menu/entities/menu.entity';
 import { User } from 'src/user/entities/user.entity';
 import { UpdateRoleDto } from './dto/update-role.dto';
+import { FindMenuListDto } from 'src/menu/dto/findMenu.dto';
+import { FindRoleListDto } from './dto/find-role.dto';
+import { handlePage } from 'src/utils/handlePage';
 @Injectable()
 export class RoleService {
   constructor(
@@ -38,35 +41,32 @@ export class RoleService {
     }
     try {
       await this.roleRepository.save({ ...createRoleDto, ...newRole });
-      return 'success';
+      return '新增成功';
     } catch (error) {
       throw new ApiException('系统异常', ApiErrorCode.FAIL);
     }
   }
 
-  async getRoles(user, condition?) {
-    const queryBuilder = this.userRepository
-      .createQueryBuilder('fs_user')
-      .leftJoinAndSelect('fs_user.roles', 'fs_role')
-      .where({ id: user.sub })
 
-
-    if (condition?.role_name) {
-      //根据角色名称模糊查询
-      queryBuilder.andWhere('fs_role.role_name LIKE :role_name', { role_name: `%${condition.role_name}%` })
-    }
-    try {
-      const User = await queryBuilder.getOne()
-      return User.roles
-    } catch (error) {
-      throw new ApiException('角色查询失败', ApiErrorCode.COMMON_CODE);
-    }
-
-  }
 
   //查询当前用户角色列表
-  async findRoleList(req, findMenuListDto): Promise<Role[]> {
-    return await this.getRoles(req.user, { role_name: findMenuListDto.role_name });
+  async findRoleList(findMenuListDto: FindRoleListDto) {
+    let queryBuilder = this.roleRepository.createQueryBuilder()
+
+    if (findMenuListDto.role_name) {
+      queryBuilder.andWhere('role_name like :role_name', { role_name: `%${findMenuListDto?.role_name}%` });
+    }
+    if (findMenuListDto.status) {
+      queryBuilder.andWhere('status = :status', { status: findMenuListDto.status });
+    }
+    if (findMenuListDto.begin_time && findMenuListDto.end_time) {
+      queryBuilder.andWhere('create_time BETWEEN :start AND :end', { start: findMenuListDto.begin_time, end: findMenuListDto.end_time });
+    }
+
+    handlePage(queryBuilder, findMenuListDto.page_num, findMenuListDto.page_size)
+
+    const [list, count] = await queryBuilder.getManyAndCount();
+    return { list, count };
   }
 
   //删除角色

@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Req } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query, Req } from '@nestjs/common';
 import { RoleService } from './role.service';
 import { CreateRoleDto } from './dto/create-role.dto';
 import { ApiOperation, ApiParam, ApiTags } from '@nestjs/swagger';
@@ -11,8 +11,12 @@ import { UpdateRoleDto } from './dto/update-role.dto';
 export class RoleController {
   constructor(private readonly roleService: RoleService) { }
 
-  @Public()
+
   @Post('createRole')
+  @Permissions('system:role:create')
+  @ApiOperation({
+    summary: '角色管理-新增',
+  })
   @ApiParam({
     name: 'CreateRoleDto',
     type: CreateRoleDto,
@@ -23,6 +27,7 @@ export class RoleController {
 
   //查询
   @Get('findRoleList')
+  @Permissions('system:role:list')
   @ApiOperation({
     summary: '角色管理-查询',
   })
@@ -30,16 +35,16 @@ export class RoleController {
     name: 'CreateRoleDto',
     type: FindRoleListDto,
   })
-  @Permissions('system:role:list')
-  findRoleList(@Req() req, findRoleListDto: FindRoleListDto) {
-    return this.roleService.findRoleList(req, findRoleListDto);
+
+  findRoleList(@Query() findRoleListDto: FindRoleListDto) {
+    return this.roleService.findRoleList(findRoleListDto);
   }
 
   @ApiOperation({
     summary: '角色管理-删除',
   })
   @Permissions('system:role:delete')
-  @Delete(':roleId')
+  @Delete('deleteRole/:roleId')
   deleteRole(@Param('roleId') roleId: string) {
     return this.roleService.deleteRole(+roleId);
   }

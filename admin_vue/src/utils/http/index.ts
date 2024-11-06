@@ -96,14 +96,13 @@ service.interceptors.response.use(
     } else if (message.includes("Request failed with status code")) {
       message = "系统接口" + message.substr(message.length - 3) + "异常";
     }
-    console.log({ error });
     if (status === 403) {
       ElMessage({
         message: "登录状态已失效,请重新登录",
         type: "error",
       });
       Storage.remove("token");
-      router.push({ name: 'Login' });
+      router.push('/login');
     } else {
       ElMessage({
         message: message,

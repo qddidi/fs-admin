@@ -18,28 +18,29 @@ import { UpdateMenuDto } from './dto/update-menu.dto';
 @ApiTags('菜单权限模块')
 export class MenuController {
   constructor(private readonly menuService: MenuService) { }
-  @Post('/getInfo')
+  @Post('getInfo')
   @ApiOperation({ summary: '获取路由' })
   async getInfo(@Request() req) {
     return await this.menuService.getInfo(req);
   }
 
   @Get('/list')
-  @ApiOperation({ summary: '获取菜单列表' })
+  @ApiParam({ name: 'findMenuListDto', type: FindMenuListDto })
+  @ApiOperation({ summary: '菜单管理-查询' })
   async list(@Query() findMenuListDto: FindMenuListDto, @Request() req) {
 
     return await this.menuService.findMenuList(findMenuListDto, req);
   }
 
-  @Public()
-  @Post('/test')
-  async test(@Request() req) {
+  // @Public()
+  // @Post('/test')
+  // async test(@Request() req) {
 
-    return "success";
-  }
+  //   return "success";
+  // }
   //新增菜单
-  @Post('/createMenu')
-  @Permissions('system:menu:add')
+  @Post('createMenu')
+  @Permissions('system:menu:create')
   @ApiParam({ name: 'createMenuDto', type: CreateMenuDto })
   @ApiOperation({ summary: '菜单管理-新增' })
   async createMenu(
@@ -50,8 +51,7 @@ export class MenuController {
   }
 
   //更新菜单
-  @Put('/updateMenu')
-  @Public()
+  @Put('updateMenu')
   @Permissions('system:menu:edit')
   @ApiParam({ name: 'updateMenu', type: UpdateMenuDto })
   @ApiOperation({ summary: '菜单管理-更新' })
@@ -66,7 +66,7 @@ export class MenuController {
     summary: '菜单管理-删除',
   })
   @Permissions('system:menu:delete')
-  @Delete(':menuId')
+  @Delete('deleteMenu/:menuId')
   deleteMenu(@Param('menuId') menuId: string) {
     return this.menuService.deleteMenu(+menuId);
   }

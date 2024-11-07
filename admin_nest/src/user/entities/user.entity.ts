@@ -29,7 +29,8 @@ export class User {
 
   @Column({ nullable: true })
   salt: string;
-
+  @Column({ nullable: true, default: 0 })
+  is_admin: number; //是否为管理员 1:是 0:否
   @ManyToMany(() => Role)
   @JoinTable({
     name: 'fs_user_role_relation',

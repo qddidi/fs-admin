@@ -5,6 +5,8 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import * as moment from 'moment';
+
 
 @Entity('fs_menu')
 export class Menu {
@@ -66,7 +68,15 @@ export class Menu {
     default: 0,
   })
   catch: number;
-  @CreateDateColumn()
+  @CreateDateColumn(
+    {
+      transformer: {
+        to: (entityValue: Date) => entityValue,
+        from: (databaseValue: Date) =>
+          moment(databaseValue).format('YYYY-MM-DD HH:mm:ss')
+      },
+    }
+  )
   create_time: Date;
 
   @UpdateDateColumn()

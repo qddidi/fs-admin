@@ -33,6 +33,7 @@ const isProd = process.env.NODE_ENV == 'production';
           database: configService.get('DB_DATABASE'), //数据库名
           //entities: [User], //数据库对应的Entity
           entities: ['**/*.entity.js'],
+
           autoLoadEntities: true, //自动加载实体
           synchronize: !isProd, //是否自动同步实体文件,生产环境建议关闭
         };

@@ -43,13 +43,11 @@ export class MenuService {
       }
 
       queryBuilder.orderBy('fs_menu.order_num', 'ASC')
-      queryBuilder.getOne();
+
       const User = await queryBuilder.getOne();
       return User
 
     } catch (error) {
-      console.log(error);
-
       throw new ApiException('查询失败', ApiErrorCode.COMMON_CODE);
     }
 
@@ -59,32 +57,37 @@ export class MenuService {
     const { user } = req;
     //根据关联关系通过user查询user下的菜单和角色
     const userList: User = await this.getUser(user)
+    console.log(userList);
 
     //是否为超级管理员,是的话查询所有菜单和权限
-    const isAdmin = userList.roles?.find((item) => item.role_name === 'admin');
+    const isAdmin = userList.is_admin === 1;
     let routers: Menu[] = [];
     let permissions: string[] = [];
     if (isAdmin) {
       routers = await this.menuRepository.find({
         order: {
           order_num: 'ASC',
+
         },
         where: {
           status: 1,
+
         },
       });
       //获取菜单所拥有的权限
       permissions = filterPermissions(routers);
       //存储当前用户的权限
-      await this.cacheService.set(`${user.sub}_permissions`, permissions, null);
+      //await this.cacheService.set(`${user.sub}_permissions`, permissions, null);
       return {
-        routers: convertToTree(routers),
+        routers: convertToTree(routers, null, 1),
         permissions: permissions,
       };
     }
 
 
     //根据id去重
+
+
     routers = rolesToMenus(userList?.roles);
     permissions = filterPermissions(routers);
     await this.cacheService.set(`${user.sub}_permissions`, permissions, 7200);
@@ -99,21 +102,45 @@ export class MenuService {
   async findMenuList(findMenuListDto: FindMenuListDto, req) {
     //user.guard中注入的解析后的JWTtoken的user
     const { user } = req;
+    let menuList
     //根据关联关系通过user查询user下的菜单和角色,并根据findMenuListDto条件查询,条件字段为空默认匹配所有
-    const userList: User = await this.getUser(user, findMenuListDto);
-    const menuList = rolesToMenus(userList?.roles);
+
+
+    if (user?.is_admin === 1) {
+      //超级管理员查询所有菜单
+      const condition = {}
+      if (findMenuListDto.status || findMenuListDto.status === 0) {
+        condition['status'] = findMenuListDto.status
+      }
+      if (findMenuListDto.title) {
+        condition['title'] = findMenuListDto.title
+      }
+      menuList = await this.menuRepository.find({
+        order: {
+          order_num: 'ASC',
+        },
+        where: condition,
+      });
+
+    } else {
+      const userList: User = await this.getUser(user, findMenuListDto);
+      menuList = rolesToMenus(userList?.roles);
+    };
     const treeMenuList = convertToTree(menuList);
-    //是否显示树形菜单 没有传title且菜单状态为开启时候才显示树形菜单
+    //是否显示树形菜单查询条件 没有传title且菜单状态为开启时候才显示树形菜单
     const isShowTreeMenu = !findMenuListDto.title && (findMenuListDto.status == 1 || !findMenuListDto.status);
     return isShowTreeMenu ? treeMenuList : menuList;
   }
 
   //新增菜单
-  async createMenu(createMenuDto: CreateMenuDto) {
+  async createMenu(req, createMenuDto: CreateMenuDto) {
+    const user = req?.user
     try {
-      await this.menuRepository.save(createMenuDto);
+      await this.menuRepository.save({ ...createMenuDto, create_by: user.sub, update_by: user.sub });
       return '菜单新增成功';
     } catch (error) {
+      console.log(error);
+
       throw new ApiException('菜单新增失败', 20000);
     }
   }

@@ -11,6 +11,7 @@ import { JwtService } from '@nestjs/jwt';
 import encry from '../utils/crypto';
 import generateCaptcha from 'src/utils/generateCaptcha';
 import { CacheService } from 'src/cache/cache.service';
+import { Menu } from 'src/menu/entities/menu.entity';
 @Injectable()
 export class UserService {
   constructor(
@@ -18,6 +19,8 @@ export class UserService {
     private userRepository: Repository<User>,
     @InjectRepository(Role)
     private roleRepository: Repository<Role>,
+    @InjectRepository(Menu)
+    private menuRepository: Repository<Menu>,
     private jwtService: JwtService,
     private cacheService: CacheService,
   ) { }
@@ -27,7 +30,8 @@ export class UserService {
 
     //获取缓存的验证码
     const cacheCaptcha = await this.cacheService.get(id);
-    console.log({ cacheCaptcha, id });
+
+
     if (captcha.toLowerCase() !== cacheCaptcha?.toLowerCase()) {
       throw new ApiException('验证码错误或已过期', ApiErrorCode.COMMON_CODE);
     }
@@ -66,6 +70,7 @@ export class UserService {
         });
 
         newUser.roles = roleList;
+
       }
 
       newUser.username = createUserDto.username;
@@ -98,7 +103,7 @@ export class UserService {
       throw new ApiException('密码错误', ApiErrorCode.PASSWORD_ERR);
     }
 
-    const payload = { username: user.username, sub: user.id };
+    const payload = { username: user.username, sub: user.id, is_admin: user.is_admin };
     const token = await this.jwtService.signAsync(payload);
     this.cacheService.set(token, token, 7200);
     return token;
@@ -107,7 +112,7 @@ export class UserService {
   getCaptcha() {
     const { id, captcha } = generateCaptcha();
     this.cacheService.set(id, captcha.text, 60);
-    console.log(captcha.text);
+
     return { id, img: captcha.data };
   }
 }

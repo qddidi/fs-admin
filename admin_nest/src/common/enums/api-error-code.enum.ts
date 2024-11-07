@@ -6,4 +6,5 @@ export enum ApiErrorCode {
   USER_EXIST = 10003, //用户已存在
   PASSWORD_ERR = 10004, //密码错误
   COMMON_CODE = 20000, //通用错误码,想偷懒就返回这个
+  FORBIdEN = 403, //没有权限
 }

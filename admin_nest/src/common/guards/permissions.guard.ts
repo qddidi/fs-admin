@@ -7,6 +7,8 @@ import {
 import { Reflector } from '@nestjs/core';
 import { Observable } from 'rxjs';
 import { CacheService } from 'src/cache/cache.service';
+import { ApiException } from '../filter/http-exception/api.exception';
+import { ApiErrorCode } from '../enums/api-error-code.enum';
 @Injectable()
 export class PermissionsGuard implements CanActivate {
   constructor(
@@ -31,7 +33,7 @@ export class PermissionsGuard implements CanActivate {
 
 
     //解析出的是超级管理员直接通过
-    if (user?.username === 'admin') {
+    if (user?.is_admin === 1) {
       return true
     }
     // 从缓存中获取用户的权限列表
@@ -48,6 +50,9 @@ export class PermissionsGuard implements CanActivate {
     const hasPermission = requiredPermissions.every((permission) =>
       userPermissions.includes(permission),
     );
+    if (!hasPermission) {
+      throw new ApiException('当前用户无权访问此接口', ApiErrorCode.FORBIdEN);
+    }
     return hasPermission;
   }
 }

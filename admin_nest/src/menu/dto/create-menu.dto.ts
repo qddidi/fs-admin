@@ -35,10 +35,12 @@ export class CreateMenuDto {
   })
   component?: string;
 
-  @IsNotEmpty({ message: '路由不可为空' })
+  @IsOptional()
   @ApiProperty({
-    example: 'BB',
+    example: 'menu',
+    required: false,
   })
+
   path: string;
   @ApiProperty({
     example: 11,
@@ -51,4 +53,14 @@ export class CreateMenuDto {
     required: false,
   })
   permission?: string;
+
+  @ApiProperty({
+    example: 1,
+  })
+  status: number;
+
+  @ApiProperty({
+    example: 1,
+  })
+  catch: number;
 }

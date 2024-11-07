@@ -18,6 +18,26 @@ export const addMenu = (data: any) => {
   });
 };
 
+//获取菜单列表
+export const getMenuList = (query: any) => {
+  return request({
+    url: "/menu/list",
+    method: "get",
+    params: query,
+  });
+};
+
+//删除菜单
+
+
+
+export const deleteMenu = (menuId: number) => {
+  return request({
+    url: `/menu/deleteMenu/${menuId}`,
+    method: "delete",
+  });
+};
+
 
 
 

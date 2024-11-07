@@ -3,7 +3,7 @@
         <div class="h-screen">
             <SideBar />
         </div>
-        <div class="flex-1 overflow-auto">
+        <div class="flex-1  h-screen overflow-auto">
             <NavBar />
             <AppMain />
         </div>

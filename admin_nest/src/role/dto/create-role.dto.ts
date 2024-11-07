@@ -37,6 +37,8 @@ export class CreateRoleDto {
     example: 1,
   })
   role_sort: number;
+
+
   @IsNotEmpty({ message: '创建人id不可为空' })
   @ApiProperty({
     example: 1,

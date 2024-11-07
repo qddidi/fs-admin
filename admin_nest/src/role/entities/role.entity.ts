@@ -33,11 +33,13 @@ export class Role {
   //创建人Id
   @Column({
     type: 'bigint',
+
   })
   create_by: number;
   //更新人Id
   @Column({
     type: 'bigint',
+
   })
   update_by: number;
 

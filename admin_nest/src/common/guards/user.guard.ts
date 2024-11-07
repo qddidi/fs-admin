@@ -54,7 +54,7 @@ export class UserGuard implements CanActivate {
       const isExpired = exp - nowTime < 3600;
 
       if (isExpired) {
-        const newPayLoad = { username: payload.username, sub: payload.sub };
+        const newPayLoad = { username: payload.username, sub: payload.sub, is_admin: payload.is_admin };
         const newToken = await this.jwtService.sign(newPayLoad);
         this.cacheService.set(token, newToken, 7200);
       }

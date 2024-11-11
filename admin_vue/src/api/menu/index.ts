@@ -28,15 +28,21 @@ export const getMenuList = (query: any) => {
 };
 
 //删除菜单
-
-
-
-export const deleteMenu = (menuId: number) => {
+export const deleteMenu = (menuId: number | number[]) => {
   return request({
     url: `/menu/deleteMenu/${menuId}`,
     method: "delete",
   });
 };
+//更新菜单
+export const updateMenu = (data: any) => {
+  return request({
+    url: `/menu/updateMenu`,
+    method: "put",
+    data
+  });
+};
+
 
 
 

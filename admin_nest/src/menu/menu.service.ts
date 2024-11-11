@@ -156,7 +156,7 @@ export class MenuService {
   }
 
   //删除菜单
-  async deleteMenu(id: number) {
+  async deleteMenu(id: number | number[]) {
     try {
       await this.menuRepository.delete(id);
       return '菜单删除成功';

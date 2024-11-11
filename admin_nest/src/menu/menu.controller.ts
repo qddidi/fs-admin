@@ -68,9 +68,21 @@ export class MenuController {
     summary: '菜单管理-删除',
   })
   @Permissions('system:menu:delete')
+  @ApiParam({
+    name: 'menuId',
+    type: 'string',
+    description: '菜单ID',
+    required: true,
+    examples: {
+      'example1': {
+        value: '1,2,3',
+        summary: '示例菜单ID',
+      },
+    },
+  })
   @Delete('deleteMenu/:menuId')
   deleteMenu(@Param('menuId') menuId: string) {
-    return this.menuService.deleteMenu(+menuId);
+    return this.menuService.deleteMenu(menuId.split(',').map(Number));
   }
 
 }

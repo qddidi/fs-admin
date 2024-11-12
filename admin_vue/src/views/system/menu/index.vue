@@ -30,7 +30,12 @@
     </el-form>
     <el-row :gutter="10" class="mb-4">
       <el-col :span="1.5">
-        <el-button type="primary" plain icon="Plus" @click="handleAdd()"
+        <el-button
+          type="primary"
+          v-hasPerm="['system:menu:add']"
+          plain
+          icon="Plus"
+          @click="handleAdd()"
           >新增</el-button
         >
       </el-col>
@@ -69,7 +74,20 @@
         class-name="small-padding fixed-width"
       >
         <template #default="scope">
-          <el-link type="primary" icon="Edit" v-hasPerm="['system:menu:edit']"
+          <el-link
+            type="primary"
+            icon="Edit"
+            class="mr-1"
+            @click="handleAdd(scope.row)"
+            v-hasPerm="['system:menu:add']"
+            >新增</el-link
+          >
+          <el-link
+            type="primary"
+            icon="Edit"
+            class="mr-1"
+            @click="handleUpdate(scope.row)"
+            v-hasPerm="['system:menu:edit']"
             >修改</el-link
           >
           <el-link
@@ -98,7 +116,7 @@
           <el-col :span="24">
             <el-form-item label="上级菜单">
               <el-cascader
-                v-model="topMenu"
+                v-model="form.parent_id"
                 :show-all-levels="false"
                 @change="handleMenuChange"
                 :options="tableData"
@@ -209,6 +227,9 @@ import { getMenuList, addMenu, deleteMenu, updateMenu } from "@/api/menu";
 import { reactive, ref } from "vue";
 import selectIcon from "@/components/selectIcon.vue";
 import { ElMessage, FormInstance, ElMessageBox } from "element-plus";
+import { MenuList } from "@/store/types/index";
+import { deepClone } from "@/utils/common";
+
 defineOptions({
   name: "FS_Menu",
 });
@@ -227,10 +248,9 @@ const dickStatus = [
     value: 0,
   },
 ];
-const tableData = ref([]);
+const tableData = ref<MenuList[]>([]);
 const getList = async () => {
   const { data } = await getMenuList(queryParams);
-
   tableData.value = data;
 };
 
@@ -239,9 +259,8 @@ const handleQuery = () => {
 };
 getList();
 
-const handleUpdate = () => {};
-
-const getTreesId = (row: any): number[] => {
+//获取自身及子菜单id
+const getTreesId = (row: MenuList): number[] => {
   const ids: number[] = [];
   ids.push(row.id);
   if (row.children) {
@@ -256,7 +275,7 @@ const getTreesId = (row: any): number[] => {
   }
   return ids;
 };
-const handleDelete = async (row: any) => {
+const handleDelete = async (row: MenuList) => {
   //updateMenu({ id: row.id, status: 0 })
   await ElMessageBox.confirm("确认删除此条菜单及子菜单吗?", "提示", {
     confirmButtonText: "确定",
@@ -280,13 +299,12 @@ const defaultProps = {
   checkStrictly: true,
 };
 const showIconView = ref(false);
-//新增
-const isUpdate = ref(false);
 
+const isUpdate = ref(false);
 interface MenuForm {
   title: string;
   path: string;
-  parent_id: number | null;
+  parent_id: any;
   component: string;
   order_num: number;
   icon: string;
@@ -297,11 +315,29 @@ interface MenuForm {
   catch: number;
 }
 const form = ref<MenuForm>({} as MenuForm);
+//编辑
+const handleUpdate = (row: MenuForm) => {
+  resetForm();
+  isUpdate.value = true;
+  form.value = deepClone(row);
+  dialogVisible.value = true;
+};
+//新增
+const handleAdd = (row?: MenuForm) => {
+  resetForm();
+  if (row?.id) {
+    form.value.parent_id = row.id;
+  }
+
+  dialogVisible.value = true;
+  isUpdate.value = false;
+};
 
 const rules = ref({
   title: [{ required: true, message: "菜单名称不能为空", trigger: "blur" }],
   path: [{ required: true, message: "路由地址不能为空", trigger: "blur" }],
 });
+
 const resetForm = () => {
   form.value = {
     title: "",
@@ -320,18 +356,13 @@ const resetForm = () => {
 resetForm();
 const dialogVisible = ref(false);
 
-const handleAdd = () => {
-  resetForm();
-  dialogVisible.value = true;
-  isUpdate.value = false;
-};
 const addMenuList = async (formEl: FormInstance | undefined) => {
   if (!formEl) return;
   await formEl.validate(async (valid, fields) => {
     if (valid) {
       dialogVisible.value = false;
       if (isUpdate.value) {
-        //await updateMenu(form)
+        await updateMenu(form.value);
         ElMessage({
           type: "success",
           message: "修改成功",
@@ -359,7 +390,5 @@ const getMenuName = (menuName: string) => {
   form.value.icon = menuName;
   showIconView.value = false;
 };
-
-const topMenu = ref();
 </script>
 <style lang="scss"></style>

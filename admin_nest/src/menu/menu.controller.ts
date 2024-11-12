@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, UseGuards, Query, Put, Delete, Param } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards, Query, Put, Delete, Param, UsePipes, ValidationPipe } from '@nestjs/common';
 import { MenuService } from './menu.service';
 import {
   ApiOperation,
@@ -13,6 +13,7 @@ import { PermissionsGuard } from 'src/common/guards/permissions.guard';
 import { Permissions } from 'src/common/decorators/permissions.decorator';
 import { FindMenuListDto } from './dto/findMenu.dto';
 import { UpdateMenuDto } from './dto/update-menu.dto';
+import { pick } from 'src/utils/common';
 
 @Controller('menu')
 @ApiTags('菜单权限模块')
@@ -57,11 +58,13 @@ export class MenuController {
   @Permissions('system:menu:edit')
   @ApiParam({ name: 'updateMenu', type: UpdateMenuDto })
   @ApiOperation({ summary: '菜单管理-更新' })
+
   async updateMenu(
     @Body()
     updateMenuDto: UpdateMenuDto,
   ) {
-    return await this.menuService.updateMenu(updateMenuDto);
+    const filterUpdateMenuDto = pick(updateMenuDto, ['id', 'title', 'order_num', 'parent_id', 'menu_type', 'icon', 'path', 'component', 'permission', 'status', 'catch'])
+    return await this.menuService.updateMenu(filterUpdateMenuDto);
   }
 
   @ApiOperation({

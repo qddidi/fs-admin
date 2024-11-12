@@ -151,6 +151,8 @@ export class MenuService {
       await this.menuRepository.update(updateMenuDto.id, updateMenuDto);
       return '菜单更新成功';
     } catch (error) {
+      console.log(error);
+
       throw new ApiException('菜单更新失败', 20000);
     }
   }

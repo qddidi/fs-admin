@@ -38,7 +38,7 @@ CREATE TABLE `fs_menu` (
   `status` int NOT NULL DEFAULT '1',
   `catch` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -47,7 +47,7 @@ CREATE TABLE `fs_menu` (
 
 LOCK TABLES `fs_menu` WRITE;
 /*!40000 ALTER TABLE `fs_menu` DISABLE KEYS */;
-INSERT INTO `fs_menu` VALUES (1,'系统管理',1,NULL,'Setting',NULL,'sys','2024-10-08 09:14:19.972694','2024-10-22 02:13:52.189932',NULL,1,1,1,0),(2,'角色管理',1,1,'User','system/role/index','role','2024-10-08 09:49:35.589168','2024-10-21 10:37:28.140056','sys:role:list',2,1,1,0),(3,'菜单管理',2,1,'Menu','system/menu/index','menu','2024-10-08 09:50:07.259281','2024-10-30 07:45:58.563892','sys:menu:list',2,1,1,1),(4,'用户管理',3,1,'User','system/user/index','user','2024-10-08 09:50:39.618234','2024-10-30 07:45:29.546299','sys:user:list',2,1,1,1);
+INSERT INTO `fs_menu` VALUES (1,'系统管理',1,NULL,'Setting',NULL,'sys','2024-10-08 09:14:19.972694','2024-10-22 02:13:52.189932',NULL,1,1,1,0),(2,'角色管理',1,1,'User','system/role/index','role','2024-10-08 09:49:35.589168','2024-10-21 10:37:28.140056','sys:role:list',2,1,1,0),(3,'菜单管理',2,1,'Menu','system/menu/index','menu','2024-10-08 09:50:07.259281','2024-10-30 07:45:58.563892','sys:menu:list',2,1,1,1),(4,'用户管理',3,1,'User','system/user/index','user','2024-10-08 09:50:39.618234','2024-10-30 07:45:29.546299','sys:user:list',2,1,1,1),(9,'删除',0,3,'Delete','','','2024-11-11 15:28:02.251319','2024-11-12 14:08:47.000000','system:menu:delete',3,1,1,0),(14,'编辑',1,3,'','','','2024-11-11 18:50:15.399057','2024-11-11 18:50:15.399057','system:menu:edit',3,1,1,0),(16,'新增',0,3,'','','','2024-11-12 14:09:15.032871','2024-11-12 14:09:15.032871','system:menu:add',3,1,1,0);
 /*!40000 ALTER TABLE `fs_menu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -127,6 +127,7 @@ CREATE TABLE `fs_user` (
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `id` bigint NOT NULL AUTO_INCREMENT,
+  `is_admin` int DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -137,7 +138,7 @@ CREATE TABLE `fs_user` (
 
 LOCK TABLES `fs_user` WRITE;
 /*!40000 ALTER TABLE `fs_user` DISABLE KEYS */;
-INSERT INTO `fs_user` VALUES ('admin',NULL,'9e5f09615e41c63295ae63083c7e8ceedc80',NULL,NULL,'K1mKag==','2024-10-09 09:55:09','2024-10-09 09:55:09',1),('user1',NULL,'191b643f9e044fe3841426ee80bcdb6e584f',NULL,NULL,'JPe1Pg==','2024-10-10 08:01:41','2024-10-10 08:01:41',2);
+INSERT INTO `fs_user` VALUES ('admin',NULL,'9e5f09615e41c63295ae63083c7e8ceedc80',NULL,NULL,'K1mKag==','2024-10-09 09:55:09','2024-10-09 09:55:09',1,1),('user1',NULL,'191b643f9e044fe3841426ee80bcdb6e584f',NULL,NULL,'JPe1Pg==','2024-10-10 08:01:41','2024-10-10 08:01:41',2,0);
 /*!40000 ALTER TABLE `fs_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -178,4 +179,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-30 17:09:28
+-- Dump completed on 2024-11-12 14:22:29

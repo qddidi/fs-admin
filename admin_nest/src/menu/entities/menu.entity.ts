@@ -8,6 +8,7 @@ import {
 import * as moment from 'moment';
 
 
+
 @Entity('fs_menu')
 export class Menu {
   @PrimaryGeneratedColumn()
@@ -81,4 +82,7 @@ export class Menu {
 
   @UpdateDateColumn()
   update_time: Date;
+
+
+
 }

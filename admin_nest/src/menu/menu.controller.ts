@@ -30,7 +30,7 @@ export class MenuController {
   @Permissions('system:menu:list')
   @ApiOperation({ summary: '菜单管理-查询' })
   async list(@Query() findMenuListDto: FindMenuListDto, @Request() req) {
-    findMenuListDto.status = +findMenuListDto.status;
+
     return await this.menuService.findMenuList(findMenuListDto, req);
   }
 
@@ -50,6 +50,8 @@ export class MenuController {
     @Body()
     createMenuDto: CreateMenuDto,
   ) {
+
+
     return await this.menuService.createMenu(req, createMenuDto);
   }
 
@@ -64,6 +66,8 @@ export class MenuController {
     updateMenuDto: UpdateMenuDto,
   ) {
     const filterUpdateMenuDto = pick(updateMenuDto, ['id', 'title', 'order_num', 'parent_id', 'menu_type', 'icon', 'path', 'component', 'permission', 'status', 'catch'])
+    console.log(filterUpdateMenuDto);
+
     return await this.menuService.updateMenu(filterUpdateMenuDto);
   }
 

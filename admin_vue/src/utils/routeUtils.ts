@@ -36,7 +36,6 @@ export const filterRoute = (data: any) => {
     return data;
 };
 
-
 export const handleRouter = (router: Router) => {
     const writeLists = ["Login"];
     router.beforeEach(async (to, _from, next) => {

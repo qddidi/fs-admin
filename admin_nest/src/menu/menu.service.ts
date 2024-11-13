@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateMenuDto } from './dto/create-menu.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Menu } from './entities/menu.entity';
-import { In, Repository } from 'typeorm';
+import { In, Like, Repository } from 'typeorm';
 import { ApiException } from 'src/common/filter/http-exception/api.exception';
 import { User } from 'src/user/entities/user.entity';
 import { Role } from 'src/role/entities/role.entity';
@@ -113,7 +113,7 @@ export class MenuService {
         condition['status'] = findMenuListDto.status
       }
       if (findMenuListDto.title) {
-        condition['title'] = findMenuListDto.title
+        condition['title'] = Like(`%${findMenuListDto.title}%`)
       }
       menuList = await this.menuRepository.find({
         order: {
@@ -121,6 +121,7 @@ export class MenuService {
         },
         where: condition,
       });
+      console.log({ condition });
 
     } else {
       const userList: User = await this.getUser(user, findMenuListDto);

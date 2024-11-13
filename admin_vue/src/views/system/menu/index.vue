@@ -45,14 +45,14 @@
       style="width: 100%; margin-bottom: 20px"
       row-key="id"
       border
-      default-expand-all
+      :default-expand-all="isExpandAll"
     >
       <el-table-column prop="title" label="菜单名" />
       <el-table-column prop="order_num" label="排序" />
       <el-table-column prop="path" label="路由" />
       <el-table-column prop="permission" label="权限字段" />
       <el-table-column prop="component" label="组件路径" />
-      <el-table-column label="图标">
+      <el-table-column label="图标" width="80">
         <template #default="scope">
           <component
             v-if="scope.row.icon"
@@ -64,7 +64,10 @@
       <el-table-column prop="create_time" label="创建时间" />
       <el-table-column prop="status" label="状态" width="80">
         <template #default="scope">
-          <el-switch :model-value="!!scope.row.status"></el-switch>
+          <el-switch
+            @change="changeStatus(scope.row)"
+            :model-value="!!scope.row.status"
+          ></el-switch>
         </template>
       </el-table-column>
       <el-table-column
@@ -76,7 +79,7 @@
         <template #default="scope">
           <el-link
             type="primary"
-            icon="Edit"
+            icon="Plus"
             class="mr-1"
             @click="handleAdd(scope.row)"
             v-hasPerm="['system:menu:add']"
@@ -159,7 +162,7 @@
                 v-if="showIconView"
                 class="border absolute top-10 bg-[#fff] z-10 border-solid p-4 h-[200px] overflow-y-scroll"
               >
-                <selectIcon @change="getMenuName" />
+                <selectIcon @change="getMenuIconName" />
               </div>
             </el-form-item>
           </el-col>
@@ -213,7 +216,7 @@
       <template #footer>
         <span class="dialog-footer">
           <el-button @click="dialogVisible = false">取消</el-button>
-          <el-button type="primary" @click="addMenuList(ruleFormRef)">
+          <el-button type="primary" @click="handelMenuList(ruleFormRef)">
             确定
           </el-button>
         </span>
@@ -229,16 +232,20 @@ import selectIcon from "@/components/selectIcon.vue";
 import { ElMessage, FormInstance, ElMessageBox } from "element-plus";
 import { MenuList } from "@/store/types/index";
 import { deepClone } from "@/utils/common";
-
 defineOptions({
   name: "FS_Menu",
 });
+const isExpandAll = ref(false);
 const ruleFormRef = ref<FormInstance>();
 const queryParams = reactive({
   title: "",
-  status: 1,
+  status: "",
 });
 const dickStatus = [
+  {
+    label: "全部",
+    value: "",
+  },
   {
     label: "启用",
     value: 1,
@@ -257,14 +264,12 @@ const getList = async () => {
 const handleQuery = () => {
   getList();
 };
-getList();
-
 //获取自身及子菜单id
 const getTreesId = (row: MenuList): number[] => {
   const ids: number[] = [];
   ids.push(row.id);
   if (row.children) {
-    row.children.forEach((item: any) => {
+    row.children.forEach((item: MenuList) => {
       if (item.children) {
         const childIds = getTreesId(item);
         ids.push(...childIds);
@@ -275,6 +280,8 @@ const getTreesId = (row: MenuList): number[] => {
   }
   return ids;
 };
+
+//删除
 const handleDelete = async (row: MenuList) => {
   //updateMenu({ id: row.id, status: 0 })
   await ElMessageBox.confirm("确认删除此条菜单及子菜单吗?", "提示", {
@@ -282,14 +289,12 @@ const handleDelete = async (row: MenuList) => {
     cancelButtonText: "取消",
   });
   const ids = getTreesId(row);
-  deleteMenu(ids).then(() => {
-    ElMessage({
-      type: "success",
-      message: "删除成功",
-    });
-
-    handleQuery();
+  await deleteMenu(ids);
+  ElMessage({
+    type: "success",
+    message: "删除成功",
   });
+  handleQuery();
 };
 
 const defaultProps = {
@@ -298,8 +303,8 @@ const defaultProps = {
   value: "id",
   checkStrictly: true,
 };
+//是否显示图标
 const showIconView = ref(false);
-
 const isUpdate = ref(false);
 interface MenuForm {
   title: string;
@@ -326,9 +331,9 @@ const handleUpdate = (row: MenuForm) => {
 const handleAdd = (row?: MenuForm) => {
   resetForm();
   if (row?.id) {
+    //如果选择从列表里新增,赋值父级菜单id
     form.value.parent_id = row.id;
   }
-
   dialogVisible.value = true;
   isUpdate.value = false;
 };
@@ -355,8 +360,7 @@ const resetForm = () => {
 };
 resetForm();
 const dialogVisible = ref(false);
-
-const addMenuList = async (formEl: FormInstance | undefined) => {
+const handelMenuList = async (formEl: FormInstance | undefined) => {
   if (!formEl) return;
   await formEl.validate(async (valid, fields) => {
     if (valid) {
@@ -382,13 +386,30 @@ const addMenuList = async (formEl: FormInstance | undefined) => {
     }
   });
 };
+//选择父级菜单
 const handleMenuChange = (val: any) => {
   form.value.parent_id = val[val.length - 1];
 };
 
-const getMenuName = (menuName: string) => {
+//更新状态
+const changeStatus = async (row: MenuForm) => {
+  const uptateRow: MenuForm = {} as MenuForm;
+  uptateRow.status = row.status === 1 ? 0 : 1;
+  uptateRow.id = row.id;
+
+  await updateMenu(uptateRow);
+  ElMessage({
+    type: "success",
+    message: "状态更新成功",
+  });
+  getList();
+};
+
+//获取选择菜单图标名称
+const getMenuIconName = (menuName: string) => {
   form.value.icon = menuName;
   showIconView.value = false;
 };
+
+getList();
 </script>
-<style lang="scss"></style>

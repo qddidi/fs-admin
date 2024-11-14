@@ -39,14 +39,15 @@ export class CreateRoleDto {
   role_sort: number;
 
 
-  @IsNotEmpty({ message: '创建人id不可为空' })
+
   @ApiProperty({
     example: 1,
   })
+  @IsOptional()
   create_by: number;
-  @IsNotEmpty({ message: '更新人id不可为空' })
   @ApiProperty({
     example: 1,
   })
+  @IsOptional()
   update_by: number;
 }

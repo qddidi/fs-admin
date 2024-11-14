@@ -64,15 +64,15 @@ export class RoleService {
     }
 
     handlePage(queryBuilder, findMenuListDto.page_num, findMenuListDto.page_size)
-
+    queryBuilder.orderBy({ role_sort: 'ASC' })
     const [list, count] = await queryBuilder.getManyAndCount();
-    return { list, count };
+    return { list, total: count };
   }
 
   //删除角色
-  async deleteRole(id): Promise<string> {
+  async deleteRole(ids: number[]): Promise<string> {
     try {
-      await this.roleRepository.delete(id);
+      await this.roleRepository.delete(ids);
       return '删除成功';
     } catch (error) {
       throw new ApiException('删除失败', ApiErrorCode.COMMON_CODE);
@@ -83,9 +83,11 @@ export class RoleService {
   //修改角色
   async updateRole(updateRoleDto: UpdateRoleDto) {
     try {
-      await this.menuRepository.update(updateRoleDto.id, updateRoleDto);
+      await this.roleRepository.update(updateRoleDto.id, updateRoleDto);
       return '角色更新成功';
     } catch (error) {
+      console.log(error);
+
       throw new ApiException('角色更新失败', 20000);
     }
   }

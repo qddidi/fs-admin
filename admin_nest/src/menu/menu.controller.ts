@@ -65,9 +65,8 @@ export class MenuController {
     @Body()
     updateMenuDto: UpdateMenuDto,
   ) {
+    //过滤掉不需要的字段
     const filterUpdateMenuDto = pick(updateMenuDto, ['id', 'title', 'order_num', 'parent_id', 'menu_type', 'icon', 'path', 'component', 'permission', 'status', 'catch'])
-    console.log(filterUpdateMenuDto);
-
     return await this.menuService.updateMenu(filterUpdateMenuDto);
   }
 

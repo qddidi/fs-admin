@@ -21,12 +21,14 @@ export class RoleController {
     name: 'CreateRoleDto',
     type: CreateRoleDto,
   })
-  createRole(@Body() createRoleDto: CreateRoleDto) {
+  createRole(@Req() req, @Body() createRoleDto: CreateRoleDto) {
+    createRoleDto.create_by = req.user.sub;
+    createRoleDto.update_by = req.user.sub;
     return this.roleService.create(createRoleDto);
   }
 
   //查询
-  @Get('findRoleList')
+  @Get('list')
   @Permissions('system:role:list')
   @ApiOperation({
     summary: '角色管理-查询',
@@ -46,12 +48,11 @@ export class RoleController {
   @Permissions('system:role:delete')
   @Delete('deleteRole/:roleId')
   deleteRole(@Param('roleId') roleId: string) {
-    return this.roleService.deleteRole(+roleId);
+    return this.roleService.deleteRole(roleId.split(',').map(Number));
   }
 
   //更新角色
   @Put('/updateRole')
-  @Public()
   @Permissions('system:role:edit')
   @ApiParam({ name: 'updateRole', type: UpdateRoleDto })
   @ApiOperation({ summary: '角色管理-更新' })

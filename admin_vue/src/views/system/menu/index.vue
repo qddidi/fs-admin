@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-form :model="queryParams" ref="queryRef" :inline="true">
-      <el-form-item label="菜单名称" prop="menuName">
+      <el-form-item label="菜单名称">
         <el-input
           v-model="queryParams.title"
           placeholder="请输入菜单名称"
@@ -42,7 +42,7 @@
     </el-row>
     <el-table
       :data="tableData"
-      style="width: 100%; margin-bottom: 20px"
+      class="w-full mt-2"
       row-key="id"
       border
       :default-expand-all="isExpandAll"
@@ -216,7 +216,7 @@
       <template #footer>
         <span class="dialog-footer">
           <el-button @click="dialogVisible = false">取消</el-button>
-          <el-button type="primary" @click="handelMenuList(ruleFormRef)">
+          <el-button type="primary" @click="submitForm(ruleFormRef)">
             确定
           </el-button>
         </span>
@@ -232,12 +232,14 @@ import selectIcon from "@/components/selectIcon.vue";
 import { ElMessage, FormInstance, ElMessageBox } from "element-plus";
 import { MenuList } from "@/store/types/index";
 import { deepClone } from "@/utils/common";
+import { MenuForm, QueryMenuParams } from "@/api/menu/types/menu.dto";
+
 defineOptions({
   name: "FS_Menu",
 });
 const isExpandAll = ref(false);
 const ruleFormRef = ref<FormInstance>();
-const queryParams = reactive({
+const queryParams = reactive<QueryMenuParams>({
   title: "",
   status: "",
 });
@@ -294,7 +296,7 @@ const handleDelete = async (row: MenuList) => {
     type: "success",
     message: "删除成功",
   });
-  handleQuery();
+  getList();
 };
 
 const defaultProps = {
@@ -306,19 +308,7 @@ const defaultProps = {
 //是否显示图标
 const showIconView = ref(false);
 const isUpdate = ref(false);
-interface MenuForm {
-  title: string;
-  path: string;
-  parent_id: any;
-  component: string;
-  order_num: number;
-  icon: string;
-  id: number | null;
-  menu_type: number;
-  permission: string;
-  status: number;
-  catch: number;
-}
+
 const form = ref<MenuForm>({} as MenuForm);
 //编辑
 const handleUpdate = (row: MenuForm) => {
@@ -360,7 +350,7 @@ const resetForm = () => {
 };
 resetForm();
 const dialogVisible = ref(false);
-const handelMenuList = async (formEl: FormInstance | undefined) => {
+const submitForm = async (formEl: FormInstance | undefined) => {
   if (!formEl) return;
   await formEl.validate(async (valid, fields) => {
     if (valid) {
@@ -371,7 +361,7 @@ const handelMenuList = async (formEl: FormInstance | undefined) => {
           type: "success",
           message: "修改成功",
         });
-        handleQuery();
+        getList();
         return;
       }
 
@@ -380,7 +370,7 @@ const handelMenuList = async (formEl: FormInstance | undefined) => {
         type: "success",
         message: "新增成功",
       });
-      handleQuery();
+      getList();
     } else {
       console.log("error submit!", fields);
     }

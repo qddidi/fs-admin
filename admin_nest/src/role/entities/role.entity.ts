@@ -8,6 +8,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { Menu } from '../../menu/entities/menu.entity';
+import * as moment from 'moment';
 @Entity('fs_role')
 export class Role {
   @PrimaryGeneratedColumn({
@@ -43,10 +44,28 @@ export class Role {
   })
   update_by: number;
 
-  @CreateDateColumn()
+  @CreateDateColumn({
+    transformer: {
+      to: (value) => {
+        return value
+      },
+      from: (value) => {
+        return moment(value).format('YYYY-MM-DD HH:mm:ss')
+      }
+    }
+  })
   create_time: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({
+    transformer: {
+      to: (value) => {
+        return value
+      },
+      from: (value) => {
+        return moment(value).format('YYYY-MM-DD HH:mm:ss')
+      }
+    }
+  })
   update_time: Date;
 
   @ManyToMany(() => Menu)

@@ -1,5 +1,5 @@
 import request from "@/utils/http/index";
-import { MenuDto } from "./types/menu.dto";
+import { MenuDto, MenuForm, QueryMenuParams } from "./types/menu.dto";
 //获取路由及权限
 export const getInfo = (data: MenuDto) => {
   return request({
@@ -10,7 +10,7 @@ export const getInfo = (data: MenuDto) => {
 };
 
 //新增菜单
-export const addMenu = (data: any) => {
+export const addMenu = (data: MenuForm) => {
   return request({
     url: "/menu/createMenu",
     data,
@@ -19,7 +19,7 @@ export const addMenu = (data: any) => {
 };
 
 //获取菜单列表
-export const getMenuList = (query: any) => {
+export const getMenuList = (query: QueryMenuParams) => {
   return request({
     url: "/menu/list",
     method: "get",
@@ -35,7 +35,7 @@ export const deleteMenu = (menuId: number | number[]) => {
   });
 };
 //更新菜单
-export const updateMenu = (data: any) => {
+export const updateMenu = (data: MenuForm) => {
   return request({
     url: `/menu/updateMenu`,
     method: "put",

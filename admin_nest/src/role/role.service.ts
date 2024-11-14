@@ -86,7 +86,7 @@ export class RoleService {
       await this.roleRepository.update(updateRoleDto.id, updateRoleDto);
       return '角色更新成功';
     } catch (error) {
-      console.log(error);
+
 
       throw new ApiException('角色更新失败', 20000);
     }

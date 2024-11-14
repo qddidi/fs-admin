@@ -5,7 +5,6 @@ export const rolesToMenus = (roles: Role[] = []) => {
     interface MenuMap {
         [key: string]: Menu;
     }
-    // console.log(userList.roles[0].menus);
 
     //根据id去重
     const menus: MenuMap = roles.reduce(

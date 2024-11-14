@@ -57,7 +57,7 @@ export class MenuService {
     const { user } = req;
     //根据关联关系通过user查询user下的菜单和角色
     const userList: User = await this.getUser(user)
-    console.log(userList);
+
 
     //是否为超级管理员,是的话查询所有菜单和权限
     const isAdmin = userList.is_admin === 1;
@@ -121,7 +121,7 @@ export class MenuService {
         },
         where: condition,
       });
-      console.log({ condition });
+
 
     } else {
       const userList: User = await this.getUser(user, findMenuListDto);
@@ -140,7 +140,7 @@ export class MenuService {
       await this.menuRepository.save({ ...createMenuDto, create_by: user.sub, update_by: user.sub });
       return '菜单新增成功';
     } catch (error) {
-      console.log(error);
+
 
       throw new ApiException('菜单新增失败', 20000);
     }
@@ -152,7 +152,7 @@ export class MenuService {
       await this.menuRepository.update(updateMenuDto.id, updateMenuDto);
       return '菜单更新成功';
     } catch (error) {
-      console.log(error);
+
 
       throw new ApiException('菜单更新失败', 20000);
     }

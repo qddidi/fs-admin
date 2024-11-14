@@ -5,6 +5,7 @@
         <el-input
           v-model="queryParams.role_name"
           placeholder="角色名称"
+          class="w-[150px]"
           clearable
         />
       </el-form-item>
@@ -21,6 +22,16 @@
             :value="dict.value"
           />
         </el-select>
+      </el-form-item>
+      <el-form-item label="创建时间" style="width: 308px">
+        <el-date-picker
+          v-model="dateRange"
+          value-format="YYYY-MM-DD"
+          type="daterange"
+          range-separator="-"
+          start-placeholder="开始日期"
+          end-placeholder="结束日期"
+        ></el-date-picker>
       </el-form-item>
       <el-form-item>
         <el-button
@@ -167,6 +178,7 @@ import { getMenuList } from "@/api/menu";
 import { ElMessage, ElMessageBox, FormInstance } from "element-plus";
 import { deepClone } from "@/utils/common";
 import { deleteRole } from "../../../api/role/index";
+import { handleDateRangeChange } from "../../../utils/common";
 const queryParams = reactive<QueryRoleParams>({
   role_name: "",
   status: "",
@@ -175,6 +187,8 @@ const queryParams = reactive<QueryRoleParams>({
   page_num: 1,
   page_size: 10,
 });
+
+const dateRange = ref<any>([]);
 const dickStatus = [
   {
     label: "启用",
@@ -204,6 +218,7 @@ const handleQuery = async () => {
 };
 
 const getList = async () => {
+  handleDateRangeChange(dateRange.value, queryParams);
   const { data } = await getRoleList(queryParams);
   tableData.value = data.list;
   total.value = data.total;

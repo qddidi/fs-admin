@@ -4,6 +4,7 @@
       <el-form-item label="菜单名称">
         <el-input
           v-model="queryParams.title"
+          class="w-[150px]"
           placeholder="请输入菜单名称"
           clearable
         />
@@ -198,8 +199,12 @@
           <el-col :span="12">
             <el-form-item label="显示状态">
               <el-radio-group v-model="form.status">
-                <el-radio :value="1">启用</el-radio>
-                <el-radio :value="0">不启用</el-radio>
+                <el-radio
+                  v-for="dict in dickStatus"
+                  :key="dict.value"
+                  :label="dict.label"
+                  :value="dict.value"
+                ></el-radio>
               </el-radio-group>
             </el-form-item>
           </el-col>
@@ -233,7 +238,6 @@ import { ElMessage, FormInstance, ElMessageBox } from "element-plus";
 import { MenuList } from "@/store/types/index";
 import { deepClone } from "@/utils/common";
 import { MenuForm, QueryMenuParams } from "@/api/menu/types/menu.dto";
-
 defineOptions({
   name: "FS_Menu",
 });
@@ -244,10 +248,6 @@ const queryParams = reactive<QueryMenuParams>({
   status: "",
 });
 const dickStatus = [
-  {
-    label: "全部",
-    value: "",
-  },
   {
     label: "启用",
     value: 1,

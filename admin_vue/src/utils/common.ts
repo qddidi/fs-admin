@@ -14,3 +14,24 @@ export function deepClone(obj: any): any {
     return clone;
 }
 
+/**
+ * 处理时间范围查询
+ * @param dateRange 选择的时间范围 
+ * @param params 查询参数 
+ * @returns 
+ */
+
+export function handleDateRangeChange(dateRange: any, params: any) {
+    if (typeof params !== 'object' || params === null || Array.isArray(params)) {
+        params = {};
+    }
+    if (Array.isArray(dateRange) && dateRange.length === 2) {
+        params.begin_time = dateRange[0];
+        params.end_time = dateRange[1];
+        return
+    }
+
+    params.begin_time = '';
+    params.end_time = '';
+}
+

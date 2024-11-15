@@ -11,6 +11,7 @@ import { UpdateRoleDto } from './dto/update-role.dto';
 import { FindMenuListDto } from 'src/menu/dto/findMenu.dto';
 import { FindRoleListDto } from './dto/find-role.dto';
 import { handlePage } from 'src/utils/handlePage';
+import { pick } from 'src/utils/common';
 @Injectable()
 export class RoleService {
   constructor(
@@ -84,10 +85,13 @@ export class RoleService {
 
   //修改角色
   async updateRole(updateRoleDto: UpdateRoleDto) {
+    //过滤掉不需要的字段
+    const filterUpdateRoleDto = pick(updateRoleDto, ['id', 'role_name', 'remark', 'role_sort', 'order_num', 'menu_ids', 'status']);
     try {
-      await this.roleRepository.update(updateRoleDto.id, updateRoleDto);
+      await this.roleRepository.update(updateRoleDto.id, filterUpdateRoleDto);
       return '角色更新成功';
     } catch (error) {
+      console.log(error);
 
 
       throw new ApiException('角色更新失败', 20000);

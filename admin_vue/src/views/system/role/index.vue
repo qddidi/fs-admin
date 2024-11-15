@@ -143,8 +143,9 @@
         <el-form-item label="菜单权限">
           <el-tree
             class="tree-border"
+            ref="menuRef"
             :data="menuOptions"
-            :default-checked-keys="form.menu_ids"
+            check-strictly
             show-checkbox
             node-key="id"
             @check="handleCheck"
@@ -174,13 +175,14 @@
 <script lang="ts" setup>
 import { getRoleList, addRole, updateRole } from "@/api/role";
 import { QueryRoleParams, RoleForm, RoleList } from "@/api/role/types/role.dto";
-import { reactive, ref } from "vue";
+import { reactive, ref, useTemplateRef } from "vue";
 import { getMenuList } from "@/api/menu";
 import { ElMessage, ElMessageBox, FormInstance } from "element-plus";
 import { deepClone } from "@/utils/common";
 import { deleteRole } from "../../../api/role/index";
 import { handleDateRangeChange } from "../../../utils/common";
 import { MenuList } from "../../../store/types/index";
+import { nextTick } from "vue";
 const queryParams = reactive<QueryRoleParams>({
   role_name: "",
   status: "",
@@ -229,7 +231,7 @@ const getList = async () => {
 getList();
 
 const form = ref<RoleForm>({} as RoleForm);
-
+const menuRef = useTemplateRef<any>("menuRef");
 const resetForm = () => {
   form.value = {
     role_name: "",
@@ -270,10 +272,17 @@ const handleAdd = () => {
 //编辑
 const handleUpdate = (row: RoleForm & { menus?: MenuList[] }) => {
   resetForm();
+
   isUpdate.value = true;
   form.value = deepClone(row);
   form.value.menu_ids = row.menus?.map((item) => item.id);
+
   dialogVisible.value = true;
+  nextTick(() => {
+    if (menuRef.value) {
+      menuRef.value.setCheckedKeys(form.value.menu_ids);
+    }
+  });
 };
 const submitForm = async (formEl: FormInstance | undefined) => {
   if (!formEl) return;

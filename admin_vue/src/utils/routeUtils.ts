@@ -45,11 +45,11 @@ export const handleRouter = (router: Router) => {
             return;
         }
         const appStore = useAppStore();
-        if (appStore.menuList.length) {
+        if (appStore.isLoadRoute) {
             appStore.$patch({
                 breadcrumbs: filterBreadCrumb(to.path, appStore.menuList),
             });
-            console.log({ to });
+
 
             appStore.addTags({ name: to.meta.title as string, path: to.path, fullpath: to.fullPath });
             to.meta?.catch && appStore.addCatchList(to.meta?.name as string)
@@ -60,7 +60,6 @@ export const handleRouter = (router: Router) => {
         try {
             await appStore.getInfo();
             const routers = filterRoute(appStore.menuList);
-
             routers.forEach((route: RouteRecordRaw) => {
                 router.addRoute("Index", route);
             });

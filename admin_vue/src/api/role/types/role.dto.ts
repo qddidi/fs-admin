@@ -1,11 +1,14 @@
+import { MenuList } from "@/store/types";
 
 export type RoleList = {
     id: number;
     role_name?: string;
     description?: string;
     order_num?: number;
-    create_time: Date;
-    update_time: Date;
+    create_time: string;
+    update_time: string;
+    menus: MenuList[];
+    status: number;
 }
 
 export type QueryRoleParams = {

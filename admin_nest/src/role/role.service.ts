@@ -51,7 +51,7 @@ export class RoleService {
 
   //查询当前用户角色列表
   async findRoleList(findMenuListDto: FindRoleListDto) {
-    let queryBuilder = this.roleRepository.createQueryBuilder()
+    let queryBuilder = this.roleRepository.createQueryBuilder('fs_role')
 
     if (findMenuListDto.role_name) {
       queryBuilder.andWhere('role_name like :role_name', { role_name: `%${findMenuListDto?.role_name}%` });
@@ -64,7 +64,9 @@ export class RoleService {
     }
 
     handlePage(queryBuilder, findMenuListDto.page_num, findMenuListDto.page_size)
-    queryBuilder.orderBy({ role_sort: 'ASC' })
+    queryBuilder.orderBy('fs_role.role_sort', 'ASC')
+    queryBuilder.leftJoinAndSelect('fs_role.menus', 'menu');
+
     const [list, count] = await queryBuilder.getManyAndCount();
     return { list, total: count };
   }

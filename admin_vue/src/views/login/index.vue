@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex items-center justify-center h-screen bg-gradient-to-b from-blue-500 to-blue-200"
+    class="flex items-center justify-center h-screen bg-gradient-to-bl from-[#B0EFFE] to-[#353567] via-[#E1D8A0]"
   >
     <div class="flex mx-auto bg-white rounded py-10">
       <div class="w-[330px] box-border text-center pt-10">

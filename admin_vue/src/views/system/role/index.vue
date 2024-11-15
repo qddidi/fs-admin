@@ -144,6 +144,7 @@
           <el-tree
             class="tree-border"
             :data="menuOptions"
+            :default-checked-keys="form.menu_ids"
             show-checkbox
             node-key="id"
             @check="handleCheck"
@@ -179,6 +180,7 @@ import { ElMessage, ElMessageBox, FormInstance } from "element-plus";
 import { deepClone } from "@/utils/common";
 import { deleteRole } from "../../../api/role/index";
 import { handleDateRangeChange } from "../../../utils/common";
+import { MenuList } from "../../../store/types/index";
 const queryParams = reactive<QueryRoleParams>({
   role_name: "",
   status: "",
@@ -241,8 +243,18 @@ const resetForm = () => {
 const handleCheck = (_: any, data: any) => {
   form.value.menu_ids = data.checkedKeys;
 };
-const changeStatus = (row: RoleList) => {
-  console.log(row);
+//更新状态
+const changeStatus = async (row: RoleList) => {
+  const uptateRow: RoleForm = {} as RoleForm;
+  uptateRow.status = row.status === 1 ? 0 : 1;
+  uptateRow.id = row.id;
+
+  await updateRole(uptateRow);
+  ElMessage({
+    type: "success",
+    message: "状态更新成功",
+  });
+  getList();
 };
 
 const dialogVisible = ref(false);
@@ -254,18 +266,16 @@ const handleAdd = () => {
   resetForm();
   dialogVisible.value = true;
   isUpdate.value = false;
-  console.log("新增");
 };
 //编辑
-const handleUpdate = (row: RoleForm) => {
+const handleUpdate = (row: RoleForm & { menus?: MenuList[] }) => {
   resetForm();
   isUpdate.value = true;
   form.value = deepClone(row);
+  form.value.menu_ids = row.menus?.map((item) => item.id);
   dialogVisible.value = true;
 };
 const submitForm = async (formEl: FormInstance | undefined) => {
-  console.log({ formEl });
-
   if (!formEl) return;
   await formEl.validate(async (valid, fields) => {
     if (valid) {

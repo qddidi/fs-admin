@@ -27,6 +27,7 @@ export type NavTag = {
     fullpath?: string
 }
 export type AppStoreState = {
+    isLoadRoute: boolean
     menuList: MenuList[]
     isCollapse: boolean
     permissions: string[]

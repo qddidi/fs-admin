@@ -31,6 +31,8 @@ export class MenuService {
         .leftJoinAndSelect('fs_user.roles', 'fs_role')
         .leftJoinAndSelect('fs_role.menus', 'fs_menu')
         .where({ id: user.sub })
+        .andWhere('fs_role.status = :status', { status: 1 })
+
 
 
       if (condition?.title) {
@@ -48,6 +50,8 @@ export class MenuService {
       return User
 
     } catch (error) {
+      console.log(error);
+
       throw new ApiException('查询失败', ApiErrorCode.COMMON_CODE);
     }
 
@@ -57,10 +61,11 @@ export class MenuService {
     const { user } = req;
     //根据关联关系通过user查询user下的菜单和角色
     const userList: User = await this.getUser(user)
+    console.log(userList);
 
 
     //是否为超级管理员,是的话查询所有菜单和权限
-    const isAdmin = userList.is_admin === 1;
+    const isAdmin = userList?.is_admin === 1;
     let routers: Menu[] = [];
     let permissions: string[] = [];
     if (isAdmin) {

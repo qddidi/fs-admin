@@ -5,6 +5,7 @@ import { AppStoreState, NavTag } from './types';
 export default defineStore("appStore", {
     state: (): AppStoreState => {
         return {
+            isLoadRoute: false,
             menuList: [],
             isCollapse: false,
             permissions: [],
@@ -18,6 +19,7 @@ export default defineStore("appStore", {
             const { data } = await getInfo({})
             this.menuList = data.routers;
             this.permissions = data.permissions;
+            this.isLoadRoute = true;
         },
 
         addTags(tag: NavTag) {

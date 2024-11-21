@@ -45,13 +45,13 @@
 
 - 后端
 
-  | 框架及服务                                                        | 说明                 | 版本   |
-  | ----------------------------------------------------------------- | -------------------- | ------ |
-  | [Nestjs/cli](https://nestjs.com/)                                 | Node 框架            | 10.0.0 |
-  | [Docker](https://nestjs.com/)                                     | 容器                 | 25.0.3 |
-  | [‌MySQL](https://www.mysql.com/)                                  | 数据库               | 8.4.0  |
-  | [Redis](https://redis.io/)                                        | 缓存数据库           | 7.0    |
-  | [TypeScript](https://www.typescriptlang.org/docs/)                | JavaScript 的超集    | 5.5.3  |
-  | [typeorm](https://typeorm.io/)                                    | 数据库对象关系映射库 | 0.3.20 |
-  | [@nestjs/swagger](https://github.com/nestjs/swagger#readme)       | 接口文档生成         | 7.3.0  |
-  | [class-validator](https://www.npmjs.com/package/class-validator/) | 接口校验             | 0.14.1 |
+| 框架及服务                                                        | 说明                 | 版本   |
+| ----------------------------------------------------------------- | -------------------- | ------ |
+| [Nestjs/cli](https://nestjs.com/)                                 | Node 框架            | 10.0.0 |
+| [Docker](https://nestjs.com/)                                     | 容器                 | 25.0.3 |
+| [‌MySQL](https://www.mysql.com/)                                  | 数据库               | 8.4.0  |
+| [Redis](https://redis.io/)                                        | 缓存数据库           | 7.0    |
+| [TypeScript](https://www.typescriptlang.org/docs/)                | JavaScript 的超集    | 5.5.3  |
+| [typeorm](https://typeorm.io/)                                    | 数据库对象关系映射库 | 0.3.20 |
+| [@nestjs/swagger](https://github.com/nestjs/swagger#readme)       | 接口文档生成         | 7.3.0  |
+| [class-validator](https://www.npmjs.com/package/class-validator/) | 接口校验             | 0.14.1 |

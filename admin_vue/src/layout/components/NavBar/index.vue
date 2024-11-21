@@ -11,6 +11,7 @@
           {{ item.name }}
         </el-breadcrumb-item>
       </el-breadcrumb>
+      <div class="ml-auto cursor-pointer" @click="loginOut">退出</div>
     </div>
     <div class="shadow-sm py-1">
       <Tags
@@ -40,7 +41,9 @@ import Tags from "./components/Tags.vue";
 import TagView from "./components/TagView.vue";
 import { useRouter, useRoute } from "vue-router";
 import { NavTag } from "../../../store/types/index";
+import { Storage } from "@/utils/storage";
 import { ref } from "vue";
+import { ElMessageBox } from "element-plus";
 const router = useRouter();
 const route = useRoute();
 const appStore = useAppStore();
@@ -114,5 +117,16 @@ const openMenu = (e: any, index: number) => {
   };
   //记录当前点击的tag的索引,用于判断显示哪个tagView
   nowClickIndex.value = index;
+};
+
+//退出登录
+
+const loginOut = async () => {
+  Storage.remove("token");
+  await ElMessageBox.confirm("确认退出吗?", "提示", {
+    confirmButtonText: "确定",
+    cancelButtonText: "取消",
+  });
+  router.push("/login");
 };
 </script>

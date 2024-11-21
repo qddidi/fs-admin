@@ -23,6 +23,7 @@
               size="large"
               placeholder="请输入用户名"
               v-model="formLogin.username"
+              @keyup.enter="handleLogin"
             />
           </el-form-item>
           <el-form-item prop="password">
@@ -31,6 +32,7 @@
               v-model="formLogin.password"
               type="password"
               placeholder="请输入密码"
+              @keyup.enter="handleLogin"
             />
           </el-form-item>
           <el-form-item prop="code">
@@ -40,6 +42,7 @@
               auto-complete="off"
               placeholder="验证码"
               class="w-[60%] mr-4"
+              @keyup.enter="handleLogin"
             >
             </el-input>
             <div @click="handleGetCaptcha" v-html="codeUrl"></div>

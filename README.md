@@ -15,19 +15,19 @@
 
 ### 登录
 
-![image.png](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/d9e41e83a00a4c9f81e52ec3bf5b4f6a~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg5Lic5pa55bCP5pyI:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMzE5MzQyMjAwMTQ3NDE5OSJ9&rk3s=e9ecf3d6&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1732267953&x-orig-sign=YUk%2FEvjhY9C4IE8leSOSV0pOqFk%3D)
+![image.png](https://github.com/qddidi/fs-admin/blob/develop/assets/01.jpg?raw=true)
 
 ### 角色管理
 
-![image.png](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/67e7a6c991ba4425aed20987e96c2d78~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg5Lic5pa55bCP5pyI:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMzE5MzQyMjAwMTQ3NDE5OSJ9&rk3s=e9ecf3d6&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1732268083&x-orig-sign=t67n%2BV%2Bu3jzDxN7%2FpL6jpvl0Ktk%3D)
+![image.png](https://github.com/qddidi/fs-admin/blob/develop/assets/02.jpg?raw=true)
 
 ### 菜单管理
 
-![image.png](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/93916a471c8544ecac4247bded16b1db~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg5Lic5pa55bCP5pyI:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMzE5MzQyMjAwMTQ3NDE5OSJ9&rk3s=e9ecf3d6&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1732268141&x-orig-sign=golxaWR11yjcFJZAOi%2FIc4B%2FBaU%3D)
+![image.png](https://github.com/qddidi/fs-admin/blob/develop/assets/03.jpg?raw=true)
 
 ### 用户管理
 
-![image.png](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/fcfe0e3d40d04c46894608b5a580c42e~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg5Lic5pa55bCP5pyI:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMzE5MzQyMjAwMTQ3NDE5OSJ9&rk3s=e9ecf3d6&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1732268177&x-orig-sign=mntn6M7xZ0J1S5Q4HWFQbQmDvGw%3D)
+![image.png](https://github.com/qddidi/fs-admin/blob/develop/assets/04.jpg?raw=true)
 
 ## 技术栈
 

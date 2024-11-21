@@ -25,7 +25,7 @@ export const loadView = (view: any) => {
 
 export const filterRoute = (data: any) => {
     data.forEach((item: any) => {
-        if (item.children?.length > 0) {
+        if (item.children?.length > 0 && item.menu_type === 1) {
             delete item.component;
             filterRoute(item.children);
         } else {

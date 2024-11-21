@@ -11,9 +11,7 @@ import { Menu } from '../../menu/entities/menu.entity';
 import * as moment from 'moment';
 @Entity('fs_role')
 export class Role {
-  @PrimaryGeneratedColumn({
-    type: 'bigint',
-  })
+  @PrimaryGeneratedColumn()
   id: number;
   //角色名
   @Column({
@@ -32,16 +30,10 @@ export class Role {
   @Column({ length: '100', nullable: true })
   remark: string;
   //创建人Id
-  @Column({
-    type: 'bigint',
-
-  })
+  @Column()
   create_by: number;
   //更新人Id
-  @Column({
-    type: 'bigint',
-
-  })
+  @Column()
   update_by: number;
 
   @CreateDateColumn({

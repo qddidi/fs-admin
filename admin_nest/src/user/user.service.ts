@@ -3,7 +3,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
 import { Role } from 'src/role/entities/role.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { In, Repository } from 'typeorm';
+import { Between, In, Like, Repository } from 'typeorm';
 import { ApiException } from 'src/common/filter/http-exception/api.exception';
 import { ApiErrorCode } from 'src/common/enums/api-error-code.enum';
 import { LoginDto } from './dto/login-dto';
@@ -12,6 +12,7 @@ import encry from '../utils/crypto';
 import generateCaptcha from 'src/utils/generateCaptcha';
 import { CacheService } from 'src/cache/cache.service';
 import { Menu } from 'src/menu/entities/menu.entity';
+import { FindUserListDto } from './dto/find-user.dto';
 @Injectable()
 export class UserService {
   constructor(
@@ -27,6 +28,7 @@ export class UserService {
   //注册(暂时不考虑使用,注册由管理员添加)
   async register(createUserDto: CreateUserDto) {
     const { username, password, captcha, id } = createUserDto;
+
 
     //获取缓存的验证码
     const cacheCaptcha = await this.cacheService.get(id);
@@ -60,7 +62,7 @@ export class UserService {
     if (userExists)
       throw new ApiException('用户已存在', ApiErrorCode.USER_EXIST);
     try {
-      const newUser = new User();
+      let newUser = new User();
       if (createUserDto.role_ids?.length) {
         //查询需要绑定的角色列表(自动在关联表生成关联关系)
         const roleList = await this.roleRepository.find({
@@ -72,13 +74,20 @@ export class UserService {
         newUser.roles = roleList;
 
       }
-
-      newUser.username = createUserDto.username;
       newUser.password = createUserDto.password;
+      newUser.nickname = createUserDto.nickname;
+      newUser.email = createUserDto.email;
+      newUser.telephone = createUserDto.telephone;
+      newUser.status = createUserDto.status;
+      newUser.username = createUserDto.username;
+
+
       await this.userRepository.save(newUser);
       return '创建成功';
     } catch (error) {
-      throw new ApiException('系统异常', ApiErrorCode.FAIL);
+      console.log(error);
+
+      throw new ApiException('创建失败', ApiErrorCode.FAIL);
     }
   }
   async findOne(username: string) {
@@ -99,6 +108,8 @@ export class UserService {
       throw new ApiException('验证码错误', ApiErrorCode.COMMON_CODE);
     }
     const user = await this.findOne(username);
+
+
     if (user.password !== encry(password, user.salt)) {
       throw new ApiException('密码错误', ApiErrorCode.PASSWORD_ERR);
     }
@@ -106,13 +117,91 @@ export class UserService {
     const payload = { username: user.username, sub: user.id, is_admin: user.is_admin };
     const token = await this.jwtService.signAsync(payload);
     this.cacheService.set(token, token, 7200);
+
     return token;
   }
   //生成验证码
   getCaptcha() {
     const { id, captcha } = generateCaptcha();
     this.cacheService.set(id, captcha.text, 60);
-
     return { id, img: captcha.data };
+  }
+
+
+  //用户查询
+  async findUserList(findUserListDto: FindUserListDto) {
+    const condition = {};
+
+    if (findUserListDto.username) {
+      condition['username'] = Like(`%${findUserListDto.username}%`);
+    }
+    if (findUserListDto.email) {
+      condition['email'] = Like(`%${findUserListDto.email}%`);
+    }
+    if (findUserListDto.begin_time && findUserListDto.end_time) {
+      condition['create_time'] = Between(findUserListDto.begin_time, findUserListDto.end_time);
+    }
+    if (findUserListDto.status) {
+      condition['status'] = findUserListDto.status;
+    }
+    try {
+      const [list, total] = await this.userRepository.findAndCount({
+        where: condition,
+        skip: (findUserListDto.page_num - 1) * findUserListDto.page_size,
+        take: findUserListDto.page_size,
+        relations: ['roles']
+      });
+      return {
+        total,
+        list
+      };
+    } catch (error) {
+      throw new ApiException('查询失败', ApiErrorCode.FAIL);
+    }
+
+  }
+
+  //用户删除
+  async deleteUser(ids: number | number[]) {
+    try {
+      await this.userRepository.delete(ids);
+      return '删除成功';
+    } catch (error) {
+      throw new ApiException('删除失败', ApiErrorCode.FAIL);
+    }
+  }
+
+  //用户修改
+  async updateUser(updateUserDto) {
+    try {
+      const newUser = new User();
+
+
+      //查询需要绑定的角色列表(自动在关联表生成关联关系)
+      if (Array.isArray(updateUserDto.role_ids)) {
+        const role = await this.roleRepository.find({
+          where: {
+            id: In(updateUserDto.role_ids),
+          },
+        });
+        newUser.roles = role;
+      }
+
+
+
+      //newUser.password = updateUserDto.password;
+      newUser.nickname = updateUserDto.nickname;
+      newUser.email = updateUserDto.email;
+      newUser.telephone = updateUserDto.telephone;
+      newUser.status = updateUserDto.status;
+      newUser.username = updateUserDto.username;
+      newUser.id = updateUserDto.id;
+      await this.userRepository.save(newUser);
+      return '修改成功';
+    } catch (error) {
+      console.log(error);
+
+      throw new ApiException('修改失败', ApiErrorCode.FAIL);
+    }
   }
 }

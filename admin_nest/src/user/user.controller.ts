@@ -1,4 +1,4 @@
-import { Controller, Post, Body, UseGuards, Get } from '@nestjs/common';
+import { Controller, Post, Body, UseGuards, Get, Query, Delete, Param, Put } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import {
@@ -12,7 +12,9 @@ import { LoginDto } from './dto/login-dto';
 import { CaptchaVo } from './vo/captcha-vo';
 import { Public } from 'src/public/public.decorator';
 import { LoginVo } from './vo/login-vo';
-
+import { FindUserListDto } from './dto/find-user.dto';
+import { Permissions } from 'src/common/decorators/permissions.decorator';
+import { UpdateUserDto } from './dto/update-user.dto';
 @ApiTags('用户模块')
 @Controller('user')
 export class UserController {
@@ -33,11 +35,8 @@ export class UserController {
   register(@Body() createUserDto: CreateUserDto) {
     return this.userService.register(createUserDto);
   }
-  @Public()
-  @Post('createUser')
-  create(@Body() createUserDto: CreateUserDto) {
-    return this.userService.create(createUserDto);
-  }
+
+
 
   @Public()
   @ApiOperation({
@@ -69,4 +68,49 @@ export class UserController {
   getCaptcha() {
     return this.userService.getCaptcha();
   }
+
+
+  @ApiOperation({
+    summary: '用户管理-新增',
+  })
+  @Permissions('system:user:create')
+  @ApiParam({ name: 'CreateUserVo', type: CreateUserDto })
+  @ApiOkResponse({
+    description: '返回示例',
+    type: CreateUserVo,
+  })
+  @Post('createUser')
+  create(@Body() createUserDto: CreateUserDto) {
+    return this.userService.create(createUserDto);
+  }
+  @ApiOperation({
+    summary: '用户管理-查询',
+  })
+  @Permissions('system:user:list')
+  @Get('list')
+  findUserList(@Query() findUserListDto: FindUserListDto) {
+    return this.userService.findUserList(findUserListDto);
+  }
+
+  @ApiOperation({
+    summary: '用户管理-删除',
+  })
+  @Permissions('system:user:delete')
+  @Delete('deleteUser/:userId')
+  deleteRole(@Param('userId') userId: string) {
+    return this.userService.deleteUser(userId.split(',').map(Number));
+  }
+
+  //更新用户
+  @Put('/updateUser')
+  @Permissions('system:user:edit')
+  @ApiParam({ name: 'updateUser', type: UpdateUserDto })
+  @ApiOperation({ summary: '用户管理-更新' })
+  async updateMenu(
+    @Body()
+    updateUserDto: UpdateUserDto,
+  ) {
+    return await this.userService.updateUser(updateUserDto);
+  }
+
 }

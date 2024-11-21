@@ -31,7 +31,7 @@ export class MenuService {
         .leftJoinAndSelect('fs_user.roles', 'fs_role')
         .leftJoinAndSelect('fs_role.menus', 'fs_menu')
         .where({ id: user.sub })
-        .andWhere('fs_role.status = :status', { status: 1 })
+
 
 
 

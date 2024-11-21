@@ -53,6 +53,10 @@ export class RoleService {
   //查询当前用户角色列表
   async findRoleList(findMenuListDto: FindRoleListDto) {
     let queryBuilder = this.roleRepository.createQueryBuilder('fs_role')
+    if (!findMenuListDto.page_size) {
+      const [list, count] = await queryBuilder.getManyAndCount();
+      return { list, total: count };
+    }
 
     if (findMenuListDto.role_name) {
       queryBuilder.andWhere('role_name like :role_name', { role_name: `%${findMenuListDto?.role_name}%` });
@@ -85,14 +89,26 @@ export class RoleService {
 
   //修改角色
   async updateRole(updateRoleDto: UpdateRoleDto) {
+
+
     //过滤掉不需要的字段
-    const filterUpdateRoleDto = pick(updateRoleDto, ['id', 'role_name', 'remark', 'role_sort', 'order_num', 'menu_ids', 'status']);
+    const filterUpdateRoleDto = pick(updateRoleDto, ['id', 'role_name', 'remark', 'role_sort', 'order_num', 'status']);
+    const newRole = new Role();
+    if (updateRoleDto.menu_ids?.length) {
+      const menuList = await this.menuRepository.find({
+        where: {
+          id: In(updateRoleDto.menu_ids),
+        },
+      });
+      newRole.menus = menuList;
+    }
+    console.log({ ...filterUpdateRoleDto, ...newRole });
+
     try {
-      await this.roleRepository.update(updateRoleDto.id, filterUpdateRoleDto);
+      await this.roleRepository.save({ ...filterUpdateRoleDto, ...newRole });
       return '角色更新成功';
     } catch (error) {
       console.log(error);
-
 
       throw new ApiException('角色更新失败', 20000);
     }

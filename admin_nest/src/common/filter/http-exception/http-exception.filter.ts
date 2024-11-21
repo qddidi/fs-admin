@@ -6,6 +6,7 @@ import {
 } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { ApiException } from './api.exception';
+import { ApiErrorCode } from 'src/common/enums/api-error-code.enum';
 @Catch(HttpException)
 export class HttpExceptionFilter implements ExceptionFilter {
   catch(exception: HttpException, host: ArgumentsHost) {
@@ -19,6 +20,14 @@ export class HttpExceptionFilter implements ExceptionFilter {
         describe: exception.getErrorMessage(),
       });
       return;
+    }
+
+    if (Array.isArray((exception.getResponse() as any).message)) {
+      response.status(200).json({
+        code: ApiErrorCode.COMMON_CODE,
+        describe: (exception.getResponse() as any).message?.join(','),
+      });
+      return
     }
     response.status(status).json({
       code: status,

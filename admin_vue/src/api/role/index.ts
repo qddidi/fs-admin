@@ -19,7 +19,7 @@ export const addRole = (data: RoleForm) => {
     });
 };
 
-//新增
+//更新
 export const updateRole = (data: RoleForm) => {
     return request({
         url: "/role/updateRole",

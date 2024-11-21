@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsNotEmpty, IsOptional } from "class-validator";
+import { IsArray, IsNotEmpty, IsNumber, IsOptional } from "class-validator";
 
 export class UpdateRoleDto {
 
@@ -28,4 +28,10 @@ export class UpdateRoleDto {
     })
     @IsOptional()
     order_num?: number;
+    @IsOptional()
+    @IsArray({
+        message: 'role_ids必须是数组',
+    })
+    @IsNumber({}, { each: true, message: 'role_ids必须是数字数组' })
+    menu_ids?: number[];
 }

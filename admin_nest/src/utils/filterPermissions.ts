@@ -4,8 +4,8 @@ export const filterPermissions = (routers: Menu[]): string[] => {
   return [
     ...new Set(
       routers
-        .map((router) => router.permission)
-        .filter((permission) => permission != null),
+        .map((router) => { if (router.status === 1) return router.permission; })
+        .filter((permission) => permission),
     ),
   ];
 };

@@ -49,8 +49,22 @@
       :default-expand-all="isExpandAll"
     >
       <el-table-column prop="title" label="菜单名" />
+      <el-table-column label="类型" width="80">
+        <template #default="scope">
+          <el-tag>{{
+            scope.row.menu_type === 1
+              ? "目录"
+              : scope.row.menu_type === 2
+              ? "菜单"
+              : scope.row.menu_type === 3
+              ? "按钮"
+              : "未知"
+          }}</el-tag>
+        </template>
+      </el-table-column>
       <el-table-column prop="order_num" label="排序" />
       <el-table-column prop="path" label="路由" />
+
       <el-table-column prop="permission" label="权限字段" />
       <el-table-column prop="component" label="组件路径" />
       <el-table-column label="图标" width="80">

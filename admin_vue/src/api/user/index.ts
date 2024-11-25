@@ -36,3 +36,12 @@ export const deleteData = (id: number | number[]) => {
         method: "delete",
     });
 };
+
+//导出
+// export const exportData = (query: QueryParams) => {
+//     return request({
+//         url: "/user/export",
+//         method: "get",
+//         params: query,
+//     });
+// };

@@ -54,6 +54,16 @@
           >新增</el-button
         >
       </el-col>
+      <el-col :span="1.5">
+        <el-button
+          type="warning"
+          v-hasPerm="['system:user:export']"
+          plain
+          icon="Download"
+          @click="exportDataList()"
+          >导出</el-button
+        >
+      </el-col>
     </el-row>
     <el-table :data="tableData" class="w-full mt-2" row-key="id" border>
       <el-table-column prop="username" label="用户名" />
@@ -184,6 +194,7 @@ import { getRoleList } from "@/api/role/index";
 import { deepClone, handleDateRangeChange } from "@/utils/common";
 import { RoleList } from "@/api/role/types/role.dto";
 import { validate_phoneNumber, validate_email } from "@/utils/validateForm";
+import { downLoad } from "@/utils/http";
 const queryParams = reactive<QueryParams>({
   username: "",
   status: "",
@@ -272,12 +283,6 @@ const resetForm = () => {
     telephone: "",
   };
 };
-//新增
-const handleAdd = () => {
-  resetForm();
-  dialogVisible.value = true;
-  isUpdate.value = false;
-};
 
 //更新状态
 const changeStatus = async (row: DataItem) => {
@@ -291,6 +296,12 @@ const changeStatus = async (row: DataItem) => {
     message: "状态更新成功",
   });
   getList();
+};
+//新增
+const handleAdd = () => {
+  resetForm();
+  dialogVisible.value = true;
+  isUpdate.value = false;
 };
 
 //编辑
@@ -335,6 +346,11 @@ const handleDelete = async (row: DataItem) => {
     message: "删除成功",
   });
   getList();
+};
+
+//导出
+const exportDataList = async () => {
+  downLoad("/user/export", queryParams, `用户列表_${new Date().getTime()}`);
 };
 </script>
 <style lang="scss"></style>

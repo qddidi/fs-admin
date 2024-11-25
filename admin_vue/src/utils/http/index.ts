@@ -6,6 +6,7 @@ import axios, {
 import { ElMessage, ElLoading } from "element-plus";
 import router from "@/router";
 import { Storage } from "@/utils/storage";
+import { saveAs } from "file-saver";
 const loadingInstance = ElLoading.service;
 let requestCount = 0;
 const showLoading = () => {
@@ -75,8 +76,9 @@ service.interceptors.response.use(
 
     const { loading = true } = config;
     if (loading) closeLoading();
+    console.log(config);
 
-    if (data.code != 200) {
+    if (data.code != 200 && config.responseType != "blob") {
       ElMessage({
         message: data.describe,
         type: "error",
@@ -114,4 +116,17 @@ service.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+
+//下载
+export const downLoad = async (url: string, params: any, filename: string) => {
+  const res = await service({
+    url,
+    method: "get",
+    params: params,
+    responseType: "blob",
+  });
+
+  const blob = new Blob([res]);
+  saveAs(blob, `${filename}.xlsx`);
+};
 export default service;

@@ -1,4 +1,4 @@
-import { Controller, Post, Body, UseGuards, Get, Query, Delete, Param, Put } from '@nestjs/common';
+import { Controller, Post, Body, UseGuards, Get, Query, Delete, Param, Put, Res } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import {
@@ -15,6 +15,7 @@ import { LoginVo } from './vo/login-vo';
 import { FindUserListDto } from './dto/find-user.dto';
 import { Permissions } from 'src/common/decorators/permissions.decorator';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { Response } from 'express';
 @ApiTags('用户模块')
 @Controller('user')
 export class UserController {
@@ -113,4 +114,13 @@ export class UserController {
     return await this.userService.updateUser(updateUserDto);
   }
 
+  //导出
+  @Get('/export')
+  @Permissions('system:user:export')
+  @ApiOperation({ summary: '用户管理-导出' })
+  async export(@Query() findUserListDto: FindUserListDto, @Res() res: Response) {
+
+    const data = await this.userService.export(findUserListDto);
+    res.send(data)
+  }
 }

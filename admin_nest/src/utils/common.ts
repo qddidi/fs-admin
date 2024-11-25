@@ -1,3 +1,5 @@
+import { utils, write } from 'xlsx';
+
 /**
  * 
  * @param obj 传入对象
@@ -13,3 +15,21 @@ export function pick(obj: any, keys: string[]): any {
     })
     return filterParams
 }
+
+
+//数据转excel
+export function exportExcel(
+    data: any[],
+    sheetName: string = 'sheet1',
+
+) {
+    const worksheet = utils.json_to_sheet(data);
+    const workbook = utils.book_new();
+    utils.book_append_sheet(workbook, worksheet, sheetName);
+    const excelBuffer: any = write(workbook, {
+        bookType: 'xlsx',
+        type: 'buffer',
+    });
+    return excelBuffer;
+}
+

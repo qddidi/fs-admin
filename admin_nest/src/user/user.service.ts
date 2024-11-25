@@ -13,6 +13,7 @@ import generateCaptcha from 'src/utils/generateCaptcha';
 import { CacheService } from 'src/cache/cache.service';
 import { Menu } from 'src/menu/entities/menu.entity';
 import { FindUserListDto } from './dto/find-user.dto';
+import { exportExcel } from 'src/utils/common';
 @Injectable()
 export class UserService {
   constructor(
@@ -202,6 +203,19 @@ export class UserService {
       console.log(error);
 
       throw new ApiException('修改失败', ApiErrorCode.FAIL);
+    }
+  }
+
+  //导出
+  async export(findUserListDto: FindUserListDto) {
+
+    try {
+      const { list } = await this.findUserList(findUserListDto)
+      const excelBuffer = await exportExcel(list);
+      return excelBuffer;
+
+    } catch (error) {
+      throw new ApiException('导出失败', ApiErrorCode.FAIL);
     }
   }
 }

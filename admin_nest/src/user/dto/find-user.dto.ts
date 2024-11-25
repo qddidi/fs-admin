@@ -39,7 +39,6 @@ export class FindUserListDto {
     begin_time: string;
     @ApiProperty({
         example: '当前页',
-
         required: false,
     })
     page_num: number;

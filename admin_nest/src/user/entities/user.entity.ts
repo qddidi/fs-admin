@@ -21,7 +21,11 @@ export class User {
   username: string; //用户名
   @Column({ nullable: true })
   nickname: string; //昵称
-  @Column()
+
+  //默认密码 123456
+  @Column({
+    default: '20989eb67e13fdee0a42504dd0b3cf65358b'
+  })
   password: string; //密码
   @Column({ nullable: true })
   avatar: string; //头像
@@ -67,7 +71,7 @@ export class User {
   update_time: Date;
   @BeforeInsert()
   beforeInsert() {
-    console.log(123132);
+
 
     this.salt = crypto.randomBytes(4).toString('base64');
     this.password = encry(this.password, this.salt);

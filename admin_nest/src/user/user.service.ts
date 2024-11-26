@@ -13,7 +13,8 @@ import generateCaptcha from 'src/utils/generateCaptcha';
 import { CacheService } from 'src/cache/cache.service';
 import { Menu } from 'src/menu/entities/menu.entity';
 import { FindUserListDto } from './dto/find-user.dto';
-import { exportExcel } from 'src/utils/common';
+import { exportExcel, importExcel } from 'src/utils/common';
+import { mapUserZh, transformZnToEn } from 'src/config/excelHeader';
 @Injectable()
 export class UserService {
   constructor(
@@ -150,7 +151,18 @@ export class UserService {
         where: condition,
         skip: (findUserListDto.page_num - 1) * findUserListDto.page_size,
         take: findUserListDto.page_size,
-        relations: ['roles']
+        relations: ['roles'],
+        select: [
+          'id',
+          'username',
+          'nickname',
+          'email',
+          'telephone',
+          'status',
+          'create_time',
+          'update_time',
+          'roles',
+        ]
       });
       return {
         total,
@@ -163,7 +175,12 @@ export class UserService {
   }
 
   //用户删除
-  async deleteUser(ids: number | number[]) {
+  async deleteUser(ids: number | number[], req) {
+
+
+    if (req.user.is_admin === 1)
+      throw new ApiException('管理员账户禁止删除', ApiErrorCode.COMMON_CODE)
+
     try {
       await this.userRepository.delete(ids);
       return '删除成功';
@@ -211,11 +228,30 @@ export class UserService {
 
     try {
       const { list } = await this.findUserList(findUserListDto)
-      const excelBuffer = await exportExcel(list);
+
+      const excelBuffer = await exportExcel(list, mapUserZh);
       return excelBuffer;
 
     } catch (error) {
       throw new ApiException('导出失败', ApiErrorCode.FAIL);
     }
+  }
+
+  //导入
+  async upload(file) {
+    //解析后的数据
+    const excelData = importExcel(file.buffer)
+
+
+    //转换为数据库需要的格式
+    const importData = transformZnToEn(excelData, mapUserZh)
+    console.log(importData);
+
+    try {
+      await this.userRepository.save(importData);
+    } catch (error) {
+      return error;
+    }
+    return '导入成功';
   }
 }

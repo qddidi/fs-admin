@@ -19,9 +19,7 @@ export class CreateUserDto {
     description: '用户名',
   })
   username: string;
-  @IsNotEmpty({
-    message: '昵称不能为空',
-  })
+
   @ApiProperty({
     example: 'xihu',
     description: '昵称',

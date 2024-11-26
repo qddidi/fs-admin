@@ -64,6 +64,16 @@
           >导出</el-button
         >
       </el-col>
+      <el-col :span="1.5">
+        <el-button
+          type="warning"
+          v-hasPerm="['system:user:import']"
+          plain
+          icon="Upload"
+          @click="importDataList()"
+          >导入</el-button
+        >
+      </el-col>
     </el-row>
     <el-table :data="tableData" class="w-full mt-2" row-key="id" border>
       <el-table-column prop="username" label="用户名" />
@@ -351,6 +361,14 @@ const handleDelete = async (row: DataItem) => {
 //导出
 const exportDataList = async () => {
   downLoad("/user/export", queryParams, `用户列表_${new Date().getTime()}`);
+};
+
+//导入
+const importDataList = async () => {
+  ElMessage({
+    type: "success",
+    message: "导入成功",
+  });
 };
 </script>
 <style lang="scss"></style>

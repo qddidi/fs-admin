@@ -1,4 +1,4 @@
-import { Controller, Post, Body, UseGuards, Get, Query, Delete, Param, Put, Res } from '@nestjs/common';
+import { Controller, Post, Body, UseGuards, Get, Query, Delete, Param, Put, Res, Req, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import {
@@ -15,7 +15,9 @@ import { LoginVo } from './vo/login-vo';
 import { FindUserListDto } from './dto/find-user.dto';
 import { Permissions } from 'src/common/decorators/permissions.decorator';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { Response } from 'express';
+import { Response, Request } from 'express';
+import { Multer } from 'multer';
+import { FileInterceptor } from '@nestjs/platform-express';
 @ApiTags('用户模块')
 @Controller('user')
 export class UserController {
@@ -98,8 +100,8 @@ export class UserController {
   })
   @Permissions('system:user:delete')
   @Delete('deleteUser/:userId')
-  deleteRole(@Param('userId') userId: string) {
-    return this.userService.deleteUser(userId.split(',').map(Number));
+  deleteRole(@Param('userId') userId: string, @Req() req: Request) {
+    return this.userService.deleteUser(userId.split(',').map(Number), req);
   }
 
   //更新用户
@@ -122,5 +124,16 @@ export class UserController {
 
     const data = await this.userService.export(findUserListDto);
     res.send(data)
+  }
+
+  //导入
+
+  @Post('/upload')
+  @Permissions('system:user:import')
+  @ApiOperation({ summary: '用户管理-导入' })
+  @ApiParam({ name: 'file', type: 'file' })
+  @UseInterceptors(FileInterceptor('file'))
+  async upload(@UploadedFile() file: Multer.File) {
+    return await this.userService.upload(file);
   }
 }

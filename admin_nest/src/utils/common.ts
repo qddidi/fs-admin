@@ -1,4 +1,5 @@
 import { File } from 'buffer';
+import { ApiException } from 'src/common/filter/http-exception/api.exception';
 import { read, utils, write } from 'xlsx';
 
 /**
@@ -59,6 +60,6 @@ export const importExcel = (file: File & { buffer: Buffer }) => {
 
         return sheetData;
     } catch (error) {
-        throw new Error('Error reading Excel file: ' + error.message);
+        throw new ApiException('文件解析失败,请检查格式是否正确', 20000);
     }
 };

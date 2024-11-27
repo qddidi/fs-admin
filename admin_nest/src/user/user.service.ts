@@ -239,18 +239,33 @@ export class UserService {
 
   //导入
   async upload(file) {
+
+    const fileSplitArr = file.originalname.split('.');
+    const fileType = fileSplitArr[fileSplitArr.length - 1];
+
+
+    if (fileType !== 'xlsx' && fileType !== 'xls')
+      throw new ApiException('请上传xlsx或xls格式的文件', ApiErrorCode.COMMON_CODE)
+
     //解析后的数据
     const excelData = importExcel(file.buffer)
-
-
     //转换为数据库需要的格式
     const importData = transformZnToEn(excelData, mapUserZh)
     console.log(importData);
 
+    const hasUseName = importData.map(item => item.username)
+    const isExist = await this.userRepository.findOne({
+      where: {
+        username: In(hasUseName)
+      }
+    })
+    if (isExist) {
+      throw new ApiException('导入用户包含已存在的用户,请核对后再进行导入', ApiErrorCode.COMMON_CODE);
+    }
     try {
       await this.userRepository.save(importData);
     } catch (error) {
-      return error;
+      throw new ApiException('导入数据库失败', ApiErrorCode.FAIL)
     }
     return '导入成功';
   }

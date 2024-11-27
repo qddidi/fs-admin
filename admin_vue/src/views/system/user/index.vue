@@ -66,7 +66,7 @@
       </el-col>
       <el-col :span="1.5">
         <el-button
-          type="warning"
+          type="success"
           v-hasPerm="['system:user:import']"
           plain
           icon="Upload"
@@ -192,19 +192,65 @@
         </div>
       </template>
     </el-dialog>
+
+    <!-- 导入 -->
+    <el-dialog
+      width="400px"
+      :title="uploadParams.title"
+      v-model="uploadParams.open"
+      append-to-body
+    >
+      <el-upload
+        class="upload-demo"
+        drag
+        accept=".xlsx, .xls"
+        :limit="1"
+        ref="upload"
+        :auto-upload="false"
+        :action="uploadParams.url"
+        :headers="uploadParams.headers"
+        :on-exceed="handleExceed"
+        :disabled="uploadParams.isUploading"
+        :on-progress="handleProgress"
+        :on-success="handleFileSuccess"
+      >
+        <el-icon class="el-icon--upload">
+          <component is="UploadFilled" />
+        </el-icon>
+        <div class="el-upload__text">拖拽文件到这或 <em>点击上传</em></div>
+        <template #tip>
+          <div class="el-upload__tip">仅允许导入xls、xlsx格式文件。</div>
+        </template>
+      </el-upload>
+      <template #footer>
+        <div class="dialog-footer">
+          <el-button type="primary" @click="uploadSubmit">确 定</el-button>
+          <el-button @click="uploadParams.open = false">取 消</el-button>
+        </div>
+      </template>
+    </el-dialog>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { reactive, ref } from "vue";
 import { DataItem, Form, QueryParams } from "@/api/user/types/user.dto";
-import { ElMessage, ElMessageBox, FormInstance } from "element-plus";
+import {
+  ElMessage,
+  ElMessageBox,
+  FormInstance,
+  UploadInstance,
+  UploadProps,
+  UploadRawFile,
+  genFileId,
+} from "element-plus";
 import { getDataList, updateData, addData, deleteData } from "@/api/user/index";
 import { getRoleList } from "@/api/role/index";
 import { deepClone, handleDateRangeChange } from "@/utils/common";
 import { RoleList } from "@/api/role/types/role.dto";
 import { validate_phoneNumber, validate_email } from "@/utils/validateForm";
 import { downLoad } from "@/utils/http";
+import { Storage } from "@/utils/storage";
 const queryParams = reactive<QueryParams>({
   username: "",
   status: "",
@@ -364,11 +410,57 @@ const exportDataList = async () => {
 };
 
 //导入
+
+/*** 用户导入参数 */
+const uploadParams = reactive({
+  // 是否显示弹出层（用户导入）
+  open: false,
+  // 弹出层标题（用户导入）
+  title: "",
+  // 上传中
+  isUploading: false,
+  // 设置上传的请求头部
+  headers: { Authorization: "Bearer " + Storage.get("token") },
+  // 上传的地址
+  url: import.meta.env.VITE_APP_API + "/user/upload",
+});
 const importDataList = async () => {
-  ElMessage({
-    type: "success",
-    message: "导入成功",
-  });
+  uploadParams.open = true;
+  uploadParams.title = "用户导入";
+};
+const upload = ref<UploadInstance>();
+
+// 文件选择处理
+const handleExceed: UploadProps["onExceed"] = (files) => {
+  upload.value!.clearFiles();
+  const file = files[0] as UploadRawFile;
+  console.log(file);
+
+  file.uid = genFileId();
+  upload.value!.handleStart(file);
+};
+//上传中
+
+const handleProgress: UploadProps["onProgress"] = () => {
+  uploadParams.isUploading = true;
+};
+
+// 上传提交
+const uploadSubmit = () => {
+  upload.value!.submit();
+};
+// 上传成功处理
+const handleFileSuccess: UploadProps["onSuccess"] = (response) => {
+  upload.value!.clearFiles();
+  uploadParams.isUploading = false;
+  const { code, describe } = response;
+  if (code !== 200) {
+    ElMessage.error(describe);
+    return;
+  }
+  ElMessage.success("导入成功");
+  uploadParams.open = false;
+  getList();
 };
 </script>
 <style lang="scss"></style>

@@ -37,7 +37,7 @@ export class User {
     default: 1,
   })
   status: number; //状态 0:禁用 1:启用
-  @Column({ nullable: true })
+  @Column({ nullable: true, default: 'q5+Kdg==' })
   salt: string;
   @Column({ nullable: true, default: 0 })
   is_admin: number; //是否为管理员 1:是 0:否

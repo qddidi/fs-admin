@@ -61,7 +61,7 @@ export class MenuService {
     const { user } = req;
     //根据关联关系通过user查询user下的菜单和角色
     const userList: User = await this.getUser(user)
-    console.log(userList);
+
 
 
     //是否为超级管理员,是的话查询所有菜单和权限

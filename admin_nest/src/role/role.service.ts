@@ -102,7 +102,7 @@ export class RoleService {
       });
       newRole.menus = menuList;
     }
-    console.log({ ...filterUpdateRoleDto, ...newRole });
+
 
     try {
       await this.roleRepository.save({ ...filterUpdateRoleDto, ...newRole });

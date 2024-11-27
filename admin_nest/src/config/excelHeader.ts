@@ -1,3 +1,4 @@
+//用户表
 export const mapUserZh = {
     id: 'id',
     username: '用户名',

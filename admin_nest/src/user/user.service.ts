@@ -242,8 +242,6 @@ export class UserService {
 
     const fileSplitArr = file.originalname.split('.');
     const fileType = fileSplitArr[fileSplitArr.length - 1];
-
-
     if (fileType !== 'xlsx' && fileType !== 'xls')
       throw new ApiException('请上传xlsx或xls格式的文件', ApiErrorCode.COMMON_CODE)
 
@@ -251,7 +249,7 @@ export class UserService {
     const excelData = importExcel(file.buffer)
     //转换为数据库需要的格式
     const importData = transformZnToEn(excelData, mapUserZh)
-    console.log(importData);
+
 
     const hasUseName = importData.map(item => item.username)
     const isExist = await this.userRepository.findOne({

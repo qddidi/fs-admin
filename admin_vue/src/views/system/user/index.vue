@@ -430,17 +430,15 @@ const importDataList = async () => {
 };
 const upload = ref<UploadInstance>();
 
-// 文件选择处理
+// 文件选择覆盖前一个文件
 const handleExceed: UploadProps["onExceed"] = (files) => {
   upload.value!.clearFiles();
   const file = files[0] as UploadRawFile;
-  console.log(file);
-
   file.uid = genFileId();
   upload.value!.handleStart(file);
 };
-//上传中
 
+//上传中
 const handleProgress: UploadProps["onProgress"] = () => {
   uploadParams.isUploading = true;
 };

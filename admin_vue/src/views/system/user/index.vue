@@ -75,7 +75,13 @@
         >
       </el-col>
     </el-row>
-    <el-table :data="tableData" class="w-full mt-2" row-key="id" border>
+    <el-table
+      :data="tableData"
+      v-loading="isLoading"
+      class="w-full mt-2"
+      row-key="id"
+      border
+    >
       <el-table-column prop="username" label="用户名" />
 
       <el-table-column prop="nickname" label="昵称" />
@@ -308,11 +314,17 @@ const handleQuery = async () => {
   getList();
 };
 
+const isLoading = ref(false);
 const getList = async () => {
   handleDateRangeChange(dateRange.value, queryParams);
-  const { data } = await getDataList(queryParams);
-  tableData.value = data.list;
-  total.value = data.total;
+  try {
+    isLoading.value = true;
+    const { data } = await getDataList(queryParams);
+    tableData.value = data.list;
+    total.value = data.total;
+  } finally {
+    isLoading.value = false;
+  }
 };
 
 getList();

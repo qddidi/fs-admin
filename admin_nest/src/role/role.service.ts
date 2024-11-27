@@ -62,10 +62,10 @@ export class RoleService {
       queryBuilder.andWhere('role_name like :role_name', { role_name: `%${findMenuListDto?.role_name}%` });
     }
     if (findMenuListDto.status) {
-      queryBuilder.andWhere('status = :status', { status: findMenuListDto.status });
+      queryBuilder.andWhere('fs_role.status = :status', { status: findMenuListDto.status });
     }
     if (findMenuListDto.begin_time && findMenuListDto.end_time) {
-      queryBuilder.andWhere('create_time BETWEEN :start AND :end', { start: findMenuListDto.begin_time, end: findMenuListDto.end_time });
+      queryBuilder.andWhere('fs_role.create_time BETWEEN :start AND :end', { start: findMenuListDto.begin_time, end: findMenuListDto.end_time });
     }
 
     handlePage(queryBuilder, findMenuListDto.page_num, findMenuListDto.page_size)

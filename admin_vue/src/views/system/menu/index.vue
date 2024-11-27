@@ -44,6 +44,7 @@
     <el-table
       :data="tableData"
       class="w-full mt-2"
+      v-loading="isLoading"
       row-key="id"
       border
       :default-expand-all="isExpandAll"
@@ -272,9 +273,16 @@ const dickStatus = [
   },
 ];
 const tableData = ref<MenuList[]>([]);
+
+const isLoading = ref(false);
 const getList = async () => {
-  const { data } = await getMenuList(queryParams);
-  tableData.value = data;
+  try {
+    isLoading.value = true;
+    const { data } = await getMenuList(queryParams);
+    tableData.value = data;
+  } finally {
+    isLoading.value = false;
+  }
 };
 
 const handleQuery = () => {

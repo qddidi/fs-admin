@@ -23,6 +23,7 @@ export const getMenuList = (query: QueryMenuParams) => {
   return request({
     url: "/menu/list",
     method: "get",
+    loading: false,
     params: query,
   });
 };

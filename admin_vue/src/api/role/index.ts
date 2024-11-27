@@ -6,6 +6,7 @@ export const getRoleList = (query: QueryRoleParams) => {
     return request({
         url: "/role/list",
         method: "get",
+        loading: false,
         params: query,
     });
 };

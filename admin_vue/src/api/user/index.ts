@@ -6,6 +6,7 @@ export const getDataList = (query: QueryParams) => {
     return request({
         url: "/user/list",
         method: "get",
+        loading: false,
         params: query,
     });
 };

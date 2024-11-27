@@ -55,7 +55,13 @@
         >
       </el-col>
     </el-row>
-    <el-table :data="tableData" class="w-full mt-2" row-key="id" border>
+    <el-table
+      :data="tableData"
+      class="w-full mt-2"
+      row-key="id"
+      v-loading="isLoading"
+      border
+    >
       <el-table-column prop="role_name" label="角色名" />
       <el-table-column prop="role_sort" label="显示顺序" width="100" />
 
@@ -221,11 +227,17 @@ const handleQuery = async () => {
   getList();
 };
 
+const isLoading = ref(false);
 const getList = async () => {
+  isLoading.value = true;
   handleDateRangeChange(dateRange.value, queryParams);
-  const { data } = await getRoleList(queryParams);
-  tableData.value = data.list;
-  total.value = data.total;
+  try {
+    const { data } = await getRoleList(queryParams);
+    tableData.value = data.list;
+    total.value = data.total;
+  } finally {
+    isLoading.value = false;
+  }
 };
 
 getList();

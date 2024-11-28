@@ -100,8 +100,8 @@ export class UserController {
   })
   @Permissions('system:user:delete')
   @Delete('deleteUser/:userId')
-  deleteRole(@Param('userId') userId: string, @Req() req: Request) {
-    return this.userService.deleteUser(userId.split(',').map(Number), req);
+  deleteRole(@Param('userId') userId: string) {
+    return this.userService.deleteUser(userId.split(',').map(Number));
   }
 
   //更新用户

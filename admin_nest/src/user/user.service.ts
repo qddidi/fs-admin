@@ -175,17 +175,23 @@ export class UserService {
   }
 
   //用户删除
-  async deleteUser(ids: number | number[], req) {
-
-
-    if (req.user.is_admin === 1)
-      throw new ApiException('管理员账户禁止删除', ApiErrorCode.COMMON_CODE)
+  async deleteUser(ids: number | number[]) {
 
     try {
+      const deleteList = await this.userRepository.find({
+        where: {
+          id: In(Array.isArray(ids) ? ids : [ids]),
+        },
+      });
+      const isAdmin = deleteList.some(item => item.is_admin === 1)
+      if (isAdmin) {
+        throw Error('管理员账户禁止删除');
+      }
       await this.userRepository.delete(ids);
       return '删除成功';
     } catch (error) {
-      throw new ApiException('删除失败', ApiErrorCode.FAIL);
+
+      throw new ApiException(error.message, ApiErrorCode.FAIL);
     }
   }
 
@@ -193,8 +199,6 @@ export class UserService {
   async updateUser(updateUserDto) {
     try {
       const newUser = new User();
-
-
       //查询需要绑定的角色列表(自动在关联表生成关联关系)
       if (Array.isArray(updateUserDto.role_ids)) {
         const role = await this.roleRepository.find({

@@ -212,7 +212,7 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="显示状态">
+            <el-form-item label="状态">
               <el-radio-group v-model="form.status">
                 <el-radio
                   v-for="dict in dickStatus"
@@ -228,6 +228,14 @@
               <el-radio-group v-model="form.catch">
                 <el-radio :value="1">缓存</el-radio>
                 <el-radio :value="0">不缓存</el-radio>
+              </el-radio-group>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12" v-show="form.menu_type === 2">
+            <el-form-item label="是否隐藏">
+              <el-radio-group v-model="form.hidden">
+                <el-radio :value="1">隐藏</el-radio>
+                <el-radio :value="0">不隐藏</el-radio>
               </el-radio-group>
             </el-form-item>
           </el-col>
@@ -368,6 +376,7 @@ const resetForm = () => {
     permission: "",
     status: 1,
     catch: 0,
+    hidden: 0,
   };
 };
 resetForm();

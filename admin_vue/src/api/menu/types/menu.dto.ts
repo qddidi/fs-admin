@@ -19,4 +19,5 @@ export type MenuForm = {
     permission: string;
     status: number;
     catch: number;
+    hidden?: number;
 }

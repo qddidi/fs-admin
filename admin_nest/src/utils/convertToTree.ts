@@ -5,8 +5,9 @@ export interface TreeNode extends Menu {
   meta?: {
     title: string;
     catch: number;
-    hidden: boolean;
+    status: boolean;
     name: string;
+    hidden?: boolean;
   };
   children?: TreeNode[];
 }
@@ -20,7 +21,7 @@ export const convertToTree = (menuList: TreeNode[], parentId: number | null = nu
     menuList[i].meta = {
       title: menuList[i].title,
       catch: menuList[i].catch,
-      hidden: !menuList[i].status,
+      status: !menuList[i].status,
       name: menuList[i].name,
     }
     if (menuList[i].menu_type === 3 && filterBut) continue

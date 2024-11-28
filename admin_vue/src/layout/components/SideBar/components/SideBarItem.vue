@@ -29,9 +29,9 @@ type Props = {
 const props = defineProps<Props>();
 
 const controlSubView = (item: MenuList) => {
-  return !item?.meta?.hidden && item.menu_type === 1;
+  return !item?.meta?.status && item.menu_type === 1;
 };
 const controlMenuView = (item: MenuList) => {
-  return !item?.meta?.hidden && item.menu_type === 2;
+  return !item?.meta?.status && item.menu_type === 2 && item?.hidden === 0;
 };
 </script>

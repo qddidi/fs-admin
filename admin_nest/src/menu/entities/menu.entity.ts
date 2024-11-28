@@ -64,6 +64,11 @@ export class Menu {
     default: 1,
   })
   status: number;
+  //是否隐藏侧边菜单 1:隐藏 0:显示
+  @Column({
+    default: 0,
+  })
+  hidden: number;
   //状态 1:缓存 0:不缓存
   @Column({
     default: 0,

@@ -11,10 +11,11 @@ export type MenuList = {
     status: boolean
     menu_type: 1 | 2 | 3
     children: MenuList[]
+    hidden?: number
     meta: {
         title?: string
         catch?: number
-        hidden?: boolean
+        status?: boolean
     }
 }
 export type Breadcrumb = {

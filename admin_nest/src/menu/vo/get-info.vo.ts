@@ -6,4 +6,5 @@ export class GetInfoVo {
     example: 'sys:role:list',
   })
   permissions: string[];
+  user: any;
 }

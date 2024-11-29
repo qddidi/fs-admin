@@ -156,13 +156,16 @@ export class UserController {
   @UseInterceptors(FileInterceptor('file', {
 
     storage: diskStorage({
-      destination: (req, _file, cb) => {
-        cb(null, path.join(process.cwd(), fileconfig.saveDirectory))
+      destination: (_req, _file, cb) => {
+        //保存文件地址
+        const saveDirectory = path.join(process.cwd(), fileconfig.saveDirectory);
+
+        cb(null, saveDirectory)
       },
       filename: (req, file, cb) => {
         const ext = path.extname(file.originalname);
         if (!ext.match(/\.(jpg|jpeg|png|gif)$/i)) {
-          cb(new ApiException('请上传图片', ApiErrorCode.COMMON_CODE), null)
+          cb(new ApiException('请上传图片类型文件', ApiErrorCode.COMMON_CODE), null)
           return
         }
         if (file.size > 500 * 1024) {

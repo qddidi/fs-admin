@@ -14,6 +14,7 @@ import { ApiErrorCode } from 'src/common/enums/api-error-code.enum';
 import { rolesToMenus } from 'src/utils/rolesToMenus';
 import { FindMenuListDto } from './dto/findMenu.dto';
 import { UpdateMenuDto } from './dto/update-menu.dto';
+import fileConfig from 'src/config/file';
 @Injectable()
 export class MenuService {
   constructor(
@@ -31,6 +32,7 @@ export class MenuService {
         .leftJoinAndSelect('fs_user.roles', 'fs_role')
         .leftJoinAndSelect('fs_role.menus', 'fs_menu')
         .where({ id: user.sub })
+
 
 
 
@@ -60,12 +62,16 @@ export class MenuService {
     //user.guard中注入的解析后的JWTtoken的user
     const { user } = req;
     //根据关联关系通过user查询user下的菜单和角色
-    const userList: User = await this.getUser(user)
+    const userInfo: User = await this.getUser(user)
 
-
-
+    //返回的个人信息
+    const userRes = {
+      avatar: `${fileConfig.fileSaveUrl}${userInfo.avatar}`,
+      username: userInfo.username,
+      telephone: userInfo.telephone,
+    }
     //是否为超级管理员,是的话查询所有菜单和权限
-    const isAdmin = userList?.is_admin === 1;
+    const isAdmin = userInfo?.is_admin === 1;
     let routers: Menu[] = [];
     let permissions: string[] = [];
     if (isAdmin) {
@@ -86,6 +92,7 @@ export class MenuService {
       return {
         routers: convertToTree(routers, null, 1),
         permissions: permissions,
+        user: userRes,
       };
     }
 
@@ -93,13 +100,14 @@ export class MenuService {
     //根据id去重
 
 
-    routers = rolesToMenus(userList?.roles);
+    routers = rolesToMenus(userInfo?.roles);
     permissions = filterPermissions(routers);
     await this.cacheService.set(`${user.sub}_permissions`, permissions, 7200);
 
     return {
       routers: convertToTree(routers),
       permissions,
+      user: userRes,
     };
   }
 

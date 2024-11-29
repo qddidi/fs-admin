@@ -8,9 +8,6 @@ export const filterBreadCrumb = (path: string, menuList: MenuList[]) => {
 
     const breadCrumbs: Breadcrumb[] = [];
     paths.forEach((path) => {
-
-
-
         breadCrumbs.push({
             name: getMenuTitle(path, menuList),
         });

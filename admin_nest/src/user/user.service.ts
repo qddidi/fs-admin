@@ -271,4 +271,32 @@ export class UserService {
     }
     return '导入成功';
   }
+
+  //个人信息
+  async getUserInfo(req) {
+    try {
+      const user = await this.userRepository.findOne({
+        where: {
+          id: req.user.sub
+        }
+      })
+      return user
+    } catch (error) {
+      throw new ApiException('查询个人信息失败', ApiErrorCode.FAIL)
+    }
+
+  }
+
+  //头像上传
+  async uploadAvatar(path: string, req) {
+    const { user } = req
+    try {
+      await this.userRepository.update({ id: user.sub }, { avatar: path })
+      return '上传成功';
+    } catch (error) {
+      console.log(error);
+
+      throw new ApiException('上传失败', ApiErrorCode.FAIL)
+    }
+  }
 }

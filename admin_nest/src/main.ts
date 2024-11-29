@@ -4,8 +4,9 @@ import { HttpExceptionFilter } from './common/filter/http-exception/http-excepti
 import { TransformInterceptor } from './common/interceptor/transform/transform.interceptor';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
+import { NestExpressApplication } from '@nestjs/platform-express';
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
   const options = new DocumentBuilder()
     .setTitle('FS_ADMIN') // 标题
     .setDescription('后台管理系统接口文档') // 描述
@@ -20,6 +21,9 @@ async function bootstrap() {
   app.useGlobalInterceptors(new TransformInterceptor());
   app.useGlobalPipes(new ValidationPipe());
   app.enableCors();
+  app.useStaticAssets('static', {
+    prefix: '/static',
+  });
   await app.listen(3000);
 }
 bootstrap();

@@ -46,3 +46,12 @@ export const deleteData = (id: number | number[]) => {
 //         params: query,
 //     });
 // };
+
+//获取用户信息
+export const getProfile = () => {
+    return request({
+        url: "/user/profile",
+        method: "get",
+        loading: false,
+    });
+};

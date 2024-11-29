@@ -11,7 +11,24 @@
           {{ item.name }}
         </el-breadcrumb-item>
       </el-breadcrumb>
-      <div class="ml-auto cursor-pointer" @click="loginOut">退出</div>
+      <div class="ml-auto mr-5 cursor-pointer">
+        <el-dropdown trigger="click">
+          <div class="flex">
+            <img
+              src="@/assets/logo.png"
+              class="w-9 h-9 rounded-full cursor-pointer"
+            /><CaretBottom class="w-5" />
+          </div>
+          <template #dropdown>
+            <el-dropdown-menu>
+              <el-dropdown-item>
+                <router-link to="/profile"> 个人中心 </router-link>
+              </el-dropdown-item>
+              <el-dropdown-item @click="loginOut">退出登录</el-dropdown-item>
+            </el-dropdown-menu>
+          </template>
+        </el-dropdown>
+      </div>
     </div>
     <div class="shadow-sm py-1">
       <Tags
@@ -44,6 +61,7 @@ import { NavTag } from "../../../store/types/index";
 import { Storage } from "@/utils/storage";
 import { ref } from "vue";
 import { ElMessageBox } from "element-plus";
+
 const router = useRouter();
 const route = useRoute();
 const appStore = useAppStore();

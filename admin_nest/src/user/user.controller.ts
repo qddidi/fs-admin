@@ -16,8 +16,12 @@ import { FindUserListDto } from './dto/find-user.dto';
 import { Permissions } from 'src/common/decorators/permissions.decorator';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { Response, Request } from 'express';
-import { Multer } from 'multer';
+import { Multer, diskStorage } from 'multer';
 import { FileInterceptor } from '@nestjs/platform-express';
+import * as path from 'path';
+import { ApiException } from 'src/common/filter/http-exception/api.exception';
+import { ApiErrorCode } from 'src/common/enums/api-error-code.enum';
+import fileconfig from 'src/config/file';
 @ApiTags('用户模块')
 @Controller('user')
 export class UserController {
@@ -136,4 +140,45 @@ export class UserController {
   async upload(@UploadedFile() file: Multer.File) {
     return await this.userService.upload(file);
   }
+
+  //获取用户信息
+  @Get('/profile')
+  @ApiOperation({ summary: '获取用户信息' })
+  async getUserInfo(@Req() req: Request) {
+    return await this.userService.getUserInfo(req);
+  }
+
+  //头像上传
+
+  @Post('/uploadAvatar')
+  @ApiOperation({ summary: '头像上传' })
+  @ApiParam({ name: 'file', type: 'file' })
+  @UseInterceptors(FileInterceptor('file', {
+
+    storage: diskStorage({
+      destination: (req, _file, cb) => {
+        cb(null, path.join(process.cwd(), fileconfig.saveDirectory))
+      },
+      filename: (req, file, cb) => {
+        const ext = path.extname(file.originalname);
+        if (!ext.match(/\.(jpg|jpeg|png|gif)$/i)) {
+          cb(new ApiException('请上传图片', ApiErrorCode.COMMON_CODE), null)
+          return
+        }
+        if (file.size > 500 * 1024) {
+          cb(new ApiException('图片大小不能超过500k', ApiErrorCode.COMMON_CODE), null)
+          return
+        }
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+        const filename = `${file.fieldname}-${uniqueSuffix}${ext}`;
+        req.filename = filename;
+        cb(null, filename);
+      },
+    }),
+  }))
+  async uploadAvatar(@UploadedFile() file: Multer.File, @Req() req: Request & { filename: string }) {
+
+    return await this.userService.uploadAvatar(`${fileconfig.saveDirectory}${req.filename}`, req);
+  }
+
 }

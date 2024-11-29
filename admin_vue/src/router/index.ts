@@ -23,6 +23,13 @@ export const routes: RouteRecordRaw[] = [
         component: () => import('@/views/index.vue'),
         name: 'Home',
         meta: { title: '首页' }
+      },
+      {
+        path: "/profile",
+        name: "Profile",
+        meta: { title: '个人中心' },
+        component: () =>
+          import(/* webpackChunkName: "profile" */ "@/views/profile/index.vue"),
       }
     ]
   }, {
@@ -31,6 +38,7 @@ export const routes: RouteRecordRaw[] = [
     component: () =>
       import(/* webpackChunkName: "login" */ "@/views/login/index.vue"),
   },
+
   {
     path: "/:pathMatch(.*)*",
     component: () => import('@/views/error/404.vue'),

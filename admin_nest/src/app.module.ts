@@ -14,6 +14,7 @@ import { APP_GUARD } from '@nestjs/core';
 import { PermissionsGuard } from './common/guards/permissions.guard';
 import { UserGuard } from './common/guards/user.guard';
 const isProd = process.env.NODE_ENV == 'production';
+
 @Module({
   imports: [
     UserModule,

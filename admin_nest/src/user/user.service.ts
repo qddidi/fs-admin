@@ -294,8 +294,6 @@ export class UserService {
       await this.userRepository.update({ id: user.sub }, { avatar: path })
       return '上传成功';
     } catch (error) {
-      console.log(error);
-
       throw new ApiException('上传失败', ApiErrorCode.FAIL)
     }
   }

@@ -137,7 +137,9 @@ const getRememberAccount = () => {
 onMounted(() => {
   getRememberAccount();
   if (Storage.get("token")) return router.push("/");
-
+  homeStore.$patch({
+    isLoadRoute: false,
+  });
   handleGetCaptcha();
 });
 </script>

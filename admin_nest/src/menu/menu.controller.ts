@@ -42,7 +42,7 @@ export class MenuController {
   // }
   //新增菜单
   @Post('createMenu')
-  @Permissions('system:menu:create')
+  @Permissions('system:menu:add')
   @ApiParam({ name: 'createMenuDto', type: CreateMenuDto })
   @ApiOperation({ summary: '菜单管理-新增' })
   async createMenu(

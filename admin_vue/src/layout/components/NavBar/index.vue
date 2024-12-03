@@ -15,7 +15,7 @@
         <el-dropdown trigger="click">
           <div class="flex">
             <img
-              src="@/assets/logo.png"
+              :src="appStore.userInfo.avatar"
               class="w-9 h-9 rounded-full cursor-pointer"
             /><CaretBottom class="w-5" />
           </div>

@@ -14,7 +14,11 @@ import { CacheService } from 'src/cache/cache.service';
 import { Menu } from 'src/menu/entities/menu.entity';
 import { FindUserListDto } from './dto/find-user.dto';
 import { exportExcel, importExcel } from 'src/utils/common';
+import fileconfig from 'src/config/file';
 import { mapUserZh, transformZnToEn } from 'src/config/excelHeader';
+import { Multer, diskStorage } from 'multer';
+import * as path from 'path';
+import { checkDirExists } from 'src/utils/fileUtils';
 @Injectable()
 export class UserService {
   constructor(
@@ -273,13 +277,17 @@ export class UserService {
   }
 
   //个人信息
-  async getUserInfo(req) {
+  async getUserInfo(req, from?: string) {
     try {
       const user = await this.userRepository.findOne({
         where: {
           id: req.user.sub
         }
       })
+      if (!from) {
+        user.avatar = fileconfig.fileSaveUrl + user.avatar
+      }
+
       return user
     } catch (error) {
       throw new ApiException('查询个人信息失败', ApiErrorCode.FAIL)
@@ -297,4 +305,6 @@ export class UserService {
       throw new ApiException('上传失败', ApiErrorCode.FAIL)
     }
   }
+
+
 }

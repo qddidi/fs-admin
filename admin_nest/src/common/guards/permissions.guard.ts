@@ -53,6 +53,6 @@ export class PermissionsGuard implements CanActivate {
     if (!hasPermission) {
       throw new ApiException('当前用户无权访问此接口', ApiErrorCode.FORBIdEN);
     }
-    return hasPermission;
+    return true;
   }
 }

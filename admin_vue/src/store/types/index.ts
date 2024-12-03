@@ -27,6 +27,11 @@ export type NavTag = {
     path: string
     fullpath?: string
 }
+export type UserInfo = {
+    username: string
+    avatar: string
+    telephone: string
+}
 export type AppStoreState = {
     isLoadRoute: boolean
     menuList: MenuList[]
@@ -35,4 +40,5 @@ export type AppStoreState = {
     breadcrumbs: Breadcrumb[]
     navTags: NavTag[]
     catchList: string[]
+    userInfo: UserInfo
 }

@@ -8,7 +8,9 @@
       </template>
       <el-upload
         class="avatar-uploader"
-        action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15"
+        :action="uploadParams.uploadUrl"
+        :headers="uploadParams.headers"
+        :on-success="handleAvatarSuccess"
         :show-file-list="false"
       >
         <img
@@ -62,12 +64,26 @@
 <script lang="ts" setup>
 import { getProfile } from "@/api/user/index";
 import { ref } from "vue";
+import { Storage } from "@/utils/storage";
+import { ElMessage } from "element-plus";
+const uploadParams = {
+  uploadUrl: import.meta.env.VITE_APP_API + "/user/uploadAvatar",
+  headers: { Authorization: "Bearer " + Storage.get("token") },
+};
 
 const proFileData = ref<any>({});
 const getProFileData = async () => {
   const { data } = await getProfile();
   proFileData.value = data;
-  console.log(proFileData.value);
+};
+
+const handleAvatarSuccess = (res: any) => {
+  if (res.code == 200) {
+    ElMessage.success("头像设置成功");
+    getProFileData();
+  } else {
+    ElMessage.error(res.describe);
+  }
 };
 getProFileData();
 </script>
@@ -84,6 +100,11 @@ getProFileData();
       overflow: hidden;
       transition: var(--el-transition-duration-fast);
       margin: 0 auto;
+    }
+    .avatar {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
     }
   }
 

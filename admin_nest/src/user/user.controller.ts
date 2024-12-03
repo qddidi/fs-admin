@@ -22,6 +22,7 @@ import * as path from 'path';
 import { ApiException } from 'src/common/filter/http-exception/api.exception';
 import { ApiErrorCode } from 'src/common/enums/api-error-code.enum';
 import fileconfig from 'src/config/file';
+import { checkDirExists, deleteOldFile } from 'src/utils/fileUtils';
 @ApiTags('用户模块')
 @Controller('user')
 export class UserController {
@@ -154,12 +155,13 @@ export class UserController {
   @ApiOperation({ summary: '头像上传' })
   @ApiParam({ name: 'file', type: 'file' })
   @UseInterceptors(FileInterceptor('file', {
-
     storage: diskStorage({
-      destination: (_req, _file, cb) => {
+      destination: async (req, _file, cb) => {
         //保存文件地址
-        const saveDirectory = path.join(process.cwd(), fileconfig.saveDirectory);
-
+        const saveDirectory = path.join(process.cwd(), fileconfig.saveDirectory, String(req.user.sub));
+        // 检查目录是否存在，如果不存在则创建
+        checkDirExists(saveDirectory);
+        req.saveDirectory = saveDirectory;
         cb(null, saveDirectory)
       },
       filename: (req, file, cb) => {
@@ -172,16 +174,24 @@ export class UserController {
           cb(new ApiException('图片大小不能超过500k', ApiErrorCode.COMMON_CODE), null)
           return
         }
-        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-        const filename = `${file.fieldname}-${uniqueSuffix}${ext}`;
+        const uniqueSuffix = Date.now() + '_' + Math.round(Math.random() * 1E9);
+        const filename = `${fileconfig.avatarPrefix}_${uniqueSuffix}${ext}`;
         req.filename = filename;
         cb(null, filename);
       },
     }),
   }))
-  async uploadAvatar(@UploadedFile() file: Multer.File, @Req() req: Request & { filename: string }) {
+  async uploadAvatar(@Req() req: Request & { filename: string, user: any }) {
+    /**
+     * 此时最新头像图片已经保存,需要删除旧头像图片
+     * 
+     * 头像存放目录 newAvatarDir
+     */
+    const newAvatarDir = path.join(process.cwd(), fileconfig.saveDirectory, String(req.user.sub))
 
-    return await this.userService.uploadAvatar(`${fileconfig.saveDirectory}${req.filename}`, req);
+    //查找当前用户目录下所有头像,如果不是最新头像文件,则删除
+    deleteOldFile(newAvatarDir, req.filename, fileconfig.avatarPrefix)
+    return await this.userService.uploadAvatar(`${fileconfig.saveDirectory}${req.user.sub}/${req.filename}`, req);
   }
 
 }

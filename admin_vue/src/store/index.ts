@@ -11,7 +11,12 @@ export default defineStore("appStore", {
             permissions: [],
             breadcrumbs: [],
             navTags: [],
-            catchList: []
+            catchList: [],
+            userInfo: {
+                username: '',
+                avatar: '',
+                telephone: ''
+            }
         }
     },
     actions: {
@@ -20,6 +25,7 @@ export default defineStore("appStore", {
             this.menuList = data.routers;
             this.permissions = data.permissions;
             this.isLoadRoute = true;
+            this.userInfo = data.user || {};
         },
 
         addTags(tag: NavTag) {

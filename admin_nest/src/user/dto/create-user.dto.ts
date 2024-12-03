@@ -17,6 +17,7 @@ export class CreateUserDto {
   @ApiProperty({
     example: 'admin',
     description: '用户名',
+
   })
   username: string;
 

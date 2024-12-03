@@ -19,7 +19,9 @@ export const checkDirExists = (dir: string) => {
  * @param typePreFix 文件类型前缀  如:fs_avatar表示头像
  */
 export const deleteOldFile = (dir: string, newFileName: string, typePreFix?: string) => {
+    if (!newFileName) throw new ApiException('文件操作有误,请重新上传', ApiErrorCode.FILE_ERROR);
     try {
+
         const fileList = readdirSync(dir)
         fileList.forEach((fileName: string) => {
             if (typePreFix) {

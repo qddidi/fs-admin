@@ -26,7 +26,6 @@ export class MenuController {
   }
 
   @Get('/list')
-  @ApiParam({ name: 'findMenuListDto', type: FindMenuListDto })
   @Permissions('system:menu:list')
   @ApiOperation({ summary: '菜单管理-查询' })
   async list(@Query() findMenuListDto: FindMenuListDto, @Request() req) {
@@ -43,7 +42,6 @@ export class MenuController {
   //新增菜单
   @Post('createMenu')
   @Permissions('system:menu:add')
-  @ApiParam({ name: 'createMenuDto', type: CreateMenuDto })
   @ApiOperation({ summary: '菜单管理-新增' })
   async createMenu(
     @Request() req,
@@ -58,7 +56,6 @@ export class MenuController {
   //更新菜单
   @Put('updateMenu')
   @Permissions('system:menu:edit')
-  @ApiParam({ name: 'updateMenu', type: UpdateMenuDto })
   @ApiOperation({ summary: '菜单管理-更新' })
 
   async updateMenu(

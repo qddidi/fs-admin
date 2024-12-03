@@ -66,6 +66,8 @@ import { getProfile } from "@/api/user/index";
 import { ref } from "vue";
 import { Storage } from "@/utils/storage";
 import { ElMessage } from "element-plus";
+import useAppStore from "@/store/index";
+const appStore = useAppStore();
 const uploadParams = {
   uploadUrl: import.meta.env.VITE_APP_API + "/user/uploadAvatar",
   headers: { Authorization: "Bearer " + Storage.get("token") },
@@ -75,6 +77,11 @@ const proFileData = ref<any>({});
 const getProFileData = async () => {
   const { data } = await getProfile();
   proFileData.value = data;
+  appStore.$patch({
+    userInfo: {
+      avatar: data.avatar,
+    },
+  });
 };
 
 const handleAvatarSuccess = (res: any) => {

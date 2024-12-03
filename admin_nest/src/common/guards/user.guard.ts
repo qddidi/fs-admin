@@ -73,7 +73,9 @@ export class UserGuard implements CanActivate {
    * @returns 提取到的token
    */
   private extractTokenFromHeader(request: Request): string | undefined {
-    const [type, token] = request.headers.authorization?.split(' ') ?? []; // 从Authorization头中提取token
+
+
+    const [type, token] = request.headers.authorization?.split(' ') ?? []; // 从authorization头中提取token
     return type === 'Bearer' ? token : undefined; // 如果是Bearer类型的token，返回token；否则返回undefined
   }
 }

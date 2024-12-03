@@ -5,7 +5,9 @@ import {
   ApiOperation,
   ApiTags,
   ApiOkResponse,
-  ApiParam,
+  ApiBearerAuth,
+  ApiBody,
+  ApiConsumes,
 } from '@nestjs/swagger';
 import { CreateUserVo } from './vo/create-user.vo';
 import { LoginDto } from './dto/login-dto';
@@ -23,7 +25,9 @@ import { ApiException } from 'src/common/filter/http-exception/api.exception';
 import { ApiErrorCode } from 'src/common/enums/api-error-code.enum';
 import fileconfig from 'src/config/file';
 import { checkDirExists, deleteOldFile } from 'src/utils/fileUtils';
+import { UploadFileDto } from './dto/upload-file.dto';
 @ApiTags('用户模块')
+@ApiBearerAuth()
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) { }
@@ -31,10 +35,7 @@ export class UserController {
   @ApiOperation({
     summary: '用户注册', // 接口描述信息
   })
-  @ApiParam({
-    name: 'CreateUserVo',
-    type: CreateUserDto,
-  })
+
   @ApiOkResponse({
     description: '返回示例',
     type: CreateUserVo,
@@ -51,10 +52,7 @@ export class UserController {
     summary: '用户登录',
   })
   @Post('login')
-  @ApiParam({
-    name: 'LoginDto',
-    type: LoginDto,
-  })
+
   @ApiOkResponse({
     description: '返回示例',
     type: LoginVo,
@@ -82,7 +80,6 @@ export class UserController {
     summary: '用户管理-新增',
   })
   @Permissions('system:user:create')
-  @ApiParam({ name: 'CreateUserVo', type: CreateUserDto })
   @ApiOkResponse({
     description: '返回示例',
     type: CreateUserVo,
@@ -112,12 +109,12 @@ export class UserController {
   //更新用户
   @Put('/updateUser')
   @Permissions('system:user:edit')
-  @ApiParam({ name: 'updateUser', type: UpdateUserDto })
   @ApiOperation({ summary: '用户管理-更新' })
-  async updateMenu(
+  async updateUser(
     @Body()
     updateUserDto: UpdateUserDto,
   ) {
+
     return await this.userService.updateUser(updateUserDto);
   }
 
@@ -136,9 +133,9 @@ export class UserController {
   @Post('/upload')
   @Permissions('system:user:import')
   @ApiOperation({ summary: '用户管理-导入' })
-  @ApiParam({ name: 'file', type: 'file' })
+  @ApiConsumes('multipart/form-data')
   @UseInterceptors(FileInterceptor('file'))
-  async upload(@UploadedFile() file: Multer.File) {
+  async upload(@UploadedFile() file: Multer.File, @Body() _body: UploadFileDto) {
     return await this.userService.upload(file);
   }
 
@@ -150,10 +147,9 @@ export class UserController {
   }
 
   //头像上传
-
   @Post('/uploadAvatar')
   @ApiOperation({ summary: '头像上传' })
-  @ApiParam({ name: 'file', type: 'file' })
+  @ApiConsumes('multipart/form-data')
   @UseInterceptors(FileInterceptor('file', {
     storage: diskStorage({
       destination: async (req, _file, cb) => {
@@ -166,6 +162,8 @@ export class UserController {
       },
       filename: (req, file, cb) => {
         const ext = path.extname(file.originalname);
+
+
         if (!ext.match(/\.(jpg|jpeg|png|gif)$/i)) {
           cb(new ApiException('请上传图片类型文件', ApiErrorCode.COMMON_CODE), null)
           return
@@ -181,17 +179,19 @@ export class UserController {
       },
     }),
   }))
-  async uploadAvatar(@Req() req: Request & { filename: string, user: any }) {
+  async uploadAvatar(@Req() req: Request & { filename: string, user: any }, @Body() _body: UploadFileDto) {
     /**
      * 此时最新头像图片已经保存,需要删除旧头像图片
      * 
      * 头像存放目录 newAvatarDir
      */
     const newAvatarDir = path.join(process.cwd(), fileconfig.saveDirectory, String(req.user.sub))
-
+    console.log(req.filename);
     //查找当前用户目录下所有头像,如果不是最新头像文件,则删除
     deleteOldFile(newAvatarDir, req.filename, fileconfig.avatarPrefix)
     return await this.userService.uploadAvatar(`${fileconfig.saveDirectory}${req.user.sub}/${req.filename}`, req);
   }
 
 }
+
+

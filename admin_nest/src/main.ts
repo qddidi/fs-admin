@@ -5,6 +5,7 @@ import { TransformInterceptor } from './common/interceptor/transform/transform.i
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
 import { NestExpressApplication } from '@nestjs/platform-express';
+import { ApiBearerAuth } from '@nestjs/swagger';
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   const options = new DocumentBuilder()
@@ -18,7 +19,9 @@ async function bootstrap() {
   //配置swgger地址
   SwaggerModule.setup('/fs_admin/api', app, document);
   app.useGlobalFilters(new HttpExceptionFilter());
+
   app.useGlobalInterceptors(new TransformInterceptor());
+
   app.useGlobalPipes(new ValidationPipe());
   app.enableCors();
   app.useStaticAssets('static', {

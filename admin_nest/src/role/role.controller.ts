@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, Query, Req } from '@nestjs/common';
 import { RoleService } from './role.service';
 import { CreateRoleDto } from './dto/create-role.dto';
-import { ApiOperation, ApiParam, ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Public } from 'src/public/public.decorator';
 import { FindRoleListDto } from './dto/find-role.dto';
 import { Permissions } from 'src/common/decorators/permissions.decorator';
@@ -17,10 +17,6 @@ export class RoleController {
   @ApiOperation({
     summary: '角色管理-新增',
   })
-  @ApiParam({
-    name: 'CreateRoleDto',
-    type: CreateRoleDto,
-  })
   createRole(@Req() req, @Body() createRoleDto: CreateRoleDto) {
     createRoleDto.create_by = req.user.sub;
     createRoleDto.update_by = req.user.sub;
@@ -32,10 +28,6 @@ export class RoleController {
   @Permissions('system:role:list')
   @ApiOperation({
     summary: '角色管理-查询',
-  })
-  @ApiParam({
-    name: 'CreateRoleDto',
-    type: FindRoleListDto,
   })
 
   findRoleList(@Query() findRoleListDto: FindRoleListDto) {
@@ -54,7 +46,6 @@ export class RoleController {
   //更新角色
   @Put('/updateRole')
   @Permissions('system:role:edit')
-  @ApiParam({ name: 'updateRole', type: UpdateRoleDto })
   @ApiOperation({ summary: '角色管理-更新' })
   async updateMenu(
     @Body()

@@ -60,7 +60,7 @@ service.interceptors.request.use(
 
     if (loading) showLoading();
     if (Storage.get("token") && isToken) {
-      config.headers["Authorization"] = "Bearer " + Storage.get("token"); // 让每个请求携带自定义token 请根据实际情况自行修改
+      config.headers["authorization"] = "Bearer " + Storage.get("token"); // 让每个请求携带自定义token 请根据实际情况自行修改
     }
 
     return config;

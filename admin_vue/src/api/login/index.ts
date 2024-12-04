@@ -18,3 +18,11 @@ export const getCaptcha = () => {
     method: "get",
   });
 };
+
+//退出登录
+export const logout = () => {
+  return request({
+    url: "/user/logout",
+    method: "post",
+  });
+};

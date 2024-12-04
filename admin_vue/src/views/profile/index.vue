@@ -33,7 +33,7 @@
             <Avatar class="profile_label_icon" />
             <div class="profile_label_text">昵称</div>
           </div>
-          <div>{{ proFileData.nick_name }}</div>
+          <div>{{ proFileData.nickname }}</div>
         </li>
         <li class="profile">
           <div class="profile_label">
@@ -72,8 +72,15 @@ const uploadParams = {
   uploadUrl: import.meta.env.VITE_APP_API + "/user/uploadAvatar",
   headers: { Authorization: "Bearer " + Storage.get("token") },
 };
-
-const proFileData = ref<any>({});
+type UserInfo = {
+  username: string;
+  nickname: string;
+  telephone: string;
+  email: string;
+  avatar: string;
+  create_time: string;
+};
+const proFileData = ref<Partial<UserInfo>>({});
 const getProFileData = async () => {
   const { data } = await getProfile();
   proFileData.value = data;

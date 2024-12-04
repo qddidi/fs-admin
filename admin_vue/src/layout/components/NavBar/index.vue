@@ -24,7 +24,9 @@
               <el-dropdown-item>
                 <router-link to="/profile"> 个人中心 </router-link>
               </el-dropdown-item>
-              <el-dropdown-item @click="loginOut">退出登录</el-dropdown-item>
+              <el-dropdown-item @click="handelLogOut"
+                >退出登录</el-dropdown-item
+              >
             </el-dropdown-menu>
           </template>
         </el-dropdown>
@@ -61,7 +63,7 @@ import { NavTag } from "../../../store/types/index";
 import { Storage } from "@/utils/storage";
 import { ref } from "vue";
 import { ElMessageBox } from "element-plus";
-
+import { logout } from "@/api/login";
 const router = useRouter();
 const route = useRoute();
 const appStore = useAppStore();
@@ -139,12 +141,13 @@ const openMenu = (e: any, index: number) => {
 
 //退出登录
 
-const loginOut = async () => {
-  Storage.remove("token");
+const handelLogOut = async () => {
   await ElMessageBox.confirm("确认退出吗?", "提示", {
     confirmButtonText: "确定",
     cancelButtonText: "取消",
   });
+  await logout();
+  Storage.remove("token");
   router.push("/login");
 };
 </script>

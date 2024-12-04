@@ -16,9 +16,8 @@ import { FindUserListDto } from './dto/find-user.dto';
 import { exportExcel, importExcel } from 'src/utils/common';
 import fileconfig from 'src/config/file';
 import { mapUserZh, transformZnToEn } from 'src/config/excelHeader';
-import { Multer, diskStorage } from 'multer';
-import * as path from 'path';
-import { checkDirExists } from 'src/utils/fileUtils';
+import { UpdateUserDto, UpdateUserPasswordDto } from './dto/update-user.dto';
+import { Request } from 'express';
 @Injectable()
 export class UserService {
   constructor(
@@ -125,6 +124,13 @@ export class UserService {
     this.cacheService.set(token, token, 7200);
 
     return token;
+  }
+  async logout(req) {
+
+    const [_type, token] = req.headers.authorization?.split(' ') ?? []
+
+    await this.cacheService.del(token || '');
+    return '退出成功';
   }
   //生成验证码
   getCaptcha() {
@@ -277,16 +283,14 @@ export class UserService {
   }
 
   //个人信息
-  async getUserInfo(req, from?: string) {
+  async getUserInfo(req) {
     try {
       const user = await this.userRepository.findOne({
         where: {
           id: req.user.sub
         }
       })
-      if (!from) {
-        user.avatar = fileconfig.fileSaveUrl + user.avatar
-      }
+      user.avatar = fileconfig.fileSaveUrl + user.avatar
 
       return user
     } catch (error) {
@@ -305,6 +309,43 @@ export class UserService {
       throw new ApiException('上传失败', ApiErrorCode.FAIL)
     }
   }
+  //个人信息修改
+  async updateUserInfo(req, updateUserDto: UpdateUserDto) {
+    const id = req.user.sub
+    try {
+      const newUser = new User();
+      //newUser.password = updateUserDto.password;
+      newUser.nickname = updateUserDto.nickname;
+      newUser.email = updateUserDto.email;
+      newUser.telephone = updateUserDto.telephone;
+      newUser.id = id;
+      await this.userRepository.save(newUser);
+      return '修改成功';
+    } catch (error) {
 
+      throw new ApiException('修改失败', ApiErrorCode.FAIL);
+    }
+  }
+
+  //修改密码
+  async updatePassword(req: Request & { user: any }, updatePasswordDto: UpdateUserPasswordDto) {
+    const { oldPassword, newPassword } = updatePasswordDto;
+    const id = req.user.sub;
+    try {
+      const user = await this.userRepository.findOne({
+        where: {
+          id
+        }
+      })
+      if (user.password !== encry(oldPassword, user.salt)) {
+        throw Error('原密码错误');
+      }
+      user.password = encry(newPassword, user.salt);
+      await this.userRepository.update(id, { password: user.password });
+      return '修改成功';
+    } catch (error) {
+      throw new ApiException(error.message, ApiErrorCode.FAIL);
+    }
+  }
 
 }

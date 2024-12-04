@@ -24,6 +24,7 @@ async function bootstrap() {
 
   app.useGlobalPipes(new ValidationPipe());
   app.enableCors();
+  // 静态资源
   app.useStaticAssets('static', {
     prefix: '/static',
   });

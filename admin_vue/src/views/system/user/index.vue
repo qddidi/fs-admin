@@ -432,7 +432,7 @@ const uploadParams = reactive({
   // 上传中
   isUploading: false,
   // 设置上传的请求头部
-  headers: { Authorization: "Bearer " + Storage.get("token") },
+  headers: { authorization: "Bearer " + Storage.get("token") },
   // 上传的地址
   url: import.meta.env.VITE_APP_API + "/user/upload",
 });

@@ -21,7 +21,9 @@ app.use(ElementPlus, {
 app.use(router)
 app.use(pinia)
 //等待路由初始化完成后再挂载,确保守卫beforeach可以使用pinia
-await router.isReady()
-directive(app)
-app.mount("#app");
+router.isReady().then(() => {
+    directive(app)
+    app.mount("#app");
+})
+
 

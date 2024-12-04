@@ -16,7 +16,7 @@ import { Public } from 'src/public/public.decorator';
 import { LoginVo } from './vo/login-vo';
 import { FindUserListDto } from './dto/find-user.dto';
 import { Permissions } from 'src/common/decorators/permissions.decorator';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { UpdateUserDto, UpdateUserPasswordDto } from './dto/update-user.dto';
 import { Response, Request } from 'express';
 import { Multer, diskStorage } from 'multer';
 import { FileInterceptor } from '@nestjs/platform-express';
@@ -62,6 +62,13 @@ export class UserController {
     return this.userService.login(loginDto);
   }
 
+  @ApiOperation({
+    summary: '退出登录',
+  })
+  @Post('logout')
+  loginOut(@Req() req: Request) {
+    return this.userService.logout(req);
+  }
   @Public()
   @ApiOperation({
     summary: '获取验证码',
@@ -192,6 +199,20 @@ export class UserController {
     return await this.userService.uploadAvatar(`${fileconfig.saveDirectory}${req.user.sub}/${req.filename}`, req);
   }
 
+
+  //修改个人信息
+  @Put('/updateUserInfo')
+  @ApiOperation({ summary: '修改个人信息' })
+  async updateUserInfo(@Req() req: Request, @Body() updateUserDto: UpdateUserDto) {
+    return await this.userService.updateUserInfo(req, updateUserDto);
+  }
+
+  //修改密码
+  @Put('/updatePassword')
+  @ApiOperation({ summary: '修改密码' })
+  async updatePassword(@Req() req: Request & { user: any }, @Body() updateUserDto: UpdateUserPasswordDto) {
+    return await this.userService.updatePassword(req, updateUserDto);
+  }
 }
 
 

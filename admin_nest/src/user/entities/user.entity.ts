@@ -71,8 +71,6 @@ export class User {
   update_time: Date;
   @BeforeInsert()
   beforeInsert() {
-
-
     this.salt = crypto.randomBytes(4).toString('base64');
     this.password = encry(this.password, this.salt);
   }

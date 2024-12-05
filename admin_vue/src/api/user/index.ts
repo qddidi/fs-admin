@@ -55,3 +55,21 @@ export const getProfile = () => {
         loading: false,
     });
 };
+
+//修改密码
+export const updatePassword = (data: { oldPassword: string; newPassword: string }) => {
+    return request({
+        url: "/user/updatePassword",
+        method: "put",
+        data,
+    });
+};
+
+//修改个人信息
+export const updateUserInfo = (data: Form) => {
+    return request({
+        url: "/user/updateUserInfo",
+        method: "put",
+        data,
+    });
+};

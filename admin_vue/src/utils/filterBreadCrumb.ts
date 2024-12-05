@@ -4,15 +4,17 @@ export const filterBreadCrumb = (path: string, menuList: MenuList[]) => {
 
     //去空
     paths = paths.filter((item) => item);
-    console.log({ paths });
+
 
     const breadCrumbs: Breadcrumb[] = [];
     paths.forEach((path) => {
+        const breadName = getMenuTitle(path, menuList)
+        if (!breadName) return;
         breadCrumbs.push({
-            name: getMenuTitle(path, menuList),
+            name: breadName,
         });
     });
-    console.log({ breadCrumbs });
+
 
     return breadCrumbs;
 };

@@ -14,40 +14,27 @@
       <div class="ml-auto mr-5 cursor-pointer">
         <el-dropdown trigger="click">
           <div class="flex">
-            <img
-              :src="appStore.userInfo.avatar"
-              class="w-9 h-9 rounded-full cursor-pointer"
-            /><CaretBottom class="w-5" />
+            <img :src="appStore.userInfo.avatar" class="w-9 h-9 object-cover rounded-full cursor-pointer" />
+            <CaretBottom class="w-5" />
           </div>
           <template #dropdown>
             <el-dropdown-menu>
               <el-dropdown-item>
                 <router-link to="/profile"> 个人中心 </router-link>
               </el-dropdown-item>
-              <el-dropdown-item @click="handelLogOut"
-                >退出登录</el-dropdown-item
-              >
+              <el-dropdown-item @click="handelLogOut">退出登录</el-dropdown-item>
             </el-dropdown-menu>
           </template>
         </el-dropdown>
       </div>
     </div>
     <div class="shadow-sm py-1">
-      <Tags
-        @open-menu="openMenu"
-        :nav-tags="appStore.navTags"
-        @close="closeTag"
-        #default="{ item, currentPath, index }"
-      >
+      <Tags @open-menu="openMenu" :nav-tags="appStore.navTags" @close="closeTag"
+        #default="{ item, currentPath, index }">
         <teleport to="body">
-          <TagView
-            v-if="isTagView && nowClickIndex == index"
-            :style="tagViewStyle"
-            @close-cur="closeCur(index, item.path, currentPath)"
-            @close-all-tags="closeAllTags"
-            @close-other-tags="closeOtherTags(item)"
-            @refreshTag="refreshTag(item)"
-          />
+          <TagView v-if="isTagView && nowClickIndex == index" :style="tagViewStyle"
+            @close-cur="closeCur(index, item.path, currentPath)" @close-all-tags="closeAllTags"
+            @close-other-tags="closeOtherTags(item)" @refreshTag="refreshTag(item)" />
         </teleport>
       </Tags>
     </div>

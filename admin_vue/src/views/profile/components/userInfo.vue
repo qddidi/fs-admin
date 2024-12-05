@@ -10,7 +10,7 @@
       <el-input v-model="user.email" maxlength="50" />
     </el-form-item>
     <el-form-item>
-      <el-button type="primary" @click="submit">保存</el-button>
+      <el-button type="primary" @click="submit">保存资料</el-button>
     </el-form-item>
   </el-form>
 </template>

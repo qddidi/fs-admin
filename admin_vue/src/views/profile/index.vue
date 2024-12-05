@@ -7,19 +7,12 @@
             <span>我的信息</span>
           </div>
         </template>
-        <el-upload
-          class="avatar-uploader"
-          :action="uploadParams.uploadUrl"
-          :headers="uploadParams.headers"
-          :on-success="handleAvatarSuccess"
-          :show-file-list="false"
-        >
-          <img
-            v-if="proFileData.avatar"
-            :src="proFileData.avatar"
-            class="avatar"
-          />
-          <el-icon v-else class="avatar-uploader-icon"><Plus /></el-icon>
+        <el-upload class="avatar-uploader" :action="uploadParams.uploadUrl" :headers="uploadParams.headers"
+          :on-success="handleAvatarSuccess" :show-file-list="false">
+          <img v-if="proFileData.avatar" :src="proFileData.avatar" class="avatar" />
+          <el-icon v-else class="avatar-uploader-icon">
+            <Plus />
+          </el-icon>
         </el-upload>
         <ul>
           <li class="profile">
@@ -68,12 +61,12 @@
           </div>
         </template>
         <el-tabs v-model="activeName">
-          <el-tab-pane label="基本资料" name="userinfo"
-            ><userInfo :user="proFileData" @submit="updateUser"
-          /></el-tab-pane>
-          <el-tab-pane label="修改密码" name="resetPwd"
-            ><resetPassWord @submit="resetPwd"
-          /></el-tab-pane>
+          <el-tab-pane label="基本资料" name="userinfo">
+            <userInfo :user="proFileData" @submit="updateUser" />
+          </el-tab-pane>
+          <el-tab-pane label="修改密码" name="resetPwd">
+            <resetPassWord @submit="resetPwd" />
+          </el-tab-pane>
         </el-tabs>
       </el-card>
     </el-col>
@@ -93,7 +86,7 @@ import { updateUserInfo, updatePassword } from "@/api/user/index";
 const appStore = useAppStore();
 const uploadParams = {
   uploadUrl: import.meta.env.VITE_APP_API + "/user/uploadAvatar",
-  headers: { Authorization: "Bearer " + Storage.get("token") },
+  headers: { authorization: "Bearer " + Storage.get("token") },
 };
 
 const proFileData = ref<Partial<UserInfo>>({});
@@ -133,9 +126,11 @@ const resetPwd = async (data: ResetForm) => {
 <style lang="scss">
 .fs_profile {
   min-width: 1000px;
+
   .avatar-uploader {
     text-align: center;
     margin: 30px 0;
+
     .el-upload {
       border: 1px dashed var(--el-border-color);
       border-radius: 50%;
@@ -145,6 +140,7 @@ const resetPwd = async (data: ResetForm) => {
       transition: var(--el-transition-duration-fast);
       margin: 0 auto;
     }
+
     .avatar {
       width: 150px;
       height: 150px;
@@ -164,6 +160,7 @@ const resetPwd = async (data: ResetForm) => {
 
     text-align: center;
   }
+
   .profile {
     display: flex;
     justify-content: space-between;
@@ -174,11 +171,13 @@ const resetPwd = async (data: ResetForm) => {
       display: flex;
       color: gray;
       align-items: center;
+
       .profile_label_icon {
         width: 20px;
         height: 20px;
         margin-right: 4px;
       }
+
       .profile_label_text {
         flex: none;
       }

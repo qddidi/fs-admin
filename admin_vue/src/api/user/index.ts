@@ -38,14 +38,7 @@ export const deleteData = (id: number | number[]) => {
     });
 };
 
-//导出
-// export const exportData = (query: QueryParams) => {
-//     return request({
-//         url: "/user/export",
-//         method: "get",
-//         params: query,
-//     });
-// };
+
 
 //获取用户信息
 export const getProfile = () => {

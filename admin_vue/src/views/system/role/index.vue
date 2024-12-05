@@ -2,176 +2,76 @@
   <div>
     <el-form :model="queryParams" ref="queryRef" :inline="true">
       <el-form-item label="角色名称">
-        <el-input
-          v-model="queryParams.role_name"
-          placeholder="角色名称"
-          class="w-[150px]"
-          clearable
-        />
+        <el-input v-model="queryParams.role_name" placeholder="角色名称" class="w-[150px]" clearable />
       </el-form-item>
       <el-form-item label="状态" prop="status" class="w-[150px]">
-        <el-select
-          v-model="queryParams.status"
-          placeholder="角色状态"
-          clearable
-        >
-          <el-option
-            v-for="dict in dickStatus"
-            :key="dict.value"
-            :label="dict.label"
-            :value="dict.value"
-          />
+        <el-select v-model="queryParams.status" placeholder="角色状态" clearable>
+          <el-option v-for="dict in dickStatus" :key="dict.value" :label="dict.label" :value="dict.value" />
         </el-select>
       </el-form-item>
       <el-form-item label="创建时间" style="width: 308px">
-        <el-date-picker
-          v-model="dateRange"
-          value-format="YYYY-MM-DD"
-          type="daterange"
-          range-separator="-"
-          start-placeholder="开始日期"
-          end-placeholder="结束日期"
-        ></el-date-picker>
+        <el-date-picker v-model="dateRange" value-format="YYYY-MM-DD" type="daterange" range-separator="-"
+          start-placeholder="开始日期" end-placeholder="结束日期"></el-date-picker>
       </el-form-item>
       <el-form-item>
-        <el-button
-          type="primary"
-          v-hasPerm="['system:role:list']"
-          icon="Search"
-          @click="handleQuery"
-          >搜索</el-button
-        >
+        <el-button type="primary" v-hasPerm="['system:role:list']" icon="Search" @click="handleQuery">搜索</el-button>
       </el-form-item>
     </el-form>
     <el-row :gutter="10" class="mb-4">
       <el-col :span="1.5">
-        <el-button
-          type="primary"
-          v-hasPerm="['system:role:add']"
-          plain
-          icon="Plus"
-          @click="handleAdd()"
-          >新增</el-button
-        >
+        <el-button type="primary" v-hasPerm="['system:role:add']" plain icon="Plus" @click="handleAdd()">新增</el-button>
       </el-col>
     </el-row>
-    <el-table
-      :data="tableData"
-      class="w-full mt-2"
-      row-key="id"
-      v-loading="isLoading"
-      border
-    >
+    <el-table :data="tableData" class="w-full mt-2" row-key="id" v-loading="isLoading" border>
       <el-table-column prop="role_name" label="角色名" />
       <el-table-column prop="role_sort" label="显示顺序" width="100" />
 
       <el-table-column prop="status" label="状态" width="80">
         <template #default="scope">
-          <el-switch
-            @change="changeStatus(scope.row)"
-            :model-value="!!scope.row.status"
-          ></el-switch>
+          <el-switch @change="changeStatus(scope.row)" :model-value="!!scope.row.status"></el-switch>
         </template>
       </el-table-column>
       <el-table-column prop="remark" label="描述" />
       <el-table-column prop="create_time" label="创建时间" />
       <el-table-column prop="update_time" label="更新时间" />
 
-      <el-table-column
-        label="操作"
-        align="center"
-        width="200"
-        class-name="small-padding fixed-width"
-      >
+      <el-table-column label="操作" align="center" width="200" class-name="small-padding fixed-width">
         <template #default="scope">
-          <el-link
-            type="primary"
-            icon="Edit"
-            class="mr-1"
-            @click="handleUpdate(scope.row)"
-            v-hasPerm="['system:role:edit']"
-            >修改</el-link
-          >
-          <el-link
-            type="danger"
-            icon="Delete"
-            @click="handleDelete(scope.row)"
-            v-hasPerm="['system:role:delete']"
-            >删除</el-link
-          >
+          <el-link type="primary" icon="Edit" class="mr-1" @click="handleUpdate(scope.row)"
+            v-hasPerm="['system:role:edit']">修改</el-link>
+          <el-link type="danger" icon="Delete" @click="handleDelete(scope.row)"
+            v-hasPerm="['system:role:delete']">删除</el-link>
         </template>
       </el-table-column>
     </el-table>
-    <el-pagination
-      v-show="total > 0"
-      background
-      class="p-5"
-      layout="total,sizes, prev, pager, next"
-      :total="total"
-      v-model:current-page="queryParams.page_num"
-      v-model:page-size="queryParams.page_size"
-      @change="getList"
-    />
+    <el-pagination v-show="total > 0" background class="p-5" layout="total,sizes, prev, pager, next" :total="total"
+      v-model:current-page="queryParams.page_num" v-model:page-size="queryParams.page_size" @change="getList" />
     <!-- 添加或修改角色配置对话框 -->
-    <el-dialog
-      :title="isUpdate ? '修改' : '新增'"
-      width="500px"
-      v-model="dialogVisible"
-      append-to-body
-    >
-      <el-form
-        :model="form"
-        ref="ruleFormRef"
-        :rules="rules"
-        label-width="100px"
-      >
+    <el-dialog :title="isUpdate ? '修改' : '新增'" width="500px" v-model="dialogVisible" append-to-body>
+      <el-form :model="form" ref="ruleFormRef" :rules="rules" label-width="100px">
         <el-form-item label="角色名称" prop="role_name">
           <el-input v-model="form.role_name" placeholder="请输入角色名称" />
         </el-form-item>
 
         <el-form-item label="角色顺序" prop="role_sort">
-          <el-input-number
-            v-model="form.role_sort"
-            controls-position="right"
-            :min="0"
-          />
+          <el-input-number v-model="form.role_sort" controls-position="right" :min="0" />
         </el-form-item>
         <el-form-item label="显示状态">
           <el-radio-group v-model="form.status">
-            <el-radio
-              v-for="dict in dickStatus"
-              :key="dict.value"
-              :label="dict.label"
-              :value="dict.value"
-            ></el-radio>
+            <el-radio v-for="dict in dickStatus" :key="dict.value" :label="dict.label" :value="dict.value"></el-radio>
           </el-radio-group>
         </el-form-item>
         <el-form-item label="菜单权限">
-          <el-tree
-            class="tree-border"
-            ref="menuRef"
-            :data="menuOptions"
-            check-strictly
-            show-checkbox
-            node-key="id"
-            @check="handleCheck"
-            empty-text="加载中，请稍候"
-            :props="{ label: 'title', children: 'children' }"
-          ></el-tree>
+          <el-tree class="tree-border" ref="menuRef" :data="menuOptions" check-strictly show-checkbox node-key="id"
+            @check="handleCheck" empty-text="加载中，请稍候" :props="{ label: 'title', children: 'children' }"></el-tree>
         </el-form-item>
         <el-form-item label="备注">
-          <el-input
-            v-model="form.remark"
-            type="textarea"
-            placeholder="请输入内容"
-          ></el-input>
+          <el-input v-model="form.remark" type="textarea" placeholder="请输入内容"></el-input>
         </el-form-item>
       </el-form>
       <template #footer>
         <div class="dialog-footer">
-          <el-button type="primary" @click="submitForm(ruleFormRef)"
-            >确 定</el-button
-          >
+          <el-button type="primary" @click="submitForm(ruleFormRef)">确 定</el-button>
           <el-button @click="cancel">取 消</el-button>
         </div>
       </template>
@@ -307,7 +207,7 @@ const submitForm = async (formEl: FormInstance | undefined) => {
       ElMessage.success(successMessage);
       getList();
     } else {
-      console.log("error submit!", fields);
+      console.log("错误的提交!", fields);
     }
   });
 };

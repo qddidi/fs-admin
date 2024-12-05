@@ -46,10 +46,17 @@ export const handleRouter = (router: Router) => {
         }
         const appStore = useAppStore();
         if (appStore.isLoadRoute) {
-            appStore.$patch({
-                breadcrumbs: filterBreadCrumb(to.path, appStore.menuList),
-            });
+            const breadCrumbs = filterBreadCrumb(to.path, appStore.menuList)
+            if (breadCrumbs?.length === 0) {
+                appStore.$patch({
+                    breadcrumbs: [{ name: to.meta.title as string }],
+                });
+            } else {
+                appStore.$patch({
+                    breadcrumbs: breadCrumbs,
+                });
 
+            }
 
             appStore.addTags({ name: to.meta.title as string, path: to.path, fullpath: to.fullPath });
             to.meta?.catch && appStore.addCatchList(to.meta?.name as string)

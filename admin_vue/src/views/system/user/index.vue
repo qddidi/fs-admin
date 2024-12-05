@@ -2,86 +2,35 @@
   <div>
     <el-form :model="queryParams" ref="queryRef" :inline="true">
       <el-form-item label="用户名称">
-        <el-input
-          v-model="queryParams.username"
-          placeholder="用户名称"
-          class="w-[150px]"
-          clearable
-        />
+        <el-input v-model="queryParams.username" placeholder="用户名称" class="w-[150px]" clearable />
       </el-form-item>
       <el-form-item label="状态" prop="status" class="w-[150px]">
-        <el-select
-          v-model="queryParams.status"
-          placeholder="用户状态"
-          clearable
-        >
-          <el-option
-            v-for="dict in dickStatus"
-            :key="dict.value"
-            :label="dict.label"
-            :value="dict.value"
-          />
+        <el-select v-model="queryParams.status" placeholder="用户状态" clearable>
+          <el-option v-for="dict in dickStatus" :key="dict.value" :label="dict.label" :value="dict.value" />
         </el-select>
       </el-form-item>
       <el-form-item label="创建时间" style="width: 308px">
-        <el-date-picker
-          v-model="dateRange"
-          value-format="YYYY-MM-DD"
-          type="daterange"
-          range-separator="-"
-          start-placeholder="开始日期"
-          end-placeholder="结束日期"
-        ></el-date-picker>
+        <el-date-picker v-model="dateRange" value-format="YYYY-MM-DD" type="daterange" range-separator="-"
+          start-placeholder="开始日期" end-placeholder="结束日期"></el-date-picker>
       </el-form-item>
       <el-form-item>
-        <el-button
-          type="primary"
-          v-hasPerm="['system:user:list']"
-          icon="Search"
-          @click="handleQuery"
-          >搜索</el-button
-        >
+        <el-button type="primary" v-hasPerm="['system:user:list']" icon="Search" @click="handleQuery">搜索</el-button>
       </el-form-item>
     </el-form>
     <el-row :gutter="10" class="mb-4">
       <el-col :span="1.5">
-        <el-button
-          type="primary"
-          v-hasPerm="['system:user:add']"
-          plain
-          icon="Plus"
-          @click="handleAdd()"
-          >新增</el-button
-        >
+        <el-button type="primary" v-hasPerm="['system:user:add']" plain icon="Plus" @click="handleAdd()">新增</el-button>
       </el-col>
       <el-col :span="1.5">
-        <el-button
-          type="warning"
-          v-hasPerm="['system:user:export']"
-          plain
-          icon="Download"
-          @click="exportDataList()"
-          >导出</el-button
-        >
+        <el-button type="warning" v-hasPerm="['system:user:export']" plain icon="Download"
+          @click="exportDataList()">导出</el-button>
       </el-col>
       <el-col :span="1.5">
-        <el-button
-          type="success"
-          v-hasPerm="['system:user:import']"
-          plain
-          icon="Upload"
-          @click="importDataList()"
-          >导入</el-button
-        >
+        <el-button type="success" v-hasPerm="['system:user:import']" plain icon="Upload"
+          @click="importDataList()">导入</el-button>
       </el-col>
     </el-row>
-    <el-table
-      :data="tableData"
-      v-loading="isLoading"
-      class="w-full mt-2"
-      row-key="id"
-      border
-    >
+    <el-table :data="tableData" v-loading="isLoading" class="w-full mt-2" row-key="id" border>
       <el-table-column prop="username" label="用户名" />
 
       <el-table-column prop="nickname" label="昵称" />
@@ -89,64 +38,27 @@
       <el-table-column prop="email" label="邮箱" />
       <el-table-column prop="status" label="状态" width="80">
         <template #default="scope">
-          <el-switch
-            @change="changeStatus(scope.row)"
-            :model-value="!!scope.row.status"
-          ></el-switch>
+          <el-switch @change="changeStatus(scope.row)" :model-value="!!scope.row.status"></el-switch>
         </template>
       </el-table-column>
 
       <el-table-column prop="create_time" label="创建时间" />
       <el-table-column prop="update_time" label="更新时间" />
 
-      <el-table-column
-        label="操作"
-        align="center"
-        width="200"
-        class-name="small-padding fixed-width"
-      >
+      <el-table-column label="操作" align="center" width="200" class-name="small-padding fixed-width">
         <template #default="scope">
-          <el-link
-            type="primary"
-            icon="Edit"
-            class="mr-1"
-            v-hasPerm="['system:user:edit']"
-            @click="handleUpdate(scope.row)"
-            >修改</el-link
-          >
-          <el-link
-            type="danger"
-            icon="Delete"
-            v-hasPerm="['system:user:delete']"
-            @click="handleDelete(scope.row)"
-            >删除</el-link
-          >
+          <el-link type="primary" icon="Edit" class="mr-1" v-hasPerm="['system:user:edit']"
+            @click="handleUpdate(scope.row)">修改</el-link>
+          <el-link type="danger" icon="Delete" v-hasPerm="['system:user:delete']"
+            @click="handleDelete(scope.row)">删除</el-link>
         </template>
       </el-table-column>
     </el-table>
-    <el-pagination
-      v-show="total > 0"
-      background
-      class="p-5"
-      layout="total,sizes, prev, pager, next"
-      :total="total"
-      v-model:current-page="queryParams.page_num"
-      v-model:page-size="queryParams.page_size"
-      @change="getList"
-    />
+    <el-pagination v-show="total > 0" background class="p-5" layout="total,sizes, prev, pager, next" :total="total"
+      v-model:current-page="queryParams.page_num" v-model:page-size="queryParams.page_size" @change="getList" />
     <!-- 添加或修改用户配置对话框 -->
-    <el-dialog
-      :title="isUpdate ? '修改' : '新增'"
-      width="500px"
-      v-model="dialogVisible"
-      append-to-body
-    >
-      <el-form
-        :model="form"
-        ref="ruleFormRef"
-        :rules="rules"
-        label-width="100px"
-      >
+    <el-dialog :title="isUpdate ? '修改' : '新增'" width="500px" v-model="dialogVisible" append-to-body>
+      <el-form :model="form" ref="ruleFormRef" :rules="rules" label-width="100px">
         <el-form-item label="用户名称" prop="username">
           <el-input v-model="form.username" placeholder="请输入用户名称" />
         </el-form-item>
@@ -165,61 +77,28 @@
 
         <el-form-item label="显示状态">
           <el-radio-group v-model="form.status">
-            <el-radio
-              v-for="dict in dickStatus"
-              :key="dict.value"
-              :label="dict.label"
-              :value="dict.value"
-            ></el-radio>
+            <el-radio v-for="dict in dickStatus" :key="dict.value" :label="dict.label" :value="dict.value"></el-radio>
           </el-radio-group>
         </el-form-item>
         <el-form-item label="角色">
-          <el-select
-            v-model="form.role_ids"
-            multiple
-            placeholder="选择角色"
-            style="width: 240px"
-          >
-            <el-option
-              v-for="item in roleOptions"
-              :key="item.id"
-              :label="item.role_name"
-              :value="item.id"
-            />
+          <el-select v-model="form.role_ids" multiple placeholder="选择角色" style="width: 240px">
+            <el-option v-for="item in roleOptions" :key="item.id" :label="item.role_name" :value="item.id" />
           </el-select>
         </el-form-item>
       </el-form>
       <template #footer>
         <div class="dialog-footer">
-          <el-button type="primary" @click="submitForm(ruleFormRef)"
-            >确 定</el-button
-          >
+          <el-button type="primary" @click="submitForm(ruleFormRef)">确 定</el-button>
           <el-button @click="cancel">取 消</el-button>
         </div>
       </template>
     </el-dialog>
 
     <!-- 导入 -->
-    <el-dialog
-      width="400px"
-      :title="uploadParams.title"
-      v-model="uploadParams.open"
-      append-to-body
-    >
-      <el-upload
-        class="upload-demo"
-        drag
-        accept=".xlsx, .xls"
-        :limit="1"
-        ref="upload"
-        :auto-upload="false"
-        :action="uploadParams.url"
-        :headers="uploadParams.headers"
-        :on-exceed="handleExceed"
-        :disabled="uploadParams.isUploading"
-        :on-progress="handleProgress"
-        :on-success="handleFileSuccess"
-      >
+    <el-dialog width="400px" :title="uploadParams.title" v-model="uploadParams.open" append-to-body>
+      <el-upload class="upload-demo" drag accept=".xlsx, .xls" :limit="1" ref="upload" :auto-upload="false"
+        :action="uploadParams.url" :headers="uploadParams.headers" :on-exceed="handleExceed"
+        :disabled="uploadParams.isUploading" :on-progress="handleProgress" :on-success="handleFileSuccess">
         <el-icon class="el-icon--upload">
           <component is="UploadFilled" />
         </el-icon>

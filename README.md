@@ -23,11 +23,15 @@
 
 ### 菜单管理
 
-![image.png](https://github.com/qddidi/fs-admin/blob/develop/assets/03.png?raw=true)
+![image.png](https://github.com/qddidi/fs-admin/blob/develop/assets/03.jpg?raw=true)
 
 ### 用户管理
 
-![image.png](https://github.com/qddidi/fs-admin/blob/develop/assets/04.png?raw=true)
+![image.png](https://github.com/qddidi/fs-admin/blob/develop/assets/04.jpg?raw=true)
+
+### 个人中心
+
+![image.png](https://github.com/qddidi/fs-admin/blob/develop/assets/05.jpg?raw=true)
 
 ## 技术栈
 

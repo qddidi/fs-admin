@@ -10,9 +10,12 @@ import { JwtModule } from '@nestjs/jwt';
 import { MenuModule } from './menu/menu.module';
 import { RoleModule } from './role/role.module';
 import * as path from 'path';
-import { APP_GUARD } from '@nestjs/core';
+import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { PermissionsGuard } from './common/guards/permissions.guard';
 import { UserGuard } from './common/guards/user.guard';
+import { LogModule } from './log/log.module';
+import { OperationLogInterceptor } from './common/interceptor/log/log.interceptor';
+import { TransformInterceptor } from './common/interceptor/transform/transform.interceptor';
 const isProd = process.env.NODE_ENV == 'production';
 
 @Module({
@@ -60,6 +63,8 @@ const isProd = process.env.NODE_ENV == 'production';
     MenuModule,
 
     RoleModule,
+
+    LogModule,
   ],
   controllers: [AppController],
   providers: [AppService, {
@@ -68,6 +73,15 @@ const isProd = process.env.NODE_ENV == 'production';
   }, {
       provide: APP_GUARD,
       useClass: PermissionsGuard,
+    },
+    // 注册全局拦截器
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: OperationLogInterceptor,
+    },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: TransformInterceptor,
     }
   ],
 })

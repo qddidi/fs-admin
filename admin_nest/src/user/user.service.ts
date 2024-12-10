@@ -337,9 +337,11 @@ export class UserService {
           id
         }
       })
+      //判断输入的原密码是否正确
       if (user.password !== encry(oldPassword, user.salt)) {
         throw Error('原密码错误');
       }
+      //加密新密码并更新密码
       user.password = encry(newPassword, user.salt);
       await this.userRepository.update(id, { password: user.password });
       return '修改成功';

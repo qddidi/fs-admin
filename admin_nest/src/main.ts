@@ -6,6 +6,7 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { ApiBearerAuth } from '@nestjs/swagger';
+import { OperationLogInterceptor } from './common/interceptor/log/log.interceptor';
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   const options = new DocumentBuilder()
@@ -20,7 +21,7 @@ async function bootstrap() {
   SwaggerModule.setup('/fs_admin/api', app, document);
   app.useGlobalFilters(new HttpExceptionFilter());
 
-  app.useGlobalInterceptors(new TransformInterceptor());
+  //app.useGlobalInterceptors(new TransformInterceptor());
 
   app.useGlobalPipes(new ValidationPipe());
   app.enableCors();

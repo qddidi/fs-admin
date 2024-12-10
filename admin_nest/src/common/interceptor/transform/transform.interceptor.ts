@@ -1,3 +1,4 @@
+//响应结果拦截器
 import {
   Injectable,
   NestInterceptor,
@@ -19,6 +20,8 @@ export class TransformInterceptor<T>
     context: ExecutionContext,
     next: CallHandler,
   ): Observable<Response<T>> {
+    console.log(123);
+
     return next
       .handle()
       .pipe(map((data) => ({ code: 200, data, describe: '请求成功' })));

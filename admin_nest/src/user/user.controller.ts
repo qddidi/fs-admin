@@ -26,6 +26,7 @@ import { ApiErrorCode } from 'src/common/enums/api-error-code.enum';
 import fileconfig from 'src/config/file';
 import { checkDirExists, deleteOldFile } from 'src/utils/fileUtils';
 import { UploadFileDto } from './dto/upload-file.dto';
+import { LogOperationTitle } from 'src/common/decorators/oprertionlog.decorator';
 @ApiTags('用户模块')
 @ApiBearerAuth()
 @Controller('user')
@@ -98,6 +99,7 @@ export class UserController {
   @ApiOperation({
     summary: '用户管理-查询',
   })
+  @LogOperationTitle('用户管理-查询')
   @Permissions('system:user:list')
   @Get('list')
   findUserList(@Query() findUserListDto: FindUserListDto) {
@@ -160,12 +162,17 @@ export class UserController {
   @UseInterceptors(FileInterceptor('file', {
     storage: diskStorage({
       destination: async (req, _file, cb) => {
-        //保存文件地址
-        const saveDirectory = path.join(process.cwd(), fileconfig.saveDirectory, String(req.user.sub));
-        // 检查目录是否存在，如果不存在则创建
-        checkDirExists(saveDirectory);
-        req.saveDirectory = saveDirectory;
-        cb(null, saveDirectory)
+        try {
+          //保存文件地址
+          const saveDirectory = path.join(process.cwd(), fileconfig.saveDirectory, String(req.user.sub));
+          // 检查目录是否存在，如果不存在则创建
+          checkDirExists(saveDirectory);
+          req.saveDirectory = saveDirectory;
+          cb(null, saveDirectory)
+        } catch (error) {
+          cb(new ApiException('文件目录处理失败', ApiErrorCode.COMMON_CODE), null)
+        }
+
       },
       filename: (req, file, cb) => {
         const ext = path.extname(file.originalname);
@@ -193,7 +200,7 @@ export class UserController {
      * 头像存放目录 newAvatarDir
      */
     const newAvatarDir = path.join(process.cwd(), fileconfig.saveDirectory, String(req.user.sub))
-    console.log(req.filename);
+
     //查找当前用户目录下所有头像,如果不是最新头像文件,则删除
     deleteOldFile(newAvatarDir, req.filename, fileconfig.avatarPrefix)
     return await this.userService.uploadAvatar(`${fileconfig.saveDirectory}${req.user.sub}/${req.filename}`, req);

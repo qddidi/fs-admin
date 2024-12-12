@@ -352,4 +352,3 @@ const handleFileSuccess: UploadProps["onSuccess"] = (response) => {
   getList();
 };
 </script>
-<style lang="scss"></style>

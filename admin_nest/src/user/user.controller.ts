@@ -36,7 +36,7 @@ export class UserController {
   @ApiOperation({
     summary: '用户注册', // 接口描述信息
   })
-
+  @LogOperationTitle('注册')
   @ApiOkResponse({
     description: '返回示例',
     type: CreateUserVo,
@@ -49,6 +49,7 @@ export class UserController {
 
 
   @Public()
+  @LogOperationTitle('登录')
   @ApiOperation({
     summary: '用户登录',
   })
@@ -66,11 +67,13 @@ export class UserController {
   @ApiOperation({
     summary: '退出登录',
   })
+  @LogOperationTitle('退出登录')
   @Post('logout')
   loginOut(@Req() req: Request) {
     return this.userService.logout(req);
   }
   @Public()
+  @LogOperationTitle('获取验证码')
   @ApiOperation({
     summary: '获取验证码',
   })
@@ -109,6 +112,7 @@ export class UserController {
   @ApiOperation({
     summary: '用户管理-删除',
   })
+  @LogOperationTitle('用户管理-删除')
   @Permissions('system:user:delete')
   @Delete('deleteUser/:userId')
   deleteRole(@Param('userId') userId: string) {
@@ -117,6 +121,7 @@ export class UserController {
 
   //更新用户
   @Put('/updateUser')
+  @LogOperationTitle('用户管理-更新')
   @Permissions('system:user:edit')
   @ApiOperation({ summary: '用户管理-更新' })
   async updateUser(
@@ -130,6 +135,7 @@ export class UserController {
   //导出
   @Get('/export')
   @Permissions('system:user:export')
+  @LogOperationTitle('用户管理-导出')
   @ApiOperation({ summary: '用户管理-导出' })
   async export(@Query() findUserListDto: FindUserListDto, @Res() res: Response) {
 
@@ -141,6 +147,7 @@ export class UserController {
 
   @Post('/upload')
   @Permissions('system:user:import')
+  @LogOperationTitle('用户管理-导入')
   @ApiOperation({ summary: '用户管理-导入' })
   @ApiConsumes('multipart/form-data')
   @UseInterceptors(FileInterceptor('file'))
@@ -150,6 +157,7 @@ export class UserController {
 
   //获取用户信息
   @Get('/profile')
+  @LogOperationTitle('获取用户信息')
   @ApiOperation({ summary: '获取用户信息' })
   async getUserInfo(@Req() req: Request) {
     return await this.userService.getUserInfo(req);
@@ -157,6 +165,7 @@ export class UserController {
 
   //头像上传
   @Post('/uploadAvatar')
+  @LogOperationTitle('用户头像上传')
   @ApiOperation({ summary: '头像上传' })
   @ApiConsumes('multipart/form-data')
   @UseInterceptors(FileInterceptor('file', {
@@ -210,12 +219,14 @@ export class UserController {
   //修改个人信息
   @Put('/updateUserInfo')
   @ApiOperation({ summary: '修改个人信息' })
+  @LogOperationTitle('修改个人信息')
   async updateUserInfo(@Req() req: Request, @Body() updateUserDto: UpdateUserDto) {
     return await this.userService.updateUserInfo(req, updateUserDto);
   }
 
   //修改密码
   @Put('/updatePassword')
+  @LogOperationTitle('修改密码')
   @ApiOperation({ summary: '修改密码' })
   async updatePassword(@Req() req: Request & { user: any }, @Body() updateUserDto: UpdateUserPasswordDto) {
     return await this.userService.updatePassword(req, updateUserDto);

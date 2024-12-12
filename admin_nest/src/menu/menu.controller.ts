@@ -7,19 +7,21 @@ import {
   ApiParam,
 } from '@nestjs/swagger';
 import { CreateMenuDto } from './dto/create-menu.dto';
-import { Public } from 'src/public/public.decorator';
+
 import { Request } from '@nestjs/common';
-import { PermissionsGuard } from 'src/common/guards/permissions.guard';
+
 import { Permissions } from 'src/common/decorators/permissions.decorator';
 import { FindMenuListDto } from './dto/findMenu.dto';
 import { UpdateMenuDto } from './dto/update-menu.dto';
 import { pick } from 'src/utils/common';
+import { LogOperationTitle } from 'src/common/decorators/oprertionlog.decorator';
 
 @Controller('menu')
 @ApiTags('菜单权限模块')
 export class MenuController {
   constructor(private readonly menuService: MenuService) { }
   @Post('getInfo')
+  @LogOperationTitle('获取路由')
   @ApiOperation({ summary: '获取路由' })
   async getInfo(@Request() req) {
     return await this.menuService.getInfo(req);
@@ -27,6 +29,7 @@ export class MenuController {
 
   @Get('/list')
   @Permissions('system:menu:list')
+  @LogOperationTitle('菜单查询')
   @ApiOperation({ summary: '菜单管理-查询' })
   async list(@Query() findMenuListDto: FindMenuListDto, @Request() req) {
 
@@ -42,6 +45,7 @@ export class MenuController {
   //新增菜单
   @Post('createMenu')
   @Permissions('system:menu:add')
+  @LogOperationTitle('菜单新增')
   @ApiOperation({ summary: '菜单管理-新增' })
   async createMenu(
     @Request() req,
@@ -56,6 +60,7 @@ export class MenuController {
   //更新菜单
   @Put('updateMenu')
   @Permissions('system:menu:edit')
+  @LogOperationTitle('菜单更新')
   @ApiOperation({ summary: '菜单管理-更新' })
 
   async updateMenu(
@@ -70,6 +75,7 @@ export class MenuController {
   @ApiOperation({
     summary: '菜单管理-删除',
   })
+  @LogOperationTitle('菜单删除')
   @Permissions('system:menu:delete')
   @ApiParam({
     name: 'menuId',

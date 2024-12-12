@@ -1,12 +1,11 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { HttpExceptionFilter } from './common/filter/http-exception/http-exception.filter';
-import { TransformInterceptor } from './common/interceptor/transform/transform.interceptor';
+
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
 import { NestExpressApplication } from '@nestjs/platform-express';
-import { ApiBearerAuth } from '@nestjs/swagger';
-import { OperationLogInterceptor } from './common/interceptor/log/log.interceptor';
+
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   const options = new DocumentBuilder()

@@ -6,6 +6,7 @@ import { Public } from 'src/public/public.decorator';
 import { FindRoleListDto } from './dto/find-role.dto';
 import { Permissions } from 'src/common/decorators/permissions.decorator';
 import { UpdateRoleDto } from './dto/update-role.dto';
+import { LogOperationTitle } from 'src/common/decorators/oprertionlog.decorator';
 @Controller('role')
 @ApiTags('角色模块')
 export class RoleController {
@@ -14,6 +15,7 @@ export class RoleController {
 
   @Post('createRole')
   @Permissions('system:role:create')
+  @LogOperationTitle('新增角色')
   @ApiOperation({
     summary: '角色管理-新增',
   })
@@ -26,6 +28,7 @@ export class RoleController {
   //查询
   @Get('list')
   @Permissions('system:role:list')
+  @LogOperationTitle('查询角色')
   @ApiOperation({
     summary: '角色管理-查询',
   })
@@ -37,6 +40,7 @@ export class RoleController {
   @ApiOperation({
     summary: '角色管理-删除',
   })
+  @LogOperationTitle('删除角色')
   @Permissions('system:role:delete')
   @Delete('deleteRole/:roleId')
   deleteRole(@Param('roleId') roleId: string) {
@@ -46,6 +50,7 @@ export class RoleController {
   //更新角色
   @Put('/updateRole')
   @Permissions('system:role:edit')
+  @LogOperationTitle('更新角色')
   @ApiOperation({ summary: '角色管理-更新' })
   async updateMenu(
     @Body()

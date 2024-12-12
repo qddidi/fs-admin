@@ -31,20 +31,17 @@ export class OperationLogInterceptor<T>
         const title = this.reflactor.get<string>('logOperationTitle', context.getHandler());
         return next
             .handle().pipe(tap(() => {
-                try {
-                    const log = new OperationLog();
-                    log.title = title;
-                    log.method = request.method;
-                    log.url = request.url;
-                    log.ip = request.ip;
-                    log.params = JSON.stringify({ ...request.query, ...request.params, ...request.body });
-                    log.user_agent = request.headers['user-agent'];
-                    log.username = request.user?.username;
-                    this.logService.saveOperationLog(log);
-                } catch (error) {
-
-                    console.log(error);
-                }
+                const log = new OperationLog();
+                log.title = title;
+                log.method = request.method;
+                log.url = request.url;
+                log.ip = request.ip;
+                log.params = JSON.stringify({ ...request.query, ...request.params, ...request.body });
+                log.user_agent = request.headers['user-agent'];
+                log.username = request.user?.username;
+                this.logService.saveOperationLog(log).catch((err) => {
+                    console.log(err);
+                });
 
             }
             ));

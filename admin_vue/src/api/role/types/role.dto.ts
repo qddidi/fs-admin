@@ -27,6 +27,7 @@ export type RoleForm = {
     role_sort?: number;
     order_num?: number;
     menu_ids?: number[];
+
     status: number;
 
 }

@@ -11,15 +11,15 @@ export class OperationLog {
     operation_type: string; //操作类型
     @Column({ length: 20, nullable: true })
     method: string; //请求方式
-    @Column({ length: 255, nullable: true })
+    @Column({ type: 'text', nullable: true })
     params: string; //参数
-    @Column({ length: 30, nullable: true })
+    @Column({ nullable: true })
     ip: string; //ip
-    @Column({ length: 255, nullable: true })
+    @Column({ type: 'text', nullable: true })
     url: string; //地址
-    @Column({ length: 500, nullable: true })
+    @Column({ nullable: true })
     user_agent: string; //浏览器
-    @Column({ length: 20, nullable: true })
+    @Column({ nullable: true })
     username: string; //操作人员
     @CreateDateColumn({
         transformer: {

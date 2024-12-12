@@ -20,7 +20,7 @@ export class TransformInterceptor<T>
     context: ExecutionContext,
     next: CallHandler,
   ): Observable<Response<T>> {
-    console.log(123);
+
 
     return next
       .handle()

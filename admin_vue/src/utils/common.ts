@@ -1,4 +1,10 @@
-export function deepClone(obj: any): any {
+/**
+ * 
+ * @param obj 需要深拷贝对象
+ * @param exclues 需要排除的字段
+ * @returns 
+ */
+export function deepClone(obj: any, exclues?: string[]): any {
     if (obj === null || typeof obj !== 'object') {
         return obj;
     }
@@ -6,6 +12,7 @@ export function deepClone(obj: any): any {
     const clone: any = Array.isArray(obj) ? [] : {};
 
     for (let key in obj) {
+        if (exclues?.includes(key)) continue
         if (Object.prototype.hasOwnProperty.call(obj, key)) {
             clone[key] = deepClone(obj[key]);
         }

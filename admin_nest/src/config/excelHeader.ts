@@ -9,6 +9,19 @@ export const mapUserZh = {
     create_time: '创建时间',
     update_time: '更新时间',
 }
+//日志表
+export const mapLogZh = {
+    id: 'id',
+    title: '操作模块',
+    method: '请求方式',
+    params: '参数',
+    ip: '主机ip',
+    user_agent: '浏览器信息',
+    username: '操作人',
+    url: '请求地址',
+    create_time: '创建时间',
+    update_time: '更新时间',
+}
 
 export const transformZnToEn = (data, mapZn) => {
     const mapEn = {}

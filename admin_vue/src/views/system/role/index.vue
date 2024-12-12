@@ -186,7 +186,7 @@ const handleUpdate = (row: RoleForm & { menus?: MenuList[] }) => {
   resetForm();
 
   isUpdate.value = true;
-  form.value = deepClone(row);
+  form.value = deepClone(row, ['menus']);
   form.value.menu_ids = row.menus?.map((item) => item.id);
 
   dialogVisible.value = true;

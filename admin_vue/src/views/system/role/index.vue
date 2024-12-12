@@ -188,7 +188,6 @@ const handleUpdate = (row: RoleForm & { menus?: MenuList[] }) => {
   isUpdate.value = true;
   form.value = deepClone(row, ['menus']);
   form.value.menu_ids = row.menus?.map((item) => item.id);
-
   dialogVisible.value = true;
   nextTick(() => {
     if (menuRef.value) {

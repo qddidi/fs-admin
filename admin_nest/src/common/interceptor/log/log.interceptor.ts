@@ -6,7 +6,7 @@ import {
     CallHandler,
 } from '@nestjs/common';
 import { Observable } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { LogService } from 'src/log/log.service';
 import { OperationLog } from 'src/log/entities/operationLog.entity';
 import { Reflector } from '@nestjs/core';

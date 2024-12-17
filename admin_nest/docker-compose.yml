@@ -15,8 +15,6 @@ services:
     image: mysql
     volumes:
       - ${MYSQL_DATA_PATH}:/var/lib/mysql
-    env_file:
-      - .env.prod
     environment:
       MYSQL_DATABASE: ${DB_DATABASE}
       MYSQL_ROOT_PASSWORD: ${DB_PASSWD}

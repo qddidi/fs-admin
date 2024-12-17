@@ -21,6 +21,8 @@ export class OperationLog {
     user_agent: string; //浏览器
     @Column({ nullable: true })
     username: string; //操作人员
+    @Column({ nullable: true })
+    response: string; //响应
     @CreateDateColumn({
         transformer: {
             to: (value) => {

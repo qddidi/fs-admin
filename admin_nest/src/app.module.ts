@@ -17,6 +17,7 @@ import { LogModule } from './log/log.module';
 import { OperationLogInterceptor } from './common/interceptor/log/log.interceptor';
 import { TransformInterceptor } from './common/interceptor/transform/transform.interceptor';
 const isProd = process.env.NODE_ENV == 'production';
+console.log({ isProd });
 
 @Module({
   imports: [

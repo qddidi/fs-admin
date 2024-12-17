@@ -16,8 +16,7 @@ export interface Response<T> {
 
 @Injectable()
 export class OperationLogInterceptor<T>
-    implements NestInterceptor<T, Response<T>>
-{
+    implements NestInterceptor<T, Response<T>> {
     constructor(
         private readonly logService: LogService,
         private readonly reflactor: Reflector,
@@ -30,7 +29,7 @@ export class OperationLogInterceptor<T>
         //获取当前控制器元数据中的日志logOperationTitle
         const title = this.reflactor.get<string>('logOperationTitle', context.getHandler());
         return next
-            .handle().pipe(tap(() => {
+            .handle().pipe(tap((res) => {
                 const log = new OperationLog();
                 log.title = title;
                 log.method = request.method;
@@ -39,6 +38,7 @@ export class OperationLogInterceptor<T>
                 log.params = JSON.stringify({ ...request.query, ...request.params, ...request.body });
                 log.user_agent = request.headers['user-agent'];
                 log.username = request.user?.username;
+                log.response = JSON.stringify(res);
                 this.logService.saveOperationLog(log).catch((err) => {
                     console.log(err);
                 });

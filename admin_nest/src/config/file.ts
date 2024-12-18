@@ -1,6 +1,6 @@
 export default {
     // 上传文件保存地址
-    fileSaveUrl: 'http://172.16.10.157:3000/',
+    fileSaveUrl: process.env.FILESAVEURL,
     // 上传文件保存目录
     saveDirectory: 'static/upload/',
 

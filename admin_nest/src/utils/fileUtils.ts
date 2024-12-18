@@ -5,7 +5,7 @@ import { ApiException } from 'src/common/filter/http-exception/api.exception';
 //判断文件目录是否存在,不存在则创建
 export const checkDirExists = (dir: string) => {
     try {
-        if (!existsSync(dir)) mkdirSync(dir);
+        if (!existsSync(dir)) mkdirSync(dir, { recursive: true });
     } catch (error) {
         throw new ApiException('创建目录失败', ApiErrorCode.FILE_ERROR)
     }

@@ -35,11 +35,12 @@ export class OperationLogInterceptor<T>
                 log.method = request.method;
                 log.url = request.url;
                 log.ip = request.ip;
-                log.params = JSON.stringify({ ...request.query, ...request.params, ...request.body });
+                const paramsText = JSON.stringify({ ...request.query, ...request.params, ...request.body });
+                log.params = paramsText.length > 1000 ? paramsText.slice(0, 1000) : paramsText;
                 log.user_agent = request.headers['user-agent'];
                 log.username = request.user?.username;
                 const resText = JSON.stringify(res);
-                log.response = resText.length > 10000 ? resText.slice(0, 10000) : resText;
+                log.response = resText.length > 1000 ? resText.slice(0, 1000) : resText;
                 this.logService.saveOperationLog(log).catch((err) => {
                     console.log(err);
                 });

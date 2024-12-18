@@ -58,6 +58,8 @@ export class LogService {
             const excelBuffer = await exportExcel(list, mapLogZh);
             return excelBuffer;
         } catch (error) {
+            console.log(error);
+
             throw new ApiException('导出失败', ApiErrorCode.FAIL);
         }
     }

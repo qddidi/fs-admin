@@ -11,6 +11,8 @@ services:
       - 3000:3000
     networks:
       - common-network
+    volumes:
+      - ${APP_PATH}:/app/static
   mysql-container:
     image: mysql
     volumes:

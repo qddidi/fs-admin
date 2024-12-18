@@ -66,7 +66,7 @@ export class MenuService {
 
     //返回的个人信息
     const userRes = {
-      avatar: `${fileConfig.fileSaveUrl}${userInfo.avatar}`,
+      avatar: `${process.env.FILESAVEURL}${userInfo.avatar}`,
       username: userInfo.username,
       telephone: userInfo.telephone,
     }

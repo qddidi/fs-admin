@@ -1,6 +1,4 @@
 export default {
-    // 上传文件保存地址
-    fileSaveUrl: process.env.FILESAVEURL,
     // 上传文件保存目录
     saveDirectory: 'static/upload/',
 

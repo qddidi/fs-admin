@@ -290,7 +290,8 @@ export class UserService {
           id: req.user.sub
         }
       })
-      user.avatar = fileconfig.fileSaveUrl + user.avatar
+
+      user.avatar = process.env.FILESAVEURL + user.avatar
 
       return user
     } catch (error) {

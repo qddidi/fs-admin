@@ -25,7 +25,6 @@ WORKDIR /app
 # 环境变量
 ENV NODE_ENV production
 
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 RUN npm config set registry https://registry.npmmirror.com/
 

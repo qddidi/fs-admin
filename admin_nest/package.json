@@ -11,7 +11,7 @@
     "start": "nest start",
     "start:dev": "cross-env NODE_ENV=development&nest start --watch",
     "start:debug": "nest start --debug --watch",
-    "prod": "pm2 start ecosystem.config.js && pm2 logs",
+    "prod": "pm2 start && pm2 logs",
     "pm2:delete": "pm2 delete all",
     "pm2:stop": "pm2 stop all",
     "pm2:restart": "pm2 restart all",

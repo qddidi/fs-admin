@@ -13,6 +13,8 @@ services:
       - common-network
     volumes:
       - ${APP_PATH}:/app/static
+    environment:
+      TZ: Asia/Shanghai # 设置时区
   mysql-container:
     image: mysql
     volumes:
@@ -20,6 +22,7 @@ services:
     environment:
       MYSQL_DATABASE: ${DB_DATABASE}
       MYSQL_ROOT_PASSWORD: ${DB_PASSWD}
+      TZ: Asia/Shanghai # 设置时区
     networks:
       - common-network
     ports:
@@ -32,6 +35,8 @@ services:
       - common-network
     ports:
       - 6379:${RD_PORT} # 显式映射 Redis 端口
+    environment:
+      TZ: Asia/Shanghai # 设置时区
 networks:
   common-network:
     driver: bridge

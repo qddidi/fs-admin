@@ -1,0 +1,15 @@
+2024-12-19 16:24:20: [31m[Nest] 4832  - [39m2024/12/19 下午4:24:20 [31m  ERROR[39m [38;5;3m[TypeOrmModule] [39m[31mUnable to connect to the database. Retrying (1)...[39m
+2024-12-19 16:24:20: Error: connect ETIMEDOUT
+    at PoolConnection._handleTimeoutError (F:\fs-admin\admin_nest\node_modules\mysql2\lib\connection.js:205:17)
+    at listOnTimeout (node:internal/timers:557:17)
+    at processTimers (node:internal/timers:500:7)
+2024-12-19 16:24:30: [31m[Nest] 29184  - [39m2024/12/19 下午4:24:30 [31m  ERROR[39m [38;5;3m[TypeOrmModule] [39m[31mUnable to connect to the database. Retrying (1)...[39m
+2024-12-19 16:24:30: [31m[Nest] 32200  - [39m2024/12/19 下午4:24:30 [31m  ERROR[39m [38;5;3m[TypeOrmModule] [39m[31mUnable to connect to the database. Retrying (1)...[39m
+2024-12-19 16:24:30: Error: connect ETIMEDOUT
+    at PoolConnection._handleTimeoutError (F:\fs-admin\admin_nest\node_modules\mysql2\lib\connection.js:205:17)
+    at listOnTimeout (node:internal/timers:557:17)
+    at processTimers (node:internal/timers:500:7)
+2024-12-19 16:24:30: Error: connect ETIMEDOUT
+    at PoolConnection._handleTimeoutError (F:\fs-admin\admin_nest\node_modules\mysql2\lib\connection.js:205:17)
+    at listOnTimeout (node:internal/timers:557:17)
+    at processTimers (node:internal/timers:500:7)

@@ -1,0 +1,242 @@
+2024-12-19 16:18:28: { isProd: false }
+2024-12-19 16:18:29: [32m[Nest] 23188  - [39m2024/12/19 下午4:18:29 [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+2024-12-19 16:18:29: [32m[Nest] 23188  - [39m2024/12/19 下午4:18:29 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +17ms[39m
+2024-12-19 16:18:29: [32m[Nest] 23188  - [39m2024/12/19 下午4:18:29 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigHostModule dependencies initialized[39m[38;5;3m +0ms[39m
+2024-12-19 16:18:29: [32m[Nest] 23188  - [39m2024/12/19 下午4:18:29 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +1ms[39m
+2024-12-19 16:18:29: [32m[Nest] 23188  - [39m2024/12/19 下午4:18:29 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +0ms[39m
+2024-12-19 16:18:29: [32m[Nest] 23188  - [39m2024/12/19 下午4:18:29 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +719ms[39m
+2024-12-19 16:18:29: [32m[Nest] 23188  - [39m2024/12/19 下午4:18:29 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mCacheModule dependencies initialized[39m[38;5;3m +9ms[39m
+2024-12-19 16:18:40: [32m[Nest] 23188  - [39m2024/12/19 下午4:18:40 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmCoreModule dependencies initialized[39m[38;5;3m +11078ms[39m
+2024-12-19 16:18:40: [32m[Nest] 23188  - [39m2024/12/19 下午4:18:40 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+2024-12-19 16:18:40: [32m[Nest] 23188  - [39m2024/12/19 下午4:18:40 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+2024-12-19 16:18:40: [32m[Nest] 23188  - [39m2024/12/19 下午4:18:40 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+2024-12-19 16:18:40: [32m[Nest] 23188  - [39m2024/12/19 下午4:18:40 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+2024-12-19 16:18:40: [32m[Nest] 23188  - [39m2024/12/19 下午4:18:40 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mMenuModule dependencies initialized[39m[38;5;3m +1ms[39m
+2024-12-19 16:18:40: [32m[Nest] 23188  - [39m2024/12/19 下午4:18:40 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mRoleModule dependencies initialized[39m[38;5;3m +0ms[39m
+2024-12-19 16:18:40: [32m[Nest] 23188  - [39m2024/12/19 下午4:18:40 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mLogModule dependencies initialized[39m[38;5;3m +0ms[39m
+2024-12-19 16:18:40: [32m[Nest] 23188  - [39m2024/12/19 下午4:18:40 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +1ms[39m
+2024-12-19 16:18:40: [32m[Nest] 23188  - [39m2024/12/19 下午4:18:40 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mUserModule dependencies initialized[39m[38;5;3m +0ms[39m
+2024-12-19 16:18:41: [32m[Nest] 23188  - [39m2024/12/19 下午4:18:41 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAppController {/}:[39m[38;5;3m +180ms[39m
+2024-12-19 16:18:41: [32m[Nest] 23188  - [39m2024/12/19 下午4:18:41 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mUserController {/user}:[39m[38;5;3m +0ms[39m
+2024-12-19 16:18:41: [32m[Nest] 23188  - [39m2024/12/19 下午4:18:41 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/user/register, POST} route[39m[38;5;3m +2ms[39m
+2024-12-19 16:18:41: [32m[Nest] 23188  - [39m2024/12/19 下午4:18:41 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/user/login, POST} route[39m[38;5;3m +1ms[39m
+2024-12-19 16:18:41: [32m[Nest] 23188  - [39m2024/12/19 下午4:18:41 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/user/logout, POST} route[39m[38;5;3m +0ms[39m
+2024-12-19 16:18:41: [32m[Nest] 23188  - [39m2024/12/19 下午4:18:41 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/user/captcha, GET} route[39m[38;5;3m +1ms[39m
+2024-12-19 16:18:41: [32m[Nest] 23188  - [39m2024/12/19 下午4:18:41 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/user/createUser, POST} route[39m[38;5;3m +0ms[39m
+2024-12-19 16:18:41: [32m[Nest] 23188  - [39m2024/12/19 下午4:18:41 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/user/list, GET} route[39m[38;5;3m +0ms[39m
+2024-12-19 16:18:41: [32m[Nest] 23188  - [39m2024/12/19 下午4:18:41 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/user/deleteUser/:userId, DELETE} route[39m[38;5;3m +1ms[39m
+2024-12-19 16:18:41: [32m[Nest] 23188  - [39m2024/12/19 下午4:18:41 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/user/updateUser, PUT} route[39m[38;5;3m +0ms[39m
+2024-12-19 16:18:41: [32m[Nest] 23188  - [39m2024/12/19 下午4:18:41 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/user/export, GET} route[39m[38;5;3m +0ms[39m
+2024-12-19 16:18:41: [32m[Nest] 23188  - [39m2024/12/19 下午4:18:41 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/user/upload, POST} route[39m[38;5;3m +1ms[39m
+2024-12-19 16:18:41: [32m[Nest] 23188  - [39m2024/12/19 下午4:18:41 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/user/profile, GET} route[39m[38;5;3m +0ms[39m
+2024-12-19 16:18:41: [32m[Nest] 23188  - [39m2024/12/19 下午4:18:41 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/user/uploadAvatar, POST} route[39m[38;5;3m +1ms[39m
+2024-12-19 16:18:41: [32m[Nest] 23188  - [39m2024/12/19 下午4:18:41 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/user/updateUserInfo, PUT} route[39m[38;5;3m +0ms[39m
+2024-12-19 16:18:41: [32m[Nest] 23188  - [39m2024/12/19 下午4:18:41 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/user/updatePassword, PUT} route[39m[38;5;3m +0ms[39m
+2024-12-19 16:18:41: [32m[Nest] 23188  - [39m2024/12/19 下午4:18:41 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mMenuController {/menu}:[39m[38;5;3m +0ms[39m
+2024-12-19 16:18:41: [32m[Nest] 23188  - [39m2024/12/19 下午4:18:41 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/menu/getInfo, POST} route[39m[38;5;3m +0ms[39m
+2024-12-19 16:18:41: [32m[Nest] 23188  - [39m2024/12/19 下午4:18:41 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/menu/list, GET} route[39m[38;5;3m +1ms[39m
+2024-12-19 16:18:41: [32m[Nest] 23188  - [39m2024/12/19 下午4:18:41 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/menu/createMenu, POST} route[39m[38;5;3m +0ms[39m
+2024-12-19 16:18:41: [32m[Nest] 23188  - [39m2024/12/19 下午4:18:41 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/menu/updateMenu, PUT} route[39m[38;5;3m +0ms[39m
+2024-12-19 16:18:41: [32m[Nest] 23188  - [39m2024/12/19 下午4:18:41 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/menu/deleteMenu/:menuId, DELETE} route[39m[38;5;3m +0ms[39m
+2024-12-19 16:18:41: [32m[Nest] 23188  - [39m2024/12/19 下午4:18:41 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mRoleController {/role}:[39m[38;5;3m +0ms[39m
+2024-12-19 16:18:41: [32m[Nest] 23188  - [39m2024/12/19 下午4:18:41 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/role/createRole, POST} route[39m[38;5;3m +0ms[39m
+2024-12-19 16:18:41: [32m[Nest] 23188  - [39m2024/12/19 下午4:18:41 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/role/list, GET} route[39m[38;5;3m +1ms[39m
+2024-12-19 16:18:41: [32m[Nest] 23188  - [39m2024/12/19 下午4:18:41 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/role/deleteRole/:roleId, DELETE} route[39m[38;5;3m +0ms[39m
+2024-12-19 16:18:41: [32m[Nest] 23188  - [39m2024/12/19 下午4:18:41 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/role/updateRole, PUT} route[39m[38;5;3m +0ms[39m
+2024-12-19 16:18:41: [32m[Nest] 23188  - [39m2024/12/19 下午4:18:41 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mLogController {/log}:[39m[38;5;3m +0ms[39m
+2024-12-19 16:18:41: [32m[Nest] 23188  - [39m2024/12/19 下午4:18:41 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/log/list, GET} route[39m[38;5;3m +0ms[39m
+2024-12-19 16:18:41: [32m[Nest] 23188  - [39m2024/12/19 下午4:18:41 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/log/export, GET} route[39m[38;5;3m +0ms[39m
+2024-12-19 16:18:41: [32m[Nest] 23188  - [39m2024/12/19 下午4:18:41 [32m    LOG[39m [38;5;3m[NestApplication] [39m[32mNest application successfully started[39m[38;5;3m +3ms[39m
+2024-12-19 16:19:25: { isProd: false }
+2024-12-19 16:19:25: [32m[Nest] 32244  - [39m2024/12/19 下午4:19:25 [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+2024-12-19 16:19:25: [32m[Nest] 32244  - [39m2024/12/19 下午4:19:25 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +21ms[39m
+2024-12-19 16:19:25: [32m[Nest] 32244  - [39m2024/12/19 下午4:19:25 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigHostModule dependencies initialized[39m[38;5;3m +0ms[39m
+2024-12-19 16:19:25: [32m[Nest] 32244  - [39m2024/12/19 下午4:19:25 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +1ms[39m
+2024-12-19 16:19:25: [32m[Nest] 32244  - [39m2024/12/19 下午4:19:25 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +0ms[39m
+2024-12-19 16:19:26: [32m[Nest] 32244  - [39m2024/12/19 下午4:19:26 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +155ms[39m
+2024-12-19 16:19:26: [32m[Nest] 32244  - [39m2024/12/19 下午4:19:26 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mCacheModule dependencies initialized[39m[38;5;3m +6ms[39m
+2024-12-19 16:19:27: [32m[Nest] 32244  - [39m2024/12/19 下午4:19:27 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmCoreModule dependencies initialized[39m[38;5;3m +945ms[39m
+2024-12-19 16:19:27: [32m[Nest] 32244  - [39m2024/12/19 下午4:19:27 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+2024-12-19 16:19:27: [32m[Nest] 32244  - [39m2024/12/19 下午4:19:27 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+2024-12-19 16:19:27: [32m[Nest] 32244  - [39m2024/12/19 下午4:19:27 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+2024-12-19 16:19:27: [32m[Nest] 32244  - [39m2024/12/19 下午4:19:27 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+2024-12-19 16:19:27: [32m[Nest] 32244  - [39m2024/12/19 下午4:19:27 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mMenuModule dependencies initialized[39m[38;5;3m +1ms[39m
+2024-12-19 16:19:27: [32m[Nest] 32244  - [39m2024/12/19 下午4:19:27 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mRoleModule dependencies initialized[39m[38;5;3m +0ms[39m
+2024-12-19 16:19:27: [32m[Nest] 32244  - [39m2024/12/19 下午4:19:27 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mLogModule dependencies initialized[39m[38;5;3m +1ms[39m
+2024-12-19 16:19:27: [32m[Nest] 32244  - [39m2024/12/19 下午4:19:27 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +0ms[39m
+2024-12-19 16:19:27: [32m[Nest] 32244  - [39m2024/12/19 下午4:19:27 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mUserModule dependencies initialized[39m[38;5;3m +0ms[39m
+2024-12-19 16:19:27: [32m[Nest] 32244  - [39m2024/12/19 下午4:19:27 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAppController {/}:[39m[38;5;3m +45ms[39m
+2024-12-19 16:19:27: [32m[Nest] 32244  - [39m2024/12/19 下午4:19:27 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mUserController {/user}:[39m[38;5;3m +0ms[39m
+2024-12-19 16:19:27: [32m[Nest] 32244  - [39m2024/12/19 下午4:19:27 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/user/register, POST} route[39m[38;5;3m +2ms[39m
+2024-12-19 16:19:27: [32m[Nest] 32244  - [39m2024/12/19 下午4:19:27 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/user/login, POST} route[39m[38;5;3m +0ms[39m
+2024-12-19 16:19:27: [32m[Nest] 32244  - [39m2024/12/19 下午4:19:27 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/user/logout, POST} route[39m[38;5;3m +0ms[39m
+2024-12-19 16:19:27: [32m[Nest] 32244  - [39m2024/12/19 下午4:19:27 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/user/captcha, GET} route[39m[38;5;3m +0ms[39m
+2024-12-19 16:19:27: [32m[Nest] 32244  - [39m2024/12/19 下午4:19:27 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/user/createUser, POST} route[39m[38;5;3m +1ms[39m
+2024-12-19 16:19:27: [32m[Nest] 32244  - [39m2024/12/19 下午4:19:27 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/user/list, GET} route[39m[38;5;3m +0ms[39m
+2024-12-19 16:19:27: [32m[Nest] 32244  - [39m2024/12/19 下午4:19:27 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/user/deleteUser/:userId, DELETE} route[39m[38;5;3m +0ms[39m
+2024-12-19 16:19:27: [32m[Nest] 32244  - [39m2024/12/19 下午4:19:27 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/user/updateUser, PUT} route[39m[38;5;3m +1ms[39m
+2024-12-19 16:19:27: [32m[Nest] 32244  - [39m2024/12/19 下午4:19:27 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/user/export, GET} route[39m[38;5;3m +0ms[39m
+2024-12-19 16:19:27: [32m[Nest] 32244  - [39m2024/12/19 下午4:19:27 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/user/upload, POST} route[39m[38;5;3m +0ms[39m
+2024-12-19 16:19:27: [32m[Nest] 32244  - [39m2024/12/19 下午4:19:27 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/user/profile, GET} route[39m[38;5;3m +1ms[39m
+2024-12-19 16:19:27: [32m[Nest] 32244  - [39m2024/12/19 下午4:19:27 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/user/uploadAvatar, POST} route[39m[38;5;3m +0ms[39m
+2024-12-19 16:19:27: [32m[Nest] 32244  - [39m2024/12/19 下午4:19:27 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/user/updateUserInfo, PUT} route[39m[38;5;3m +1ms[39m
+2024-12-19 16:19:27: [32m[Nest] 32244  - [39m2024/12/19 下午4:19:27 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/user/updatePassword, PUT} route[39m[38;5;3m +0ms[39m
+2024-12-19 16:19:27: [32m[Nest] 32244  - [39m2024/12/19 下午4:19:27 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mMenuController {/menu}:[39m[38;5;3m +0ms[39m
+2024-12-19 16:19:27: [32m[Nest] 32244  - [39m2024/12/19 下午4:19:27 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/menu/getInfo, POST} route[39m[38;5;3m +0ms[39m
+2024-12-19 16:19:27: [32m[Nest] 32244  - [39m2024/12/19 下午4:19:27 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/menu/list, GET} route[39m[38;5;3m +0ms[39m
+2024-12-19 16:19:27: [32m[Nest] 32244  - [39m2024/12/19 下午4:19:27 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/menu/createMenu, POST} route[39m[38;5;3m +0ms[39m
+2024-12-19 16:19:27: [32m[Nest] 32244  - [39m2024/12/19 下午4:19:27 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/menu/updateMenu, PUT} route[39m[38;5;3m +1ms[39m
+2024-12-19 16:19:27: [32m[Nest] 32244  - [39m2024/12/19 下午4:19:27 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/menu/deleteMenu/:menuId, DELETE} route[39m[38;5;3m +0ms[39m
+2024-12-19 16:19:27: [32m[Nest] 32244  - [39m2024/12/19 下午4:19:27 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mRoleController {/role}:[39m[38;5;3m +0ms[39m
+2024-12-19 16:19:27: [32m[Nest] 32244  - [39m2024/12/19 下午4:19:27 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/role/createRole, POST} route[39m[38;5;3m +0ms[39m
+2024-12-19 16:19:27: [32m[Nest] 32244  - [39m2024/12/19 下午4:19:27 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/role/list, GET} route[39m[38;5;3m +0ms[39m
+2024-12-19 16:19:27: [32m[Nest] 32244  - [39m2024/12/19 下午4:19:27 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/role/deleteRole/:roleId, DELETE} route[39m[38;5;3m +0ms[39m
+2024-12-19 16:19:27: [32m[Nest] 32244  - [39m2024/12/19 下午4:19:27 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/role/updateRole, PUT} route[39m[38;5;3m +1ms[39m
+2024-12-19 16:19:27: [32m[Nest] 32244  - [39m2024/12/19 下午4:19:27 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mLogController {/log}:[39m[38;5;3m +0ms[39m
+2024-12-19 16:19:27: [32m[Nest] 32244  - [39m2024/12/19 下午4:19:27 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/log/list, GET} route[39m[38;5;3m +0ms[39m
+2024-12-19 16:19:27: [32m[Nest] 32244  - [39m2024/12/19 下午4:19:27 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/log/export, GET} route[39m[38;5;3m +0ms[39m
+2024-12-19 16:19:27: [32m[Nest] 32244  - [39m2024/12/19 下午4:19:27 [32m    LOG[39m [38;5;3m[NestApplication] [39m[32mNest application successfully started[39m[38;5;3m +2ms[39m
+2024-12-19 16:24:07: { isProd: false }
+2024-12-19 16:24:08: { isProd: false }
+2024-12-19 16:24:07: { isProd: false }
+2024-12-19 16:24:08: { isProd: false }
+2024-12-19 16:24:07: [32m[Nest] 20312  - [39m2024/12/19 下午4:24:07 [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+2024-12-19 16:24:07: [32m[Nest] 20312  - [39m2024/12/19 下午4:24:07 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +44ms[39m
+2024-12-19 16:24:07: [32m[Nest] 20312  - [39m2024/12/19 下午4:24:07 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigHostModule dependencies initialized[39m[38;5;3m +1ms[39m
+2024-12-19 16:24:07: [32m[Nest] 20312  - [39m2024/12/19 下午4:24:07 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +0ms[39m
+2024-12-19 16:24:08: [32m[Nest] 8444  - [39m2024/12/19 下午4:24:08 [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+2024-12-19 16:24:07: [32m[Nest] 29188  - [39m2024/12/19 下午4:24:07 [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+2024-12-19 16:24:07: [32m[Nest] 20312  - [39m2024/12/19 下午4:24:07 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +1ms[39m
+2024-12-19 16:24:08: [32m[Nest] 8444  - [39m2024/12/19 下午4:24:08 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +29ms[39m
+2024-12-19 16:24:07: [32m[Nest] 29188  - [39m2024/12/19 下午4:24:07 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +53ms[39m
+2024-12-19 16:24:08: [32m[Nest] 20312  - [39m2024/12/19 下午4:24:08 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +223ms[39m
+2024-12-19 16:24:08: [32m[Nest] 8444  - [39m2024/12/19 下午4:24:08 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigHostModule dependencies initialized[39m[38;5;3m +0ms[39m
+2024-12-19 16:24:07: [32m[Nest] 29188  - [39m2024/12/19 下午4:24:07 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigHostModule dependencies initialized[39m[38;5;3m +1ms[39m
+2024-12-19 16:24:08: [32m[Nest] 20312  - [39m2024/12/19 下午4:24:08 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mCacheModule dependencies initialized[39m[38;5;3m +7ms[39m
+2024-12-19 16:24:08: [32m[Nest] 8444  - [39m2024/12/19 下午4:24:08 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +0ms[39m
+2024-12-19 16:24:07: [32m[Nest] 29188  - [39m2024/12/19 下午4:24:07 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +0ms[39m
+2024-12-19 16:24:08: [32m[Nest] 8444  - [39m2024/12/19 下午4:24:08 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +1ms[39m
+2024-12-19 16:24:07: [32m[Nest] 29188  - [39m2024/12/19 下午4:24:07 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +1ms[39m
+2024-12-19 16:24:08: [32m[Nest] 8444  - [39m2024/12/19 下午4:24:08 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +165ms[39m
+2024-12-19 16:24:08: [32m[Nest] 29188  - [39m2024/12/19 下午4:24:08 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +215ms[39m
+2024-12-19 16:24:08: [32m[Nest] 8444  - [39m2024/12/19 下午4:24:08 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mCacheModule dependencies initialized[39m[38;5;3m +7ms[39m
+2024-12-19 16:24:08: [32m[Nest] 29188  - [39m2024/12/19 下午4:24:08 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mCacheModule dependencies initialized[39m[38;5;3m +7ms[39m
+2024-12-19 16:24:08: [32m[Nest] 14292  - [39m2024/12/19 下午4:24:08 [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+2024-12-19 16:24:08: [32m[Nest] 14292  - [39m2024/12/19 下午4:24:08 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +42ms[39m
+2024-12-19 16:24:08: [32m[Nest] 14292  - [39m2024/12/19 下午4:24:08 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigHostModule dependencies initialized[39m[38;5;3m +1ms[39m
+2024-12-19 16:24:08: [32m[Nest] 14292  - [39m2024/12/19 下午4:24:08 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +1ms[39m
+2024-12-19 16:24:08: [32m[Nest] 14292  - [39m2024/12/19 下午4:24:08 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +0ms[39m
+2024-12-19 16:24:08: [32m[Nest] 14292  - [39m2024/12/19 下午4:24:08 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +290ms[39m
+2024-12-19 16:24:08: [32m[Nest] 14292  - [39m2024/12/19 下午4:24:08 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mCacheModule dependencies initialized[39m[38;5;3m +11ms[39m
+2024-12-19 16:24:08: { isProd: false }
+2024-12-19 16:24:08: [32m[Nest] 16672  - [39m2024/12/19 下午4:24:08 [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+2024-12-19 16:24:08: [32m[Nest] 16672  - [39m2024/12/19 下午4:24:08 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +50ms[39m
+2024-12-19 16:24:08: [32m[Nest] 16672  - [39m2024/12/19 下午4:24:08 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigHostModule dependencies initialized[39m[38;5;3m +1ms[39m
+2024-12-19 16:24:08: [32m[Nest] 16672  - [39m2024/12/19 下午4:24:08 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +1ms[39m
+2024-12-19 16:24:08: [32m[Nest] 16672  - [39m2024/12/19 下午4:24:08 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +1ms[39m
+2024-12-19 16:24:09: [32m[Nest] 16672  - [39m2024/12/19 下午4:24:09 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +361ms[39m
+2024-12-19 16:24:09: [32m[Nest] 16672  - [39m2024/12/19 下午4:24:09 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mCacheModule dependencies initialized[39m[38;5;3m +15ms[39m
+2024-12-19 16:24:09: { isProd: false }
+2024-12-19 16:24:09: [32m[Nest] 31552  - [39m2024/12/19 下午4:24:09 [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+2024-12-19 16:24:09: [32m[Nest] 31552  - [39m2024/12/19 下午4:24:09 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +45ms[39m
+2024-12-19 16:24:09: [32m[Nest] 31552  - [39m2024/12/19 下午4:24:09 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigHostModule dependencies initialized[39m[38;5;3m +0ms[39m
+2024-12-19 16:24:09: [32m[Nest] 31552  - [39m2024/12/19 下午4:24:09 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +0ms[39m
+2024-12-19 16:24:09: [32m[Nest] 31552  - [39m2024/12/19 下午4:24:09 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +1ms[39m
+2024-12-19 16:24:09: [32m[Nest] 31552  - [39m2024/12/19 下午4:24:09 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +363ms[39m
+2024-12-19 16:24:09: [32m[Nest] 31552  - [39m2024/12/19 下午4:24:09 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mCacheModule dependencies initialized[39m[38;5;3m +15ms[39m
+2024-12-19 16:24:10: { isProd: false }
+2024-12-19 16:24:10: [32m[Nest] 4832  - [39m2024/12/19 下午4:24:10 [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+2024-12-19 16:24:10: [32m[Nest] 4832  - [39m2024/12/19 下午4:24:10 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +29ms[39m
+2024-12-19 16:24:10: [32m[Nest] 4832  - [39m2024/12/19 下午4:24:10 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigHostModule dependencies initialized[39m[38;5;3m +0ms[39m
+2024-12-19 16:24:10: [32m[Nest] 4832  - [39m2024/12/19 下午4:24:10 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +0ms[39m
+2024-12-19 16:24:10: [32m[Nest] 4832  - [39m2024/12/19 下午4:24:10 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +1ms[39m
+2024-12-19 16:24:10: [32m[Nest] 4832  - [39m2024/12/19 下午4:24:10 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +185ms[39m
+2024-12-19 16:24:12: [32m[Nest] 4832  - [39m2024/12/19 下午4:24:12 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mCacheModule dependencies initialized[39m[38;5;3m +1830ms[39m
+2024-12-19 16:24:18: { isProd: false }
+2024-12-19 16:24:18: { isProd: false }
+2024-12-19 16:24:19: [32m[Nest] 29184  - [39m2024/12/19 下午4:24:19 [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+2024-12-19 16:24:19: [32m[Nest] 29184  - [39m2024/12/19 下午4:24:19 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +22ms[39m
+2024-12-19 16:24:19: [32m[Nest] 29184  - [39m2024/12/19 下午4:24:19 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigHostModule dependencies initialized[39m[38;5;3m +1ms[39m
+2024-12-19 16:24:19: [32m[Nest] 29184  - [39m2024/12/19 下午4:24:19 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +0ms[39m
+2024-12-19 16:24:19: [32m[Nest] 29184  - [39m2024/12/19 下午4:24:19 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +0ms[39m
+2024-12-19 16:24:20: [32m[Nest] 29184  - [39m2024/12/19 下午4:24:20 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +1466ms[39m
+2024-12-19 16:24:18: [32m[Nest] 32200  - [39m2024/12/19 下午4:24:18 [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+2024-12-19 16:24:19: [32m[Nest] 32200  - [39m2024/12/19 下午4:24:19 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +23ms[39m
+2024-12-19 16:24:19: [32m[Nest] 32200  - [39m2024/12/19 下午4:24:19 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigHostModule dependencies initialized[39m[38;5;3m +1ms[39m
+2024-12-19 16:24:19: [32m[Nest] 32200  - [39m2024/12/19 下午4:24:19 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +0ms[39m
+2024-12-19 16:24:19: [32m[Nest] 32200  - [39m2024/12/19 下午4:24:19 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +0ms[39m
+2024-12-19 16:24:20: [32m[Nest] 32200  - [39m2024/12/19 下午4:24:20 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +1465ms[39m
+2024-12-19 16:24:22: [32m[Nest] 32200  - [39m2024/12/19 下午4:24:22 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mCacheModule dependencies initialized[39m[38;5;3m +2485ms[39m
+2024-12-19 16:24:22: [32m[Nest] 29184  - [39m2024/12/19 下午4:24:22 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mCacheModule dependencies initialized[39m[38;5;3m +2484ms[39m
+2024-12-19 16:24:31: { isProd: false }
+2024-12-19 16:24:31: { isProd: false }
+2024-12-19 16:24:31: { isProd: false }
+2024-12-19 16:24:31: { isProd: false }
+2024-12-19 16:24:31: { isProd: false }
+2024-12-19 16:24:31: { isProd: false }
+2024-12-19 16:24:31: { isProd: false }
+2024-12-19 16:24:31: { isProd: false }
+2024-12-19 16:24:31: { isProd: false }
+2024-12-19 16:24:31: [32m[Nest] 14884  - [39m2024/12/19 下午4:24:31 [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+2024-12-19 16:24:31: [32m[Nest] 14884  - [39m2024/12/19 下午4:24:31 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +27ms[39m
+2024-12-19 16:24:31: [32m[Nest] 14884  - [39m2024/12/19 下午4:24:31 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigHostModule dependencies initialized[39m[38;5;3m +0ms[39m
+2024-12-19 16:24:31: [32m[Nest] 14884  - [39m2024/12/19 下午4:24:31 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +1ms[39m
+2024-12-19 16:24:31: [32m[Nest] 14884  - [39m2024/12/19 下午4:24:31 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +0ms[39m
+2024-12-19 16:24:32: [32m[Nest] 14884  - [39m2024/12/19 下午4:24:32 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +1533ms[39m
+2024-12-19 16:24:31: [32m[Nest] 14544  - [39m2024/12/19 下午4:24:31 [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+2024-12-19 16:24:31: [32m[Nest] 14544  - [39m2024/12/19 下午4:24:31 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +17ms[39m
+2024-12-19 16:24:31: [32m[Nest] 14544  - [39m2024/12/19 下午4:24:31 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigHostModule dependencies initialized[39m[38;5;3m +0ms[39m
+2024-12-19 16:24:31: [32m[Nest] 14544  - [39m2024/12/19 下午4:24:31 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +1ms[39m
+2024-12-19 16:24:31: [32m[Nest] 14544  - [39m2024/12/19 下午4:24:31 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +0ms[39m
+2024-12-19 16:24:32: [32m[Nest] 14544  - [39m2024/12/19 下午4:24:32 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +1549ms[39m
+2024-12-19 16:24:31: [32m[Nest] 29552  - [39m2024/12/19 下午4:24:31 [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+2024-12-19 16:24:31: [32m[Nest] 29552  - [39m2024/12/19 下午4:24:31 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +17ms[39m
+2024-12-19 16:24:31: [32m[Nest] 29552  - [39m2024/12/19 下午4:24:31 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigHostModule dependencies initialized[39m[38;5;3m +0ms[39m
+2024-12-19 16:24:31: [32m[Nest] 29552  - [39m2024/12/19 下午4:24:31 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +0ms[39m
+2024-12-19 16:24:31: [32m[Nest] 29552  - [39m2024/12/19 下午4:24:31 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +0ms[39m
+2024-12-19 16:24:32: [32m[Nest] 29552  - [39m2024/12/19 下午4:24:32 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +1426ms[39m
+2024-12-19 16:24:31: [32m[Nest] 31644  - [39m2024/12/19 下午4:24:31 [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+2024-12-19 16:24:31: [32m[Nest] 31644  - [39m2024/12/19 下午4:24:31 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +25ms[39m
+2024-12-19 16:24:31: [32m[Nest] 31644  - [39m2024/12/19 下午4:24:31 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigHostModule dependencies initialized[39m[38;5;3m +0ms[39m
+2024-12-19 16:24:31: [32m[Nest] 31644  - [39m2024/12/19 下午4:24:31 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +1ms[39m
+2024-12-19 16:24:31: [32m[Nest] 31644  - [39m2024/12/19 下午4:24:31 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +0ms[39m
+2024-12-19 16:24:32: [32m[Nest] 31644  - [39m2024/12/19 下午4:24:32 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +1541ms[39m
+2024-12-19 16:24:31: [32m[Nest] 10580  - [39m2024/12/19 下午4:24:31 [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+2024-12-19 16:24:31: [32m[Nest] 10580  - [39m2024/12/19 下午4:24:31 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +27ms[39m
+2024-12-19 16:24:31: [32m[Nest] 10580  - [39m2024/12/19 下午4:24:31 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigHostModule dependencies initialized[39m[38;5;3m +0ms[39m
+2024-12-19 16:24:31: [32m[Nest] 10580  - [39m2024/12/19 下午4:24:31 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +0ms[39m
+2024-12-19 16:24:31: [32m[Nest] 10580  - [39m2024/12/19 下午4:24:31 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +1ms[39m
+2024-12-19 16:24:32: [32m[Nest] 10580  - [39m2024/12/19 下午4:24:32 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +1547ms[39m
+2024-12-19 16:24:31: [32m[Nest] 20500  - [39m2024/12/19 下午4:24:31 [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+2024-12-19 16:24:31: [32m[Nest] 20500  - [39m2024/12/19 下午4:24:31 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +25ms[39m
+2024-12-19 16:24:31: [32m[Nest] 20500  - [39m2024/12/19 下午4:24:31 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigHostModule dependencies initialized[39m[38;5;3m +0ms[39m
+2024-12-19 16:24:31: [32m[Nest] 20500  - [39m2024/12/19 下午4:24:31 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +1ms[39m
+2024-12-19 16:24:31: [32m[Nest] 20500  - [39m2024/12/19 下午4:24:31 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +0ms[39m
+2024-12-19 16:24:32: [32m[Nest] 20500  - [39m2024/12/19 下午4:24:32 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +1551ms[39m
+2024-12-19 16:24:31: [32m[Nest] 11528  - [39m2024/12/19 下午4:24:31 [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+2024-12-19 16:24:31: [32m[Nest] 11528  - [39m2024/12/19 下午4:24:31 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +26ms[39m
+2024-12-19 16:24:31: [32m[Nest] 11528  - [39m2024/12/19 下午4:24:31 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigHostModule dependencies initialized[39m[38;5;3m +0ms[39m
+2024-12-19 16:24:31: [32m[Nest] 11528  - [39m2024/12/19 下午4:24:31 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +0ms[39m
+2024-12-19 16:24:31: [32m[Nest] 11528  - [39m2024/12/19 下午4:24:31 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +1ms[39m
+2024-12-19 16:24:32: [32m[Nest] 11528  - [39m2024/12/19 下午4:24:32 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +1551ms[39m
+2024-12-19 16:24:31: [32m[Nest] 17252  - [39m2024/12/19 下午4:24:31 [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+2024-12-19 16:24:31: [32m[Nest] 17252  - [39m2024/12/19 下午4:24:31 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +24ms[39m
+2024-12-19 16:24:31: [32m[Nest] 17252  - [39m2024/12/19 下午4:24:31 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigHostModule dependencies initialized[39m[38;5;3m +1ms[39m
+2024-12-19 16:24:31: [32m[Nest] 17252  - [39m2024/12/19 下午4:24:31 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +0ms[39m
+2024-12-19 16:24:31: [32m[Nest] 17252  - [39m2024/12/19 下午4:24:31 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +0ms[39m
+2024-12-19 16:24:32: [32m[Nest] 17252  - [39m2024/12/19 下午4:24:32 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +1553ms[39m
+2024-12-19 16:24:31: [32m[Nest] 16884  - [39m2024/12/19 下午4:24:31 [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+2024-12-19 16:24:31: [32m[Nest] 16884  - [39m2024/12/19 下午4:24:31 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +22ms[39m
+2024-12-19 16:24:31: [32m[Nest] 16884  - [39m2024/12/19 下午4:24:31 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigHostModule dependencies initialized[39m[38;5;3m +1ms[39m
+2024-12-19 16:24:31: [32m[Nest] 16884  - [39m2024/12/19 下午4:24:31 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +0ms[39m
+2024-12-19 16:24:31: [32m[Nest] 16884  - [39m2024/12/19 下午4:24:31 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +0ms[39m
+2024-12-19 16:24:32: [32m[Nest] 16884  - [39m2024/12/19 下午4:24:32 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +1587ms[39m
+2024-12-19 16:24:32: [32m[Nest] 29552  - [39m2024/12/19 下午4:24:32 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mCacheModule dependencies initialized[39m[38;5;3m +95ms[39m
+2024-12-19 16:24:33: [32m[Nest] 16884  - [39m2024/12/19 下午4:24:33 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mCacheModule dependencies initialized[39m[38;5;3m +158ms[39m
+2024-12-19 16:24:33: [32m[Nest] 10580  - [39m2024/12/19 下午4:24:33 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mCacheModule dependencies initialized[39m[38;5;3m +193ms[39m
+2024-12-19 16:24:33: [32m[Nest] 11528  - [39m2024/12/19 下午4:24:33 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mCacheModule dependencies initialized[39m[38;5;3m +188ms[39m
+2024-12-19 16:24:33: [32m[Nest] 17252  - [39m2024/12/19 下午4:24:33 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mCacheModule dependencies initialized[39m[38;5;3m +187ms[39m
+2024-12-19 16:24:33: [32m[Nest] 20500  - [39m2024/12/19 下午4:24:33 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mCacheModule dependencies initialized[39m[38;5;3m +188ms[39m
+2024-12-19 16:24:33: [32m[Nest] 31644  - [39m2024/12/19 下午4:24:33 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mCacheModule dependencies initialized[39m[38;5;3m +199ms[39m
+2024-12-19 16:24:36: [32m[Nest] 14884  - [39m2024/12/19 下午4:24:36 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mCacheModule dependencies initialized[39m[38;5;3m +3201ms[39m
+2024-12-19 16:24:36: [32m[Nest] 14544  - [39m2024/12/19 下午4:24:36 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mCacheModule dependencies initialized[39m[38;5;3m +3205ms[39m

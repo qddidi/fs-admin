@@ -22,7 +22,7 @@ jobs:
             git pull # 拉取最新代码
             sudo docker compose down --rmi all # 停止并删除所有容器
             sudo docker compose --env-file .env.prod up -d  # 构建并启动容器
-            # 等待服务启动并进行健康检查
+            # 等待服务启动并进行检测docker是否启动
             max_retries=30
             retry_interval=10
             expected_services=("mysql-container" "nest-app" "redis-container")

@@ -25,8 +25,14 @@ jobs:
             # 等待服务启动并进行健康检查
             max_retries=30
             retry_interval=10
+            expected_services=("mysql-container" "nest-app" "redis-container")
+            running_services=$(sudo docker compose --env-file .env.prod ps --services --filter "status=running")
+
+            # 将运行中的服务转换为数组
+            IFS=$'\n' read -r -d '' -a running_services_array <<< "$running_services"
             for i in $(seq 1 $max_retries); do
-              if sudo docker compose --env-file .env.prod ps --services --filter "status=running" | grep -q 'Up'; then
+              # 检查两个数组是否相等
+              if [ "${#expected_services[@]}" -eq "${#running_services_array[@]}" ]; then
                 echo "All services are up and running."
                 exit 0
               else
@@ -34,6 +40,5 @@ jobs:
                 sleep $retry_interval
               fi
             done
-
             echo "Services did not start within the expected time."
             exit 1

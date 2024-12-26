@@ -17,7 +17,8 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            cd ~/web_server/fs-admin # 进入项目目录
+            set -e # 如果任何命令失败，立即退出
+            cd ~/web_server/fs-admin/admin_nest # 进入项目目录
             git pull # 拉取最新代码
             docker compose down --rmi all # 停止并删除所有容器
             docker compose --env-file .env.prod up

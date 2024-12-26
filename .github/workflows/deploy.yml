@@ -19,36 +19,27 @@ jobs:
           script: |
             set -e # 如果任何命令失败，立即退出
             cd ~/web_server/fs-admin/admin_nest # 进入项目目录
-            echo "Current directory: $(pwd)" # 输出当前目录
-
             git pull # 拉取最新代码
-            echo "Git pull completed."
-
             sudo docker compose down --rmi all # 停止并删除所有容器
-            echo "Docker containers stopped and removed."
-
             sudo docker compose --env-file .env.prod up -d  # 构建并启动容器
-            echo "Docker containers started."
-
             # 等待服务启动并进行健康检查
             max_retries=30
             retry_interval=10
             expected_services=("mysql-container" "nest-app" "redis-container")
+            all_services_running=true
+            running_services=$(sudo docker compose --env-file .env.prod ps --services --filter "status=running")
+            for service in "${expected_services[@]}"; do
+                if ! echo "$running_services" | grep -q "^$service\$"; then
+                  echo "Service $service is not running."
+                  all_services_running=false
+                  break
+                fi
+              done
 
-            for i in $(seq 1 $max_retries); do
-              running_services=$(sudo docker compose --env-file .env.prod ps --services --filter "status=running")
-              IFS=$'\n' read -r -d '' -a running_services_array <<< "$running_services"
-              
-              echo "Attempt $i/$max_retries:"
-              echo "Expected services: ${expected_services[*]}"
-              echo "Running services: ${running_services_array[*]}"
-
-              if [ "${#expected_services[@]}" -eq "${#running_services_array[@]}" ]; then
-                echo "All services are up and running."
-                exit 0
+              if [ "$all_services_running" = true ]; then
+                echo "All expected services are running."
               else
-                echo "Waiting for services to start..."
-                sleep $retry_interval
+                echo "Not all expected services are running."
               fi
             done
 

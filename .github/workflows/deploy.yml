@@ -21,4 +21,4 @@ jobs:
             cd ~/web_server/fs-admin/admin_nest # 进入项目目录
             git pull # 拉取最新代码
             sudo docker compose down --rmi all # 停止并删除所有容器
-            sudo docker compose --env-file .env.prod up
+            sudo docker compose --env-file .env.prod up -d  # 构建并启动容器

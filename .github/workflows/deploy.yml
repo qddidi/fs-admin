@@ -22,3 +22,18 @@ jobs:
             git pull # 拉取最新代码
             sudo docker compose down --rmi all # 停止并删除所有容器
             sudo docker compose --env-file .env.prod up -d  # 构建并启动容器
+            # 等待服务启动并进行健康检查
+            max_retries=30
+            retry_interval=10
+            for i in $(seq 1 $max_retries); do
+              if sudo docker compose --env-file .env.prod ps --services --filter "status=running" | grep -q 'Up'; then
+                echo "All services are up and running."
+                exit 0
+              else
+                echo "Waiting for services to start... Attempt $i/$max_retries"
+                sleep $retry_interval
+              fi
+            done
+
+            echo "Services did not start within the expected time."
+            exit 1

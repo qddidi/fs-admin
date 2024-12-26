@@ -25,8 +25,7 @@ jobs:
             # 等待服务启动并进行健康检查
             max_retries=30
             retry_interval=10
-            expected_services=("mysql-container" "nest-app" "redis-container")
-            all_services_running=true
+            sleep $retry_interval
             for i in $(seq 1 $max_retries); do
               if sudo docker compose --env-file .env.prod ps --services --filter "status=running" | grep -q 'nest-app'; then
                 echo "All services are up and running."

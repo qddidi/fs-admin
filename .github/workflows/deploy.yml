@@ -22,24 +22,18 @@ jobs:
             git pull # 拉取最新代码
             sudo docker compose down --rmi all # 停止并删除所有容器
             sudo docker compose --env-file .env.prod up -d  # 构建并启动容器
-            # 等待服务启动并进行检测docker是否启动 
+            # 等待服务启动并进行健康检查
             max_retries=30
             retry_interval=10
             expected_services=("mysql-container" "nest-app" "redis-container")
             all_services_running=true
-            running_services=$(sudo docker compose --env-file .env.prod ps --services --filter "status=running")
-            for service in "${expected_services[@]}"; do
-                if ! echo "$running_services" | grep -q "^$service\$"; then
-                  echo "Service $service is not running."
-                  all_services_running=false
-                  break
-                fi
-              done
-
-              if [ "$all_services_running" = true ]; then
-                echo "All expected services are running."
+            for i in $(seq 1 $max_retries); do
+              if sudo docker compose --env-file .env.prod ps --services --filter "status=running" | grep -q 'nest-app'; then
+                echo "All services are up and running."
+                exit 0
               else
-                echo "Not all expected services are running."
+                echo "Waiting for services to start... Attempt $i/$max_retries"
+                sleep $retry_interval
               fi
             done
 

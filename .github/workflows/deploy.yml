@@ -16,29 +16,41 @@ jobs:
           host: ${{ secrets.SERVER_IP }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: |
-            set -e # 如果任何命令失败，立即退出
-            cd ~/web_server/fs-admin/admin_nest # 进入项目目录
-            git pull # 拉取最新代码
-            sudo docker compose down --rmi all # 停止并删除所有容器
-            sudo docker compose --env-file .env.prod up -d  # 构建并启动容器
-            # 等待服务启动并进行健康检查
-            max_retries=30
-            retry_interval=10
-            expected_services=("mysql-container" "nest-app" "redis-container")
-            running_services=$(sudo docker compose --env-file .env.prod ps --services --filter "status=running")
+        script: |
+          set -e # 如果任何命令失败，立即退出
+          cd ~/web_server/fs-admin/admin_nest # 进入项目目录
+          echo "Current directory: $(pwd)" # 输出当前目录
 
-            # 将运行中的服务转换为数组
+          git pull # 拉取最新代码
+          echo "Git pull completed."
+
+          sudo docker compose down --rmi all # 停止并删除所有容器
+          echo "Docker containers stopped and removed."
+
+          sudo docker compose --env-file .env.prod up -d  # 构建并启动容器
+          echo "Docker containers started."
+
+          # 等待服务启动并进行健康检查
+          max_retries=30
+          retry_interval=10
+          expected_services=("mysql-container" "nest-app" "redis-container")
+
+          for i in $(seq 1 $max_retries); do
+            running_services=$(sudo docker compose --env-file .env.prod ps --services --filter "status=running")
             IFS=$'\n' read -r -d '' -a running_services_array <<< "$running_services"
-            for i in $(seq 1 $max_retries); do
-              # 检查两个数组是否相等
-              if [ "${#expected_services[@]}" -eq "${#running_services_array[@]}" ]; then
-                echo "All services are up and running."
-                exit 0
-              else
-                echo "Waiting for services to start... Attempt $i/$max_retries"
-                sleep $retry_interval
-              fi
-            done
-            echo "Services did not start within the expected time."
-            exit 1
+            
+            echo "Attempt $i/$max_retries:"
+            echo "Expected services: ${expected_services[*]}"
+            echo "Running services: ${running_services_array[*]}"
+
+            if [ "${#expected_services[@]}" -eq "${#running_services_array[@]}" ]; then
+              echo "All services are up and running."
+              exit 0
+            else
+              echo "Waiting for services to start..."
+              sleep $retry_interval
+            fi
+          done
+
+          echo "Services did not start within the expected time."
+          exit 1

@@ -12,34 +12,25 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-        with:
-          fetch-depth: 1
 
       - name: Check for changes in admin_vue directory
         id: check_admin_vue
         run: |
-          echo "Checking for changes in admin_vue..."
-          if git show --name-only HEAD | grep -q '^admin_vue/'; then
+          if git diff --name-only "HEAD^" HEAD | grep -q '^admin_vue/'; then
             echo "admin_vue_changed=true" >> $GITHUB_ENV
-            echo "admin_vue has changes."
           else
             echo "admin_vue_changed=false" >> $GITHUB_ENV
-            echo "admin_vue has no changes."
           fi
 
       - name: Check for changes in admin_nest directory
         id: check_admin_nest
         run: |
-          echo "Checking for changes in admin_nest..."
-          if git show --name-only HEAD | grep -q '^admin_nest/'; then
+          if git diff --name-only "HEAD^" HEAD | grep -q '^admin_nest/'; then
             echo "admin_nest_changed=true" >> $GITHUB_ENV
-            echo "admin_nest has changes."
           else
             echo "admin_nest_changed=false" >> $GITHUB_ENV
-            echo "admin_nest has no changes."
           fi
-
-      - name: Deploy to Remote Server for admin_nest
+      - name: Deploy to Remote Server
         uses: appleboy/ssh-action@master
         if: env.admin_nest_changed == 'true'
         with:
@@ -50,29 +41,5 @@ jobs:
             set -e # 如果任何命令失败，立即退出
             cd ~/web_server/fs-admin/admin_nest # 进入项目目录
             git pull # 拉取最新代码
-            sudo docker compose down --rmi all # 删除所有容器
+            sudo docker compose down --rmi all # 停止并删除所有容器
             sudo docker compose --env-file .env.prod up -d  # 构建并启动容器
-
-      - name: Deploy to Remote Server for admin_vue
-        uses: appleboy/ssh-action@master
-        if: env.admin_vue_changed == 'true'
-        with:
-          host: ${{ secrets.SERVER_IP }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: |
-            set -e # 如果任何命令失败，立即退出
-            cd ~/web_server/fs-admin/admin_vue # 进入项目目录
-            git pull # 拉取最新代码
-            # 停止并删除特定的容器
-            sudo docker stop fs-admin-vue || true
-            sudo docker rm fs-admin-vue || true
-
-            # 删除特定的镜像
-            sudo docker rmi fs-admin-vue || true
-
-            # 构建新的镜像
-            sudo docker build -t fs-admin-vue .
-
-            # 启动新的容器
-            sudo docker run -d --name fs-admin-vue -p 80:80 fs-admin-vue

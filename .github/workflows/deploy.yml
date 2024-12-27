@@ -12,8 +12,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
 
       - name: Check for changes in admin_vue directory
         id: check_admin_vue
@@ -33,7 +31,7 @@ jobs:
             echo "admin_nest_changed=false" >> $GITHUB_ENV
           fi
 
-      - name: Deploy to Remote Server
+      - name: Deploy to Remote Server for admin_nest
         uses: appleboy/ssh-action@master
         if: env.admin_nest_changed == 'true'
         with:

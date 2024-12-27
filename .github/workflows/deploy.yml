@@ -16,7 +16,7 @@ jobs:
       - name: Check for changes in admin_vue directory
         id: check_admin_vue
         run: |
-          if git diff --name-only HEAD\~1 HEAD | grep -q '^admin_vue/'; then
+          if git diff --name-only "HEAD^" HEAD | grep -q '^admin_vue/'; then
             echo "admin_vue_changed=true" >> $GITHUB_ENV
           else
             echo "admin_vue_changed=false" >> $GITHUB_ENV
@@ -25,7 +25,7 @@ jobs:
       - name: Check for changes in admin_nest directory
         id: check_admin_nest
         run: |
-          if git diff --name-only HEAD\~1 HEAD | grep -q '^admin_nest/'; then
+          if git diff --name-only "HEAD^" HEAD | grep -q '^admin_nest/'; then
             echo "admin_nest_changed=true" >> $GITHUB_ENV
           else
             echo "admin_nest_changed=false" >> $GITHUB_ENV

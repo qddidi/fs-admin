@@ -1,0 +1,6 @@
+*.md
+!README.md
+node_modules/
+.git/
+.vscode/
+dist/

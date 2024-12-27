@@ -1,10 +1,3 @@
-name: Deploy to Remote Server
-
-on:
-  push:
-    branches:
-      - master # 触发条件，可以根据需要修改
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -12,23 +5,31 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
 
       - name: Check for changes in admin_vue directory
         id: check_admin_vue
         run: |
+          echo "Checking for changes in admin_vue..."
           if git show --name-only HEAD | grep -q '^admin_vue/'; then
             echo "admin_vue_changed=true" >> $GITHUB_ENV
+            echo "admin_vue has changes."
           else
             echo "admin_vue_changed=false" >> $GITHUB_ENV
+            echo "admin_vue has no changes."
           fi
 
       - name: Check for changes in admin_nest directory
         id: check_admin_nest
         run: |
+          echo "Checking for changes in admin_nest..."
           if git show --name-only HEAD | grep -q '^admin_nest/'; then
             echo "admin_nest_changed=true" >> $GITHUB_ENV
+            echo "admin_nest has changes."
           else
             echo "admin_nest_changed=false" >> $GITHUB_ENV
+            echo "admin_nest has no changes."
           fi
 
       - name: Deploy to Remote Server for admin_nest
@@ -44,22 +45,7 @@ jobs:
             git pull # 拉取最新代码
             sudo docker compose down --rmi all # 删除所有容器
             sudo docker compose --env-file .env.prod up -d  # 构建并启动容器
-            # 等待服务启动并进行健康检查
-            max_retries=30
-            retry_interval=10
-            sleep $retry_interval
-            for i in $(seq 1 $max_retries); do
-              if sudo docker compose --env-file .env.prod ps --services --filter "status=running" | grep -q 'nest-app'; then
-                echo "All services are up and running."
-                exit 0
-              else
-                echo "Waiting for services to start... Attempt $i/$max_retries"
-                sleep $retry_interval
-              fi
-            done
 
-            echo "Services did not start within the expected time."
-            exit 1
       - name: Deploy to Remote Server for admin_vue
         uses: appleboy/ssh-action@master
         if: env.admin_vue_changed == 'true'

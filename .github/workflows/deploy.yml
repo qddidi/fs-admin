@@ -45,3 +45,27 @@ jobs:
             git pull # 拉取最新代码
             sudo docker compose down --rmi all # 停止并删除所有容器
             sudo docker compose --env-file .env.prod up -d  # 构建并启动容器
+
+      - name: Deploy to Remote Server for admin_vue
+        uses: appleboy/ssh-action@master
+        if: env.admin_vue_changed == 'true'
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            set -e # 如果任何命令失败，立即退出
+            cd ~/web_server/fs-admin/admin_vue # 进入项目目录
+            git pull # 拉取最新代码
+            # 停止并删除特定的容器
+            sudo docker stop fs-admin-vue || true
+            sudo docker rm fs-admin-vue || true
+
+            # 删除特定的镜像
+            sudo docker rmi fs-admin-vue || true
+
+            # 构建新的镜像
+            sudo docker build -t fs-admin-vue .
+
+            # 启动新的容器
+            sudo docker run -d --name fs-admin-vue -p 80:80 fs-admin-vue

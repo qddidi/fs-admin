@@ -1,3 +1,10 @@
+name: Deploy to Remote Server
+
+on:
+  push:
+    branches:
+      - master # 触发条件，可以根据需要修改
+
 jobs:
   deploy:
     runs-on: ubuntu-latest

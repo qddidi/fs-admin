@@ -10,8 +10,29 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Check for changes in admin_vue directory
+        id: check_admin_vue
+        run: |
+          if git diff --name-only HEAD^ HEAD | grep -q '^admin_vue/'; then
+            echo "admin_vue_changed=true" >> $GITHUB_ENV
+          else
+            echo "admin_vue_changed=false" >> $GITHUB_ENV
+          fi
+
+      - name: Check for changes in admin_nest directory
+        id: check_admin_nest
+        run: |
+          if git diff --name-only HEAD^ HEAD | grep -q '^admin_nest/'; then
+            echo "admin_nest_changed=true" >> $GITHUB_ENV
+          else
+            echo "admin_nest_changed=false" >> $GITHUB_ENV
+          fi
       - name: Deploy to Remote Server
         uses: appleboy/ssh-action@master
+        if: env.admin_nest_changed == 'true'
         with:
           host: ${{ secrets.SERVER_IP }}
           username: ${{ secrets.SSH_USER }}

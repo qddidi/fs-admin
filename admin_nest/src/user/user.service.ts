@@ -302,6 +302,7 @@ export class UserService {
 
   //头像上传
   async uploadAvatar(path: string, req) {
+    throw new ApiException('演示项目禁止上传', ApiErrorCode.FORBIdEN)
     const { user } = req
     try {
       await this.userRepository.update({ id: user.sub }, { avatar: path })

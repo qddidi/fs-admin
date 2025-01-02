@@ -85,7 +85,7 @@ import type { ResetForm, UserInfo } from "./types";
 import { updateUserInfo, updatePassword } from "@/api/user/index";
 const appStore = useAppStore();
 const uploadParams = {
-  uploadUrl: import.meta.env.VITE_APP_API + "/user/uploadAvatar",
+  uploadUrl: import.meta.env.VITE_APP_API + "user/uploadAvatar",
   headers: { authorization: "Bearer " + Storage.get("token") },
 };
 

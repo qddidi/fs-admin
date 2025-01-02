@@ -171,6 +171,7 @@ export class UserController {
   @UseInterceptors(FileInterceptor('file', {
     storage: diskStorage({
       destination: async (req, _file, cb) => {
+        cb(new ApiException('演示项目禁止上传文件', ApiErrorCode.COMMON_CODE), null)
         try {
           //保存文件地址
           const saveDirectory = path.join(process.cwd(), fileconfig.saveDirectory, String(req.user.sub));

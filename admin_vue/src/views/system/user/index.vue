@@ -136,6 +136,9 @@ import { RoleList } from "@/api/role/types/role.dto";
 import { validate_phoneNumber, validate_email } from "@/utils/validateForm";
 import { downLoad } from "@/utils/http";
 import { Storage } from "@/utils/storage";
+defineOptions({
+  name: "FS_User",
+});
 const queryParams = reactive<QueryParams>({
   username: "",
   status: "",

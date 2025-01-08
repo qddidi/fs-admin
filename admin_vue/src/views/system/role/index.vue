@@ -89,6 +89,9 @@ import { deleteRole } from "../../../api/role/index";
 import { handleDateRangeChange } from "../../../utils/common";
 import { MenuList } from "../../../store/types/index";
 import { nextTick } from "vue";
+defineOptions({
+  name: "FS_Role",
+});
 const queryParams = reactive<QueryRoleParams>({
   role_name: "",
   status: "",

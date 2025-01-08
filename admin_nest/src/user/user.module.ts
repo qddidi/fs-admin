@@ -10,7 +10,6 @@ import { Menu } from 'src/menu/entities/menu.entity';
   controllers: [UserController],
   providers: [
     UserService,
-
   ],
   imports: [TypeOrmModule.forFeature([User, Role, Menu]), CacheModule],
 })

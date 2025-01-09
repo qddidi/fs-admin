@@ -17,29 +17,27 @@
     <h2 class="text-2xl font-bold mb-10 mt-10">页面预览</h2>
     <div>
       <h4 class="text-xl font-bold mb-10 mt-10">登录</h4>
-      <img
-        src="https://github.com/qddidi/fs-admin/blob/develop/assets/01.jpg?raw=true"
-        alt="登录页面"
-        class="w-2/3"
-      />
+      <img src="https://github.com/qddidi/fs-admin/blob/develop/assets/01.jpg?raw=true" alt="登录页面" class="w-2/3" />
       <h4 class="text-xl font-bold mb-10 mt-10">角色管理</h4>
       <img
-        src="https://github.com/qddidi/fs-admin/blob/develop/assets/02.jpg?raw=true"
-        alt="角色管理页面"
-        class="w-2/3"
-      />
+        src="https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/829477e6afe744308d45d042ad01c48b~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg5Lic5pa55bCP5pyI:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMzE5MzQyMjAwMTQ3NDE5OSJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1737018948&x-orig-sign=6LxBnVAOx%2FQUlz756unxVgUF7PM%3D"
+        alt="角色管理页面" class="w-2/3" />
       <h4 class="text-xl font-bold mb-10 mt-10">菜单管理</h4>
       <img
-        src="https://github.com/qddidi/fs-admin/blob/develop/assets/03.png?raw=true"
-        alt="菜单管理页面"
-        class="w-2/3"
-      />
+        src="https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/35c60613326c4746a65137e4fb39ab0a~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg5Lic5pa55bCP5pyI:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMzE5MzQyMjAwMTQ3NDE5OSJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1737018948&x-orig-sign=VExN2wxbZPhBGa%2BBLCRs9tQwrjk%3D"
+        alt="菜单管理页面" class="w-2/3" />
       <h4 class="text-xl font-bold mb-10 mt-10">用户管理页面</h4>
       <img
-        src="https://github.com/qddidi/fs-admin/blob/develop/assets/04.png?raw=true"
-        alt="用户管理页面"
-        class="w-2/3"
-      />
+        src="https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/4c996d8d02a745ad9bf18cf6905e7b0d~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg5Lic5pa55bCP5pyI:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMzE5MzQyMjAwMTQ3NDE5OSJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1737018948&x-orig-sign=JTzo8TWILIxvFRHcaRAkGUwXStI%3D"
+        alt="用户管理页面" class="w-2/3" />
+      <h4 class="text-xl font-bold mb-10 mt-10">日志管理</h4>
+      <img
+        src="https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/e0400b4b01404eef9148b41100032add~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg5Lic5pa55bCP5pyI:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMzE5MzQyMjAwMTQ3NDE5OSJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1737018948&x-orig-sign=K3SPI%2BO8u0X3xRQco6cGCp4LB0I%3D"
+        alt="日志管理" class="w-2/3" />
+      <h4 class="text-xl font-bold mb-10 mt-10">个人中心</h4>
+      <img
+        src="https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/b9b39b13ed334d1ba5772924e1accd69~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg5Lic5pa55bCP5pyI:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMzE5MzQyMjAwMTQ3NDE5OSJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1737018948&x-orig-sign=EotC%2BxRjy28jBbNN5%2Bfn1TrbEfw%3D"
+        alt="日志管理" class="w-2/3" />
     </div>
     <h2 class="text-2xl font-bold mb-10 mt-10">技术栈</h2>
     <h3 class="text-xl font-bold mb-10">前端</h3>
@@ -54,77 +52,49 @@
       <tbody>
         <tr>
           <td class="border px-4 py-2">
-            <a
-              href="https://staging-cn.vuejs.org/"
-              class="text-blue-500 hover:text-blue-700"
-              >Vue</a
-            >
+            <a href="https://staging-cn.vuejs.org/" class="text-blue-500 hover:text-blue-700">Vue</a>
           </td>
           <td class="border px-4 py-2">Vue 框架</td>
           <td class="border px-4 py-2">3.5.8</td>
         </tr>
         <tr>
           <td class="border px-4 py-2">
-            <a
-              href="https://cn.vitejs.dev//"
-              class="text-blue-500 hover:text-blue-700"
-              >Vite</a
-            >
+            <a href="https://cn.vitejs.dev//" class="text-blue-500 hover:text-blue-700">Vite</a>
           </td>
           <td class="border px-4 py-2">开发与构建工具</td>
           <td class="border px-4 py-2">5.4.1</td>
         </tr>
         <tr>
           <td class="border px-4 py-2">
-            <a
-              href="https://element-plus.org/zh-CN/"
-              class="text-blue-500 hover:text-blue-700"
-              >Element Plus</a
-            >
+            <a href="https://element-plus.org/zh-CN/" class="text-blue-500 hover:text-blue-700">Element Plus</a>
           </td>
           <td class="border px-4 py-2">Element Plus</td>
           <td class="border px-4 py-2">2.8.3</td>
         </tr>
         <tr>
           <td class="border px-4 py-2">
-            <a
-              href="https://www.typescriptlang.org/docs/"
-              class="text-blue-500 hover:text-blue-700"
-              >TypeScript</a
-            >
+            <a href="https://www.typescriptlang.org/docs/" class="text-blue-500 hover:text-blue-700">TypeScript</a>
           </td>
           <td class="border px-4 py-2">JavaScript 的超集</td>
           <td class="border px-4 py-2">5.5.3</td>
         </tr>
         <tr>
           <td class="border px-4 py-2">
-            <a
-              href="https://pinia.vuejs.org/"
-              class="text-blue-500 hover:text-blue-700"
-              >pinia</a
-            >
+            <a href="https://pinia.vuejs.org/" class="text-blue-500 hover:text-blue-700">pinia</a>
           </td>
           <td class="border px-4 py-2">Vue 存储库 替代 vuex5</td>
           <td class="border px-4 py-2">2.2.4</td>
         </tr>
         <tr>
           <td class="border px-4 py-2">
-            <a
-              href="https://router.vuejs.org/"
-              class="text-blue-500 hover:text-blue-700"
-              >vue-router</a
-            >
+            <a href="https://router.vuejs.org/" class="text-blue-500 hover:text-blue-700">vue-router</a>
           </td>
           <td class="border px-4 py-2">Vue 路由</td>
           <td class="border px-4 py-2">4.4.5</td>
         </tr>
         <tr>
           <td class="border px-4 py-2">
-            <a
-              href="https://tailwind.nodejs.cn/"
-              class="text-blue-500 hover:text-blue-700"
-              >tailwindcss</a
-            >
+            <a href="https://tailwind.nodejs.cn/" class="text-blue-500 hover:text-blue-700">tailwindcss</a>
           </td>
           <td class="border px-4 py-2">原子 css</td>
           <td class="border px-4 py-2">3.4.12</td>
@@ -143,88 +113,58 @@
       <tbody>
         <tr>
           <td class="border px-4 py-2">
-            <a
-              href="https://nestjs.com/"
-              class="text-blue-500 hover:text-blue-700"
-              >Nestjs/cli</a
-            >
+            <a href="https://nestjs.com/" class="text-blue-500 hover:text-blue-700">Nestjs/cli</a>
           </td>
           <td class="border px-4 py-2">Node 框架</td>
           <td class="border px-4 py-2">10.0.0</td>
         </tr>
         <tr>
           <td class="border px-4 py-2">
-            <a
-              href="https://nestjs.com/"
-              class="text-blue-500 hover:text-blue-700"
-              >Docker</a
-            >
+            <a href="https://nestjs.com/" class="text-blue-500 hover:text-blue-700">Docker</a>
           </td>
           <td class="border px-4 py-2">容器</td>
           <td class="border px-4 py-2">25.0.3</td>
         </tr>
         <tr>
           <td class="border px-4 py-2">
-            <a
-              href="https://www.mysql.com/"
-              class="text-blue-500 hover:text-blue-700"
-              >‌MySQL</a
-            >
+            <a href="https://www.mysql.com/" class="text-blue-500 hover:text-blue-700">‌MySQL</a>
           </td>
           <td class="border px-4 py-2">数据库</td>
           <td class="border px-4 py-2">8.4.0</td>
         </tr>
         <tr>
           <td class="border px-4 py-2">
-            <a
-              href="https://redis.io/"
-              class="text-blue-500 hover:text-blue-700"
-              >Redis</a
-            >
+            <a href="https://redis.io/" class="text-blue-500 hover:text-blue-700">Redis</a>
           </td>
           <td class="border px-4 py-2">缓存数据库</td>
           <td class="border px-4 py-2">7.0</td>
         </tr>
         <tr>
           <td class="border px-4 py-2">
-            <a
-              href="https://www.typescriptlang.org/docs/"
-              class="text-blue-500 hover:text-blue-700"
-              >TypeScript</a
-            >
+            <a href="https://www.typescriptlang.org/docs/" class="text-blue-500 hover:text-blue-700">TypeScript</a>
           </td>
           <td class="border px-4 py-2">JavaScript 的超集</td>
           <td class="border px-4 py-2">5.5.3</td>
         </tr>
         <tr>
           <td class="border px-4 py-2">
-            <a
-              href="https://typeorm.io/"
-              class="text-blue-500 hover:text-blue-700"
-              >typeorm</a
-            >
+            <a href="https://typeorm.io/" class="text-blue-500 hover:text-blue-700">typeorm</a>
           </td>
           <td class="border px-4 py-2">数据库对象关系映射库</td>
           <td class="border px-4 py-2">0.3.20</td>
         </tr>
         <tr>
           <td class="border px-4 py-2">
-            <a
-              href="https://github.com/nestjs/swagger#readme"
-              class="text-blue-500 hover:text-blue-700"
-              >@nestjs/swagger</a
-            >
+            <a href="https://github.com/nestjs/swagger#readme"
+              class="text-blue-500 hover:text-blue-700">@nestjs/swagger</a>
           </td>
           <td class="border px-4 py-2">接口文档生成</td>
           <td class="border px-4 py-2">7.3.0</td>
         </tr>
         <tr>
           <td class="border px-4 py-2">
-            <a
-              href="https://www.npmjs.com/package/class-validator/"
-              class="text-blue-500 hover:text-blue-700"
-              >class-validator</a
-            >
+            <a href="https://www.npmjs.com/package/class-validator/"
+              class="text-blue-500 hover:text-blue-700">class-validator</a>
           </td>
           <td class="border px-4 py-2">接口校验</td>
           <td class="border px-4 py-2">0.14.1</td>

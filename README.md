@@ -24,27 +24,32 @@
 - 在线 Swagger 文档：内置在线 Swagger 文档
 - 完善的教程：详细的实现细节都在教程之中[完整教程](https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzI2NzY3NDQzMg==&action=getalbum&album_id=3421173325324713991#wechat_redirect)
 
+## 演示地址
+
+[项目演示地址](http://fsadmin.xyz/#/)
+
 ## 页面预览
 
-### 登录
+- 登录
 
 ![image.png](https://github.com/qddidi/fs-admin/blob/develop/assets/01.jpg?raw=true)
 
-### 角色管理
+- 角色管理
 
-![image.png](https://github.com/qddidi/fs-admin/blob/develop/assets/02.jpg?raw=true)
+![image.png](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/829477e6afe744308d45d042ad01c48b~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg5Lic5pa55bCP5pyI:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMzE5MzQyMjAwMTQ3NDE5OSJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1737018948&x-orig-sign=6LxBnVAOx%2FQUlz756unxVgUF7PM%3D)
 
-### 菜单管理
+- 菜单管理
+  ![image.png](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/35c60613326c4746a65137e4fb39ab0a~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg5Lic5pa55bCP5pyI:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMzE5MzQyMjAwMTQ3NDE5OSJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1737018948&x-orig-sign=VExN2wxbZPhBGa%2BBLCRs9tQwrjk%3D)
 
-![image.png](https://github.com/qddidi/fs-admin/blob/develop/assets/03.jpg?raw=true)
+- 用户管理
+  ![image.png](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/4c996d8d02a745ad9bf18cf6905e7b0d~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg5Lic5pa55bCP5pyI:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMzE5MzQyMjAwMTQ3NDE5OSJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1737018948&x-orig-sign=JTzo8TWILIxvFRHcaRAkGUwXStI%3D)
 
-### 用户管理
+- 日志
+  ![image.png](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/e0400b4b01404eef9148b41100032add~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg5Lic5pa55bCP5pyI:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMzE5MzQyMjAwMTQ3NDE5OSJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1737018948&x-orig-sign=K3SPI%2BO8u0X3xRQco6cGCp4LB0I%3D)
 
-![image.png](https://github.com/qddidi/fs-admin/blob/develop/assets/04.jpg?raw=true)
+- 个人中心
 
-### 个人中心
-
-![image.png](https://github.com/qddidi/fs-admin/blob/develop/assets/05.jpg?raw=true)
+![image.png](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/b9b39b13ed334d1ba5772924e1accd69~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg5Lic5pa55bCP5pyI:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMzE5MzQyMjAwMTQ3NDE5OSJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1737018948&x-orig-sign=EotC%2BxRjy28jBbNN5%2Bfn1TrbEfw%3D)
 
 ## 技术栈
 
@@ -65,10 +70,18 @@
 | 框架及服务                                                        | 说明                 | 版本   |
 | ----------------------------------------------------------------- | -------------------- | ------ |
 | [Nestjs/cli](https://nestjs.com/)                                 | Node 框架            | 10.0.0 |
-| [Docker](https://nestjs.com/)                                     | 容器                 | 25.0.3 |
 | [‌MySQL](https://www.mysql.com/)                                  | 数据库               | 8.4.0  |
 | [Redis](https://redis.io/)                                        | 缓存数据库           | 7.0    |
 | [TypeScript](https://www.typescriptlang.org/docs/)                | JavaScript 的超集    | 5.5.3  |
 | [typeorm](https://typeorm.io/)                                    | 数据库对象关系映射库 | 0.3.20 |
 | [@nestjs/swagger](https://github.com/nestjs/swagger#readme)       | 接口文档生成         | 7.3.0  |
 | [class-validator](https://www.npmjs.com/package/class-validator/) | 接口校验             | 0.14.1 |
+
+- 部署
+
+| 框架及服务                                            | 说明                         | 版本   |
+| ----------------------------------------------------- | ---------------------------- | ------ |
+| [Docker](https://nestjs.com/)                         | 容器                         | 25.0.3 |
+| [nginx](https://nginx.org/)                           | web 服务器/反向代理/负载均衡 | stable |
+| [pm2](https://pm2.keymetrics.io/)                     | 进程管理                     | 5.3.2  |
+| [Github Actions](https://github.com/features/actions) | 自动部署                     | ---    |

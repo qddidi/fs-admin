@@ -89,6 +89,7 @@ export class MenuService {
       permissions = filterPermissions(routers);
       //存储当前用户的权限
       //await this.cacheService.set(`${user.sub}_permissions`, permissions, null);
+
       return {
         routers: convertToTree(routers, null, 1),
         permissions: permissions,
@@ -103,6 +104,7 @@ export class MenuService {
     routers = rolesToMenus(userInfo?.roles);
     permissions = filterPermissions(routers);
     await this.cacheService.set(`${user.sub}_permissions`, permissions, 7200);
+
 
     return {
       routers: convertToTree(routers),
@@ -140,7 +142,7 @@ export class MenuService {
       const userList: User = await this.getUser(user, findMenuListDto);
       menuList = rolesToMenus(userList?.roles);
     };
-    const treeMenuList = convertToTree(menuList);
+    const treeMenuList = convertToTree(menuList, null, null, true);
     //是否显示树形菜单查询条件 没有传title且菜单状态为开启时候才显示树形菜单
     const isShowTreeMenu = !findMenuListDto.title && (findMenuListDto.status == 1 || !findMenuListDto.status);
     return isShowTreeMenu ? treeMenuList : menuList;

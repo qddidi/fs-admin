@@ -63,3 +63,16 @@ export const importExcel = (file: File & { buffer: Buffer }) => {
         throw new ApiException('文件解析失败,请检查格式是否正确', 20000);
     }
 };
+
+//生成随机字符串
+export const generateRandomString = (length: number, charset: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'): string => {
+    let result = '';
+    const charsetLength = charset.length;
+
+    for (let i = 0; i < length; i++) {
+        const randomIndex = Math.floor(Math.random() * charsetLength);
+        result += charset[randomIndex];
+    }
+
+    return result;
+}

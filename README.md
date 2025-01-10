@@ -1,3 +1,5 @@
+[<img src="https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/931256383775461791dfee91d8fe7eb7~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg5Lic5pa55bCP5pyI:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMzE5MzQyMjAwMTQ3NDE5OSJ9&#x26;rk3s=e9ecf3d6&#x26;x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&#x26;x-orig-expires=1736582563&#x26;x-orig-sign=AbbZNJEUq8jss7HcJRIzqhWZATU%3D" height="60">](https://api.gitsponsors.com/api/badge/link?p=VEDod38mAhyBiU+CiV2m0exeQIlO3jeilPDgq5/vseGynVIncAUdy4haRIKC7dLvOLfGxOadcgIhIGRRsvR4Bru88S9VKPnSEdGDvUKNR1GKqEJUx48cZXZ5ZFryy2NdaDfK2yrZeqSsvktrMjySLQ==)
+
 ## FS-ADMIN 简介
 
 **FS-ADMIN**是一个以前端全栈技术开发的后台权限管理系统,前后端统一使用**TypeScript**语言开发,只需掌握一门语言就可以完成前后端的开发,大大降低了开发难度,提高了开发效率。坚持以前端开发者为中心,旨在打造一个基于前端全栈技术的企业级后台权限管理系统。

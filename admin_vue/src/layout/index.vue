@@ -12,4 +12,6 @@
 
 <script lang="ts" setup>
 import { SideBar, AppMain, NavBar } from "./components/index.ts";
+import useSetBarWidth from "@/composables/useSetBarWidth.ts";
+useSetBarWidth()
 </script>

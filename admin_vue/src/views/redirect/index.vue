@@ -9,6 +9,7 @@ const route = useRoute();
 const router = useRouter();
 const { params, query } = route
 const { path } = params
+
 defineOptions({
     name: "Redirect"
 })

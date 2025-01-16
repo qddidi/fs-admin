@@ -3,7 +3,7 @@ import { handleRouter } from "@/utils/routeUtils";
 export const routes: RouteRecordRaw[] = [
   {
     path: '/redirect',
-    component: import(/* webpackChunkName: "index" */ "@/layout/index.vue"),
+    component: () => import(/* webpackChunkName: "index" */ "@/layout/index.vue"),
     children: [
       {
         path: ':path(.*)',

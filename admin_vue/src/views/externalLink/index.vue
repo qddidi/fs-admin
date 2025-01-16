@@ -7,7 +7,5 @@
 <script lang='ts' setup>
 import { useRoute } from "vue-router";
 const route = useRoute();
-console.log(route);
-
-const linkUrl = route.meta?.externalLink;
+const linkUrl = route.meta?.externalLink as string;
 </script>

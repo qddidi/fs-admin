@@ -60,13 +60,14 @@ const closeTag = (index: number, path: string, currentPath: string) => {
   appStore.navTags.splice(index, 1);
   const length = appStore.navTags.length;
   //没用tag标签跳转首页
-  if (!length) {
+  if (length === 0) {
     router.replace("/index");
     return;
   }
   //如果关闭的是当前页,跳转上一个tag页面
   if (path === currentPath) {
-    length && router.replace(appStore.navTags.slice(-1)[0].path);
+    const previousTagPath = appStore.navTags.slice(-1)[0].path;
+    router.replace(previousTagPath);
   }
 };
 //关闭当前

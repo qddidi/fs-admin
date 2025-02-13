@@ -1,5 +1,3 @@
-[<img src="https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/931256383775461791dfee91d8fe7eb7~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg5Lic5pa55bCP5pyI:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMzE5MzQyMjAwMTQ3NDE5OSJ9&#x26;rk3s=e9ecf3d6&#x26;x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&#x26;x-orig-expires=1736582563&#x26;x-orig-sign=AbbZNJEUq8jss7HcJRIzqhWZATU%3D" height="60">](https://api.gitsponsors.com/api/badge/link?p=VEDod38mAhyBiU+CiV2m0exeQIlO3jeilPDgq5/vseGynVIncAUdy4haRIKC7dLvOLfGxOadcgIhIGRRsvR4Bru88S9VKPnSEdGDvUKNR1GKqEJUx48cZXZ5ZFryy2NdaDfK2yrZeqSsvktrMjySLQ==)
-
 ## FS-ADMIN 简介
 
 **FS-ADMIN**是一个以前端全栈技术开发的后台权限管理系统,前后端统一使用**TypeScript**语言开发,只需掌握一门语言就可以完成前后端的开发,大大降低了开发难度,提高了开发效率。坚持以前端开发者为中心,旨在打造一个基于前端全栈技术的企业级后台权限管理系统。
@@ -29,32 +27,6 @@
 ## 演示地址
 
 [项目演示地址](http://fsadmin.xyz/#/)
-
-## 页面预览
-
-- 登录
-
-![image.png](https://github.com/qddidi/fs-admin/blob/develop/assets/01.jpg?raw=true)
-
-- 角色管理
-
-![image.png](https://p9-xtjj-sign.byteimg.com/tos-cn-i-73owjymdk6/829477e6afe744308d45d042ad01c48b~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg5Lic5pa55bCP5pyI:q75.awebp?rk3s=f64ab15b&x-expires=1736480334&x-signature=AkN0%2BgZRT%2BXTw1snSafd1mUwYhE%3D)
-
-- 菜单管理
-
-![image.png](https://p9-xtjj-sign.byteimg.com/tos-cn-i-73owjymdk6/35c60613326c4746a65137e4fb39ab0a~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg5Lic5pa55bCP5pyI:q75.awebp?rk3s=f64ab15b&x-expires=1736480334&x-signature=kyeerLbg8eqns5OrYkrokTNc7oY%3D)
-
-- 用户管理
-
-![image.png](https://p9-xtjj-sign.byteimg.com/tos-cn-i-73owjymdk6/4c996d8d02a745ad9bf18cf6905e7b0d~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg5Lic5pa55bCP5pyI:q75.awebp?rk3s=f64ab15b&x-expires=1736480334&x-signature=u4%2BqK9JbJE2PL%2BKukOqk4nfd%2Bp4%3D)
-
-- 日志
-
-![image.png](https://p9-xtjj-sign.byteimg.com/tos-cn-i-73owjymdk6/e0400b4b01404eef9148b41100032add~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg5Lic5pa55bCP5pyI:q75.awebp?rk3s=f64ab15b&x-expires=1736480334&x-signature=J1IyqiwkGTT0fvV%2BJ2qbDifQMh4%3D)
-
-- 个人中心
-
-![image.png](https://p9-xtjj-sign.byteimg.com/tos-cn-i-73owjymdk6/b9b39b13ed334d1ba5772924e1accd69~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg5Lic5pa55bCP5pyI:q75.awebp?rk3s=f64ab15b&x-expires=1736480334&x-signature=WTdKo7z1VpN5skYDbsIEGQN673g%3D)
 
 ## 技术栈
 

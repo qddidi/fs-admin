@@ -165,7 +165,6 @@ const changeStatus = async (row: RoleList) => {
   const uptateRow: RoleForm = {} as RoleForm;
   uptateRow.status = row.status === 1 ? 0 : 1;
   uptateRow.id = row.id;
-
   await updateRole(uptateRow);
   ElMessage({
     type: "success",

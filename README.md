@@ -62,3 +62,46 @@
 | [nginx](https://nginx.org/)                           | web 服务器/反向代理/负载均衡 | stable |
 | [pm2](https://pm2.keymetrics.io/)                     | 进程管理                     | 5.3.2  |
 | [Github Actions](https://github.com/features/actions) | 自动部署                     | ---    |
+
+## 启动
+
+### 前端
+
+```
+cd admin_vue
+npm install
+npm run dev
+```
+
+### 后端
+
+- 无 docker
+
+1. 安装 mysql(略)
+2. 安装 redis(略)
+3. mysql 导入`fs_admin.sql`文件
+4. 修改`admin_nest/.env`文件中的`mysql`及`redis`配置
+
+```
+cd admin_nest
+npm install
+npm run start:dev
+```
+
+- 有 docker
+
+1. 启动
+
+```
+docker compose --env-file .env up
+```
+
+2. 导入`fs_admin.sql`文件
+
+根据设置的用户名及密码登录 mysql,导入`fs_admin.sql`文件
+
+```
+地址:localhost:3306
+用户名:root
+密码:123456
+```

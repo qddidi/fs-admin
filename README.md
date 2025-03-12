@@ -22,7 +22,7 @@
 - 自动化部署：内置自动化部署方案
 - AOP 切面编程：内置 AOP 切面编程方案
 - 在线 Swagger 文档：内置在线 Swagger 文档
-- 完善的教程：详细的实现细节都在教程之中[完整教程](https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzI2NzY3NDQzMg==&action=getalbum&album_id=3421173325324713991#wechat_redirect)
+- 完善的教程：[完整免费教程](https://juejin.cn/user/3193422001474199/columns)
 
 ## 演示地址
 

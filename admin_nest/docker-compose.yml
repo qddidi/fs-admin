@@ -28,11 +28,9 @@ services:
     ports:
       - 3307:${DB_PORT} # 显式映射 MySQL 端口
   redis-container:
-    image: redis:7.0
+    image: redis
     volumes:
       - ${REDIS_DATA_PATH}:/data
-      - ./redis.conf:/usr/local/etc/redis/redis.conf
-    command: redis-server /usr/local/etc/redis/redis.conf
     networks:
       - common-network
     ports:

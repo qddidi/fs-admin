@@ -109,6 +109,7 @@ export class UserService {
     const { username, password, captcha, id } = loginDto;
     //缓存的验证码
     const cacheCaptcha = await this.cacheService.get(id);
+    console.log(captcha.toLowerCase(), cacheCaptcha?.toLowerCase());
     if (captcha.toLowerCase() !== cacheCaptcha?.toLowerCase()) {
       throw new ApiException('验证码错误', ApiErrorCode.COMMON_CODE);
     }

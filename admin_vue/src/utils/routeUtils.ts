@@ -24,15 +24,20 @@ export const loadView = (view: any) => {
 
 
 export const filterRoute = (data: any) => {
+    
+    
     data.forEach((item: any) => {
         if (item.children?.length > 0 && item.menu_type === 1) {
             delete item.component;
             filterRoute(item.children);
-        } else {
+        }else{
             item.component = loadView(item.component);
+            delete item.children;
             // item.redirect = "/404";
         }
     });
+   
+    
     return data;
 };
 
@@ -57,7 +62,8 @@ export const handleRouter = (router: Router) => {
                 });
 
             }
-
+            console.log(to);
+            
             appStore.addTags({ name: to.meta.title as string, path: to.path, fullpath: to.fullPath });
             to.meta?.catch && appStore.addCatchList(to.meta?.name as string)
 
@@ -66,6 +72,8 @@ export const handleRouter = (router: Router) => {
         }
         try {
             await appStore.getInfo();
+            console.log(appStore.menuList,1111);
+            
             const routers = filterRoute(appStore.menuList);
             routers.forEach((route: RouteRecordRaw) => {
                 router.addRoute("Index", route);

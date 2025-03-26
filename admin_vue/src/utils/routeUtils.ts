@@ -62,10 +62,9 @@ export const handleRouter = (router: Router) => {
                 });
 
             }
-            console.log(to);
             
             appStore.addTags({ name: to.meta.title as string, path: to.path, fullpath: to.fullPath });
-            to.meta?.catch && appStore.addCatchList(to.meta?.name as string)
+            to.meta?.catch && appStore.addCatchList(to.name as string)
 
             next()
             return;
